@@ -1,6 +1,6 @@
 from django import template
 #-
-from material.tags import button, checkbox, textarea, textfield
+from ..tags import button, checkbox, textarea, textfield
 
 register = template.Library()
 
