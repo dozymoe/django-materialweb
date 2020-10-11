@@ -1,0 +1,12 @@
+@use "@material/floating-label/mdc-floating-label";
+@use "@material/line-ripple/mdc-line-ripple";
+@use "@material/notched-outline/mdc-notched-outline";
+@use "@material/ripple/mdc-ripple";
+@use "@material/textfield";
+
+@include textfield.core-styles;
+
+/*.mdc-text-field .mdc-floating-label
+{
+    top: 1.25em;
+}*/

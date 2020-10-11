@@ -1,0 +1,14 @@
+## git
+
+*.orig
+
+
+## python
+
+*.pyc
+
+
+## vim
+
+*.swo
+*.swp
