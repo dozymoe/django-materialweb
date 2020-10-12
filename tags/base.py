@@ -1,7 +1,6 @@
 from uuid import uuid4
 #-
 from django import template
-from django.utils.functional import cached_property
 
 
 class Node(template.Node):
@@ -15,6 +14,9 @@ class Node(template.Node):
         self.args = args
         self.context = None
         self.kwargs = kwargs
+        self.bound_field = None
+        self.id = None
+        self.mode = None
 
 
     @property
@@ -28,25 +30,6 @@ class Node(template.Node):
         if self.WANT_CHILDREN:
             return self.args[0].render(self.context)
         return ''
-
-
-    @cached_property
-    def bound_field(self):
-        if not self.WANT_FORM_FIELD:
-            return None
-
-        if self.WANT_CHILDREN:
-            var = self.args[1]
-        else:
-            var = self.args[0]
-        return var.resolve(self.context)
-
-
-    @cached_property
-    def id(self):
-        if not self.WANT_FORM_FIELD:
-            return uuid4().hex
-        return self.bound_field.id_for_label
 
 
     @property
@@ -98,13 +81,18 @@ class Node(template.Node):
 '''
 
 
-    @cached_property
-    def mode(self):
-        return self.kwargs.get('mode', None)
-
-
     def render(self, context):
         self.context = context
+        self.mode = self.kwargs.get('mode', None)
+
+        if self.WANT_FORM_FIELD:
+            if self.WANT_CHILDREN:
+                self.bound_field = self.args[1].resolve(context)
+            else:
+                self.bound_field = self.args[0].resolve(context)
+            self.id = self.bound_field.id_for_label
+        else:
+            self.id = uuid4().hex
 
         values = {
             'id': self.id,
