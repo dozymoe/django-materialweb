@@ -33,7 +33,7 @@ export class Button extends Component
         }
         else if (this.props.raised)
         {
-            classname += ' mdc-button--raised';
+            className += ' mdc-button--raised';
         }
 
         return (
