@@ -1,6 +1,6 @@
 from django import template
 #-
-from ..tags import button, checkbox, textarea, textfield
+from ..tags import button, checkbox, imagelist, textarea, textfield
 
 register = template.Library()
 
@@ -15,6 +15,8 @@ MATERIAL_TAGS = {
     'TextArea': textarea.TextArea,
     'TextField': textfield.TextField,
     'ToggleButton': button.ToggleButton,
+    'ImageList': imagelist.ImageList,
+    'ImageListItem': imagelist.ListItem,
 }
 
 

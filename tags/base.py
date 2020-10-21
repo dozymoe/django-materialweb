@@ -98,11 +98,11 @@ class Node(template.Node):
             'id': self.id,
             'label': self.label,
             'element': self.element,
-            'child': self.child,
             'props': self.props,
             'class': self.kwargs.get('class', '').split(),
         }
         self.prepare_values(values)
+        values['child'] = self.child
         values['class'] = ' '.join(values['class'])
         values['props'] = ' '.join(values['props'])
 
