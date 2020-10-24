@@ -1,7 +1,10 @@
+import logging
+#-
 from django import template
 #-
 from ..tags import button, checkbox, imagelist, textarea, textfield
 
+_logger = logging.getLogger(__name__)
 register = template.Library()
 
 
@@ -20,37 +23,42 @@ MATERIAL_TAGS = {
 }
 
 
-def do_parse_tag(parser, token):
-    params = token.split_contents()
-    tagname = params.pop(0)
+class TagParser:
 
-    args = []
-    kwargs = {}
-    for param in params:
-        if '=' in param:
-            key, val = param.split('=', 1)
-        else:
-            key, val = (None, param)
+    def __init__(self, tags):
+        self.tags = tags
 
-        if val[0] in ('"', "'"):
-            val = val.strip('"\'')
-        else:
-            val = template.Variable(param)
+    def __call__(self, parser, token):
+        params = token.split_contents()
+        tagname = params.pop(0)
 
-        if key:
-            kwargs[key] = val
-        else:
-            args.append(val)
+        args = []
+        kwargs = {}
+        for param in params:
+            if '=' in param:
+                key, val = param.split('=', 1)
+            else:
+                key, val = (None, param)
 
-    cls = MATERIAL_TAGS[tagname]
+            if val[0] in ('"', "'"):
+                val = val.strip('"\'')
+            else:
+                val = template.Variable(val)
 
-    if getattr(cls, 'WANT_CHILDREN', False):
-        nodelist = parser.parse(('end' + tagname,))
-        parser.delete_first_token()
-        args.insert(0, nodelist)
+            if key:
+                kwargs[key] = val
+            else:
+                args.append(val)
 
-    return cls(*args, **kwargs)
+        cls = self.tags[tagname]
+
+        if getattr(cls, 'WANT_CHILDREN', False):
+            nodelist = parser.parse(('end' + tagname,))
+            parser.delete_first_token()
+            args.insert(0, nodelist)
+
+        return cls(*args, **kwargs)
 
 
 for name in MATERIAL_TAGS:
-    register.tag(name, do_parse_tag)
+    register.tag(name, TagParser(MATERIAL_TAGS))

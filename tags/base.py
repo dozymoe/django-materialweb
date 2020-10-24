@@ -17,6 +17,7 @@ class Node(template.Node):
         self.bound_field = None
         self.id = None
         self.mode = None
+        self.values = None
 
 
     @property
@@ -81,6 +82,12 @@ class Node(template.Node):
 '''
 
 
+    def eval(self, value):
+        if isinstance(value, template.Variable):
+            return value.resolve(self.context)
+        return value
+
+
     def render(self, context):
         self.context = context
         self.mode = self.kwargs.get('mode', None)
@@ -94,7 +101,7 @@ class Node(template.Node):
         else:
             self.id = uuid4().hex
 
-        values = {
+        self.values = values = {
             'id': self.id,
             'label': self.label,
             'element': self.element,
