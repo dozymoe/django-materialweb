@@ -50,21 +50,13 @@ export class List extends Component
                     {
                       let value = child.props.value
                                 || child.props['data-value'];
-                      let className = child.props.className || '';
-                      let props = omit(child.props, ['className']);
-                      if (selection && value === selected)
-                      {
-                        className += ' mdc-list-item--selected';
-                      }
                       return React.cloneElement(
                           child,
                           {
-                            ...props,
-                            className: className,
+                            ...child.props,
                             role: selection ? 'option' : null,
                             tabIndex: idx,
-                            'aria-selected': selection ? value === selected
-                                : null,
+                            selected: selection ? value === selected : null,
                           });
                     }
                     return child;
@@ -96,13 +88,18 @@ List.Item = @observer class extends Component
     render()
     {
         let className = this.props.className || '';
-        let props = omit(this.props, ['onClick', 'className']);
+        let props = omit(this.props, ['className', 'selected', 'value']);
+        if (this.props.selected)
+        {
+            className += ' mdc-list-item--selected';
+        }
 
         return (
 
-            <li ref={this.el} {...props} onClick={this.props.onClick}
+            <li ref={this.el} {...props}
+                aria-selected={this.props.selected}
                 className={'mdc-list-item ' + className}>
-              <span className="mdc-list-item__ripple"></span>
+              <span className="mdc-list-item__ripple" />
               <span className="mdc-list-item__text">
                 {this.props.children}
               </span>
