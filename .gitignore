@@ -1,14 +1,35 @@
-## git
+/frozen_django/.coverage
+
+
+# git
 
 *.orig
 
 
-## python
+# pybuildtool
+
+/build.yml
+
+
+# python
 
 *.pyc
+/*.egg-info/
+/.eggs/
+/build/
+/dist/
+/.virtualenv/
+/requirements.txt
+/python_modules
 
 
-## vim
+# waf
+
+/.BUILD/
+/.lock-waf_*
+
+
+# vim
 
 *.swo
 *.swp

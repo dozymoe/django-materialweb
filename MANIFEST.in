@@ -1,0 +1,9 @@
+include materialweb/README.rst
+exclude run
+exclude wscript
+exclude requirements.txt
+exclude build.yml
+exclude .git*
+exclude MANIFEST.in
+prune etc
+prune lib
