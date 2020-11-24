@@ -1,11 +1,27 @@
+"""Implements Material Design Web Component: TextField
+
+Text fields let users enter and edit text.
+
+The text field class consists of the following types:
+* Filled text
+* Outlined text
+
+See: https://material-components.github.io/material-components-web-catalog/#/component/text-field
+"""
 from .base import Node
 
 
 class TextField(Node):
+    """Text field component.
 
+    See: https://material.io/develop/web/components/text-fields
+    """
     WANT_FORM_FIELD = True
+    MODES = ('filled', 'outlined', 'fullwidth')
 
     def prepare_attributes(self, attrs, default):
+        """Prepare html input element's attributes.
+        """
         if self.mode == 'fullwidth':
             attrs['aria-label'] = self.label
         else:
@@ -15,16 +31,11 @@ class TextField(Node):
         attrs['class'].append('mdc-text-field__input')
 
 
-    @property
-    def template(self):
-        if self.mode == 'outlined':
-            return self.template_outlined()
-        if self.mode == 'fullwidth':
-            return self.template_fullwidth()
-        return self.template_filled()
-
-
     def template_outlined(self):
+        """Formatted literal string for outlined TextField.
+
+        See: https://material.io/develop/web/components/text-fields#outlined-text
+        """
         return '''
 <label class="mdc-text-field mdc-text-field--outlined {class}">
   {element}
@@ -42,6 +53,10 @@ class TextField(Node):
 
 
     def template_filled(self):
+        """Formatted literal string for filled TextField.
+
+        See: https://material.io/develop/web/components/text-fields#filled-text
+        """
         return '''
 <label class="mdc-text-field mdc-text-field--filled {class}">
   <span class="mdc-text-field__ripple"></span>
@@ -55,6 +70,8 @@ class TextField(Node):
 
 
     def template_fullwidth(self):
+        """Formatted literal string for fullwidth TextField.
+        """
         return '''
 <label className="mdc-text-field mdc-text-field--filled mdc-text-field--fullwidth {class}">
   <span class="mdc-text-field__ripple"></span>

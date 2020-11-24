@@ -7,6 +7,7 @@ class Node(template.Node):
 
     WANT_CHILDREN = False
     WANT_FORM_FIELD = False
+    MODES = ()
 
     NODE_PROPS = ('mode', 'class', 'label')
 
@@ -17,6 +18,7 @@ class Node(template.Node):
         self.bound_field = None
         self.id = None
         self.mode = None
+        self.values = None
 
 
     @property
@@ -81,9 +83,23 @@ class Node(template.Node):
 '''
 
 
+    def eval(self, value):
+        if isinstance(value, template.Variable):
+            return value.resolve(self.context)
+        return value
+
+
     def render(self, context):
         self.context = context
         self.mode = self.kwargs.get('mode', None)
+
+        if self.MODES:
+            if not self.mode:
+                self.mode = self.MODES[0]
+            elif self.mode not in self.MODES:
+                raise NotImplemented("Method %s is not allowed." % self.mode)
+        else:
+            self.mode = 'default'
 
         if self.WANT_FORM_FIELD:
             if self.WANT_CHILDREN:
@@ -94,15 +110,15 @@ class Node(template.Node):
         else:
             self.id = uuid4().hex
 
-        values = {
+        self.values = values = {
             'id': self.id,
             'label': self.label,
             'element': self.element,
-            'child': self.child,
             'props': self.props,
             'class': self.kwargs.get('class', '').split(),
         }
         self.prepare_values(values)
+        values['child'] = self.child
         values['class'] = ' '.join(values['class'])
         values['props'] = ' '.join(values['props'])
 
@@ -119,3 +135,15 @@ class Node(template.Node):
 
     def prepare_values(self, values):
         pass
+
+
+    def get_template(self):
+        """Get formatted literal string for different types of TextField.
+        """
+        method = getattr(self, 'template_%s' % self.mode, None)
+        if not method:
+            raise NotImplemented("Method is missing: template_%s" % self.mode)
+
+        return method()
+
+    template = property(get_template)

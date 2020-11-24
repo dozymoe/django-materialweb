@@ -1,4 +1,6 @@
 include materialweb/README.rst
+recursive-include materialweb/docs *
+recursive-include materialweb/static *
 exclude run
 exclude wscript
 exclude requirements.txt

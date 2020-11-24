@@ -1,23 +1,44 @@
+"""Implements Material Design Web Component: TextField
+
+Text fields let users enter and edit text.
+
+The text field class consists of the following types:
+* Filled text
+* Outlined text
+
+See: https://material-components.github.io/material-components-web-catalog/#/component/text-field
+"""
 from .base import Node
 
 
 class TextArea(Node):
+    """Textarea component.
 
+    See: https://material.io/develop/web/components/text-fields#textarea
+    """
     WANT_FORM_FIELD = True
 
     def prepare_attributes(self, attrs, default):
+        """Prepare html input element's attributes.
+        """
         attrs['aria-label'] = self.label
         attrs['class'].append('mdc-text-field__input')
 
 
     @property
     def template(self):
+        """Get formatted literal string for different types of TextField.
+        """
         if self.mode == 'outlined':
             return self.template_outlined()
         return self.template_filled()
 
 
     def template_outlined(self):
+        """Get formatted literal string for outlined TextArea.
+
+        See: https://material.io/develop/web/components/text-fields#outlined
+        """
         return '''
 <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--no-label {class}">
   <span class="mdc-text-field__resizer">
@@ -32,6 +53,10 @@ class TextArea(Node):
 
 
     def template_filled(self):
+        """Get formatted literal string for filled TextArea.
+
+        See: https://material.io/develop/web/components/text-fields#filled
+        """
         return '''
 <label class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label {class}">
   <span class="mdc-text-field__ripple"></span>
