@@ -83,7 +83,7 @@ class BrandLink(Node):
     NODE_PROPS = ('mode', 'class', 'label', 'href')
 
     def prepare_values(self, values):
-        values['href'] = self.kwargs.get('href', '#')
+        values['href'] = self.eval(self.kwargs.get('href')) or '#'
 
 
     def template_default(self):
@@ -146,7 +146,7 @@ class Link(Node):
     NODE_PROPS = ('mode', 'class', 'label', 'href')
 
     def prepare_values(self, values):
-        values['href'] = self.kwargs.get('href', '#')
+        values['href'] = self.eval(self.kwargs.get('href')) or '#'
 
 
     def template_default(self):
