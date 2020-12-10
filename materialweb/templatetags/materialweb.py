@@ -2,7 +2,7 @@ import logging
 #-
 from django import template
 #-
-from ..tags import button, checkbox, imagelist, textarea, textfield
+from ..tags import top_appbar, button, checkbox, imagelist, textarea, textfield
 
 _logger = logging.getLogger(__name__)
 register = template.Library()
@@ -15,11 +15,19 @@ MATERIAL_TAGS = {
     'CheckBox': checkbox.CheckBox,
     'CheckBoxInput': checkbox.CheckBoxInput,
     'IconButton': button.IconButton,
+    'ImageList': imagelist.ImageList,
+    'ImageListItem': imagelist.ListItem,
     'TextArea': textarea.TextArea,
     'TextField': textfield.TextField,
     'ToggleButton': button.ToggleButton,
-    'ImageList': imagelist.ImageList,
-    'ImageListItem': imagelist.ListItem,
+    'TopAppBar': top_appbar.TopAppBar,
+    'TopAppBarLeft': top_appbar.LeftSection,
+    'TopAppBarRight': top_appbar.RightSection,
+    'TopAppBarBrandButton': top_appbar.BrandButton,
+    'TopAppBarBrandLink': top_appbar.BrandLink,
+    'TopAppBarTitle': top_appbar.Title,
+    'TopAppBarButton': top_appbar.IconButton,
+    'TopAppBarLink': top_appbar.Link,
 }
 
 

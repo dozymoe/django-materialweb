@@ -6,6 +6,7 @@ from .base import Node
 class Button(Node):
 
     WANT_CHILDREN = True
+    MODES = ('outlined', 'raised')
 
     NODE_PROPS = ('mode', 'class', 'label', 'type')
 
@@ -19,6 +20,10 @@ class Button(Node):
 
     @property
     def template(self):
+        """Get formatted literal string for different types of Button.
+
+        Overridden because the templates are the same.
+        """
         return '''
 <div class="mdc-touch-target-wrapper">
   <button type="{type}" class="mdc-button mdc-button--touch {class}" {props}>
@@ -34,8 +39,7 @@ class Label(Node):
 
     WANT_CHILDREN = True
 
-    @property
-    def template(self):
+    def template_default(self):
         return '<span class="mdc-button__label">{child}</span>'
 
 
@@ -43,8 +47,7 @@ class Icon(Node):
 
     WANT_CHILDREN = True
 
-    @property
-    def template(self):
+    def template_default(self):
         return '''
 <i aria-hidden="true" class="mdc-button__icon {class}">
   {child}
@@ -62,8 +65,7 @@ class IconButton(Node):
         values['type'] = self.kwargs.get('type', 'button')
 
 
-    @property
-    def template(self):
+    def template_default(self):
         return '''
 <button type="{type}" aria-label="{label}" title="{label}" {props}
     class="mdc-icon-button {class}">
@@ -87,8 +89,7 @@ class ToggleButton(Node):
             values['props'].append('aria-pressed="true"')
 
 
-    @property
-    def template(self):
+    def template_default(self):
         return '''
 <button type="button" aria-label="{label}" title="{label}" {props}
     class="mdc-icon-button toggle {class}">

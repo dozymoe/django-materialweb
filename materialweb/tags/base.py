@@ -1,6 +1,9 @@
+import logging
 from uuid import uuid4
 #-
 from django import template
+
+_logger = logging.getLogger(__name__)
 
 
 class Node(template.Node):
@@ -23,8 +26,9 @@ class Node(template.Node):
 
     @property
     def props(self):
-        return ['%s="%s"' % item for item in self.kwargs.items()\
-                if item[0] not in self.NODE_PROPS]
+        return ['%s="%s"' % (key, self.eval(val))\
+                for (key, val) in self.kwargs.items()\
+                if key not in self.NODE_PROPS]
 
 
     @property
@@ -37,7 +41,7 @@ class Node(template.Node):
     @property
     def label(self):
         if 'label' in self.kwargs:
-            return self.kwargs['label']
+            return self.eval(self.kwargs['label'])
         if self.WANT_FORM_FIELD:
             return self.bound_field.label
         return ''
@@ -97,7 +101,8 @@ class Node(template.Node):
             if not self.mode:
                 self.mode = self.MODES[0]
             elif self.mode not in self.MODES:
-                raise NotImplemented("Method %s is not allowed." % self.mode)
+                raise NotImplementedError("Method %s is not allowed." %\
+                        self.mode)
         else:
             self.mode = 'default'
 
@@ -115,7 +120,7 @@ class Node(template.Node):
             'label': self.label,
             'element': self.element,
             'props': self.props,
-            'class': self.kwargs.get('class', '').split(),
+            'class': self.eval(self.kwargs.get('class', '')).split(),
         }
         self.prepare_values(values)
         values['child'] = self.child
@@ -137,13 +142,14 @@ class Node(template.Node):
         pass
 
 
-    def get_template(self):
+    @property
+    def template(self):
         """Get formatted literal string for different types of TextField.
         """
         method = getattr(self, 'template_%s' % self.mode, None)
         if not method:
-            raise NotImplemented("Method is missing: template_%s" % self.mode)
+            _logger.info(self.__class__)
+            raise NotImplementedError("Method is missing: template_%s" %\
+                    self.mode)
 
         return method()
-
-    template = property(get_template)

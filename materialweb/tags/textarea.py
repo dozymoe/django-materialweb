@@ -7,7 +7,7 @@ The text field class consists of the following types:
 * Outlined text
 
 See: https://material-components.github.io/material-components-web-catalog/#/component/text-field
-"""
+""" # pylint:disable=line-too-long
 from .base import Node
 
 
@@ -17,21 +17,13 @@ class TextArea(Node):
     See: https://material.io/develop/web/components/text-fields#textarea
     """
     WANT_FORM_FIELD = True
+    MODES = ('filled', 'outlined')
 
     def prepare_attributes(self, attrs, default):
         """Prepare html input element's attributes.
         """
         attrs['aria-label'] = self.label
         attrs['class'].append('mdc-text-field__input')
-
-
-    @property
-    def template(self):
-        """Get formatted literal string for different types of TextField.
-        """
-        if self.mode == 'outlined':
-            return self.template_outlined()
-        return self.template_filled()
 
 
     def template_outlined(self):

@@ -8,7 +8,7 @@ Use checkboxes to:
 * Turn an item on or off in a desktop environment
 
 See: https://material-components.github.io/material-components-web-catalog/#/component/checkbox
-"""
+""" # pylint:disable=line-too-long
 from .base import Node
 
 

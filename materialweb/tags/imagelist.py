@@ -5,7 +5,7 @@ An Image List consists of several items, each containing an image and
 optionally supporting content (i.e. a text label).
 
 See: https://material-components.github.io/material-components-web-catalog/#/component/image-list
-"""
+""" # pylint:disable=line-too-long
 from .base import Node
 
 
@@ -25,7 +25,8 @@ class ImageList(Node):
         self.context['mode'] = self.mode
 
 
-    def get_template(self):
+    @property
+    def template(self):
         return '''
 <ul class="mdc-image-list {class}" {props}>
   {child}
@@ -40,7 +41,8 @@ class ListItem(Node):
 
     NODE_PROPS = ('image', 'reversed', 'class')
 
-    def get_template(self):
+    @property
+    def template(self):
         image = self.kwargs.get('image', None)
         reverse = 'reversed' in self.args or self.kwargs.get('reversed', False)
 

@@ -7,7 +7,7 @@ The text field class consists of the following types:
 * Outlined text
 
 See: https://material-components.github.io/material-components-web-catalog/#/component/text-field
-"""
+""" # pylint:disable=line-too-long
 from .base import Node
 
 
@@ -35,7 +35,7 @@ class TextField(Node):
         """Formatted literal string for outlined TextField.
 
         See: https://material.io/develop/web/components/text-fields#outlined-text
-        """
+        """ # pylint:disable=line-too-long
         return '''
 <label class="mdc-text-field mdc-text-field--outlined {class}">
   {element}

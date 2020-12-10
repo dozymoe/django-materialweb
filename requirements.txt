@@ -1,0 +1,7 @@
+coverage
+django
+pybuildtool
+pylint
+pytest
+twine
+wheel
