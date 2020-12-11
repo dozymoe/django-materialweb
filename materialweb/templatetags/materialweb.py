@@ -17,6 +17,7 @@ MATERIAL_TAGS = {
     'IconButton': button.IconButton,
     'ImageList': imagelist.ImageList,
     'ImageList_Item': imagelist.ListItem,
+    'Link': button.Link,
     'TextArea': textarea.TextArea,
     'TextField': textfield.TextField,
     'ToggleButton': button.ToggleButton,

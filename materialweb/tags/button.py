@@ -101,3 +101,23 @@ class ToggleButton(Node):
   </i>
 </button>
 '''
+
+
+class Link(Node):
+    """Button as link
+    """
+    WANT_CHILDREN = True
+
+    NODE_PROPS = ('mode', 'class', 'label', 'href')
+
+    def prepare_values(self, values):
+        values['href'] = self.eval(self.kwargs.get('href')) or '#'
+
+
+    def template_default(self):
+        return '''
+<a href="{href}" aria-label="{label}" title="{label}" {props}
+    class="mdc-icon-button {class}">
+  {child}
+</a>
+'''
