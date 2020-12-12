@@ -69,5 +69,6 @@ class TagParser:
         return cls(*args, **kwargs)
 
 
+_parser = TagParser(MATERIAL_TAGS)
 for name in MATERIAL_TAGS:
-    register.tag(name, TagParser(MATERIAL_TAGS))
+    register.tag(name, _parser)
