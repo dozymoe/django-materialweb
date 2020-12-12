@@ -129,9 +129,15 @@ class IconButton(Node):
     """
     WANT_CHILDREN = True
 
+    NODE_PROPS = ('mode', 'class', 'label', 'type')
+
+    def prepare_values(self, values):
+        values['type'] = self.kwargs.get('type', 'button')
+
+
     def template_default(self):
         return '''
-<button type="button" aria-label="{label}" title="{label}" {props}
+<button type="{type}" aria-label="{label}" title="{label}" {props}
     class="mdc-top-app-bar__action-item mdc-icon-button {class}">
   {child}
 </button>
