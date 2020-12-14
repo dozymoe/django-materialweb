@@ -1,4 +1,7 @@
 import logging
+from yarl import URL
+#-
+from django.utils.translation import gettext
 #-
 from .base import Node
 from .button import IconButton, Icon, Link
@@ -9,9 +12,10 @@ _logger = logging.getLogger(__name__)
 class DataTable(Node):
 
     WANT_CHILDREN = True
-    NODE_PROPS = ('pager', 'row_selectable', 'row_movable')
+    NODE_PROPS = ('name', 'pager', 'page_name', 'row_selectable', 'row_movable')
 
     def prepare_values(self, values):
+        self.context['name'] = self.eval(self.kwargs.get('name', ''))
         self.context['selectable'] = self.eval(
                 self.kwargs.get('row_selectable'))
         self.context['movable'] = self.eval(
@@ -25,53 +29,66 @@ class DataTable(Node):
 
 
     def render_pagination(self, pager):
+        url = URL(self.context['request'].get_full_path())
+        page_name = self.eval(self.kwargs.get('page_name', 'page'))
+
         if pager.has_previous():
             cls = Link
+            first_kwargs = {'href': url % {page_name: 1}}
+            next_kwargs = {'href': url % {page_name: pager.next_page_number()}}
             extra_kwargs = {}
         else:
             cls = IconButton
+            first_kwargs = next_kwargs = {}
             extra_kwargs = {'disabled': 'disabled'}
 
         first_button = cls(
                 Icon('first_page'),
                 **{
-                    'label': "First Page",
+                    'label': gettext("First Page"),
                     'data-first-page': 'true',
                     'class': 'material-icons mdc-data-table__pagination-button',
                 },
+                **first_kwargs,
                 **extra_kwargs)
         prev_button = cls(
                 Icon('chevron_left'),
                 **{
-                    'label': "Previous Page",
+                    'label': gettext("Previous Page"),
                     'data-prev-page': 'true',
                     'class': 'material-icons i'
                         'mdc-data-table__pagination-button',
                 },
+                **next_kwargs,
                 **extra_kwargs)
 
         if pager.has_next():
             cls = Link
+            first_kwargs = {'href': url % {page_name: 1}}
+            next_kwargs = {'href': url % {page_name: pager.next_page_number()}}
             extra_kwargs = {}
         else:
             cls = IconButton
+            next_kwargs = last_kwargs = {}
             extra_kwargs = {'disabled': 'disabled'}
 
         next_button = cls(
                 Icon('chevron_right'),
                 **{
-                    'label': "Next Page",
+                    'label': gettext("Next Page"),
                     'data-next-page': 'true',
                     'class': 'material-icons mdc-data-table__pagination-button',
                 },
+                **next_kwargs,
                 **extra_kwargs)
         last_button = cls(
                 Icon('last_page'),
                 **{
-                    'label': "Next Page",
+                    'label': gettext("Last Page"),
                     'data-last-page': 'true',
                     'class': 'material-icons mdc-data-table__pagination-button',
                 },
+                **last_kwargs,
                 **extra_kwargs)
 
         values = {
@@ -84,20 +101,22 @@ class DataTable(Node):
             'prev_button': prev_button.render(self.context),
             'next_button': next_button.render(self.context),
             'last_button': last_button.render(self.context),
+            'label_rows_per_page': gettext("Rows per page"),
+            'id_page_size': self.id + '-pagesize',
         }
         template = '''
 <div class="mdc-data-table__pagination">
   <div class="mdc-data-table__pagination-trailing">
     <div class="mdc-data-table__pagination-rows-per-page">
       <div class="mdc-data-table__pagination-rows-per-page-label">
-        Rows per page
+        {label_rows_per_page}
       </div>
 
       <div class="mdc-select mdc-select--outlined mdc-select--no-label mdc-data-table__pagination-rows-per-page-select">
         <div role="button" aria-haspopup="listbox"
-            aria-labelledby="demo-pagination-select" tabindex="0"
+            aria-labelledby="{id_page_size}" tabindex="0"
             class="mdc-select__anchor">
-          <span id="demo-pagination-select" class="mdc-select__selected-text">
+          <span id="{id_page_size}" class="mdc-select__selected-text">
             {page_size}
           </span>
           <span class="mdc-select__dropdown-icon">
@@ -188,13 +207,15 @@ class HeadRow(Node):
         else:
             values['select_checkbox'] = ''
 
+        values['label_toggle_all'] = gettext("Toggle all rows")
+
 
     def render_select(self):
         return '''
 <th role="columnheader" scope="col"
     class="mdc-data-table__header-cell mdc-data-table__header-cell--checkbox">
   <div class="mdc-checkbox mdc-data-table__header-row-checkbox mdc-checkbox--selected">
-    <input type="checkbox" aria-label="Toggle all rows"
+    <input type="checkbox" aria-label="{label_toggle_all}"
         class="mdc-checkbox__native-control" />
     <div class="mdc-checkbox__background">
       <svg viewBox="0 0 24 24" class="mdc-checkbox__checkmark">
@@ -252,19 +273,27 @@ class Body(Node):
 class BodyRow(Node):
 
     WANT_CHILDREN = True
+    NODE_PROPS = ('value',)
 
     def prepare_values(self, values):
         if self.context['selectable']:
+            self.context['id_row_header'] = self.id + '-header'
             values['select_checkbox'] = self.render_select()
         else:
             values['select_checkbox'] = ''
 
 
     def render_select(self):
-        return '''
+        values = {
+            'name': self.context.get('name', ''),
+            'value': self.eval(self.kwargs.get('value', '')),
+            'id_row_header': self.context['id_row_header'],
+        }
+        template = '''
 <td class="mdc-data-table__cell mdc-data-table__cell--checkbox">
   <div class="mdc-checkbox mdc-data-table__row-checkbox">
-    <input type="checkbox" aria-labelledby="u0"
+    <input name="{name}" value="{value}" type="checkbox"
+        aria-labelledby="{id_row_header}"
         class="mdc-checkbox__native-control" />
     <div class="mdc-checkbox__background">
       <svg viewBox="0 0 24 24" class="mdc-checkbox__checkmark">
@@ -277,6 +306,7 @@ class BodyRow(Node):
   </div>
 </td>
 '''
+        return template.format(**values)
 
 
     def template_default(self):
@@ -312,6 +342,9 @@ class BodyColumnHeader(Node):
         type_ = self.kwargs.get('type')
         if type_ == 'num':
             values['class'].append('mdc-data-table__header-cell--numeric')
+
+        if 'id_row_header' in self.context:
+            values['props'].append('id="%s"' % self.context['id_row_header'])
 
 
     def template_default(self):

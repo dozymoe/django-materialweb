@@ -126,7 +126,17 @@ class Node(template.Node):
         self.prepare_values(values)
         values['child'] = self.child
         values['class'] = ' '.join(values['class'])
-        values['props'] = ' '.join(values['props'])
+
+        # Cleanup props
+        added_props = set()
+        clean_props = []
+        for prop in reversed(values['props']):
+            prop_name = prop.split('=')[0]
+            if prop_name in added_props:
+                continue
+            added_props.add(prop_name)
+            clean_props.append(prop)
+        values['props'] = ' '.join(clean_props)
 
         html = self.template.format(**values)
 
