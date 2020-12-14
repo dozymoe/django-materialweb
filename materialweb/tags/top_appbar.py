@@ -79,8 +79,7 @@ class BrandLink(Node):
     """TopAppBar brand button
     """
     WANT_CHILDREN = True
-
-    NODE_PROPS = ('mode', 'class', 'label', 'href')
+    NODE_PROPS = ('href',)
 
     def prepare_values(self, values):
         values['href'] = self.eval(self.kwargs.get('href')) or '#'
@@ -99,8 +98,7 @@ class Title(Node):
     """TopAppBar title
     """
     WANT_CHILDREN = True
-
-    NODE_PROPS = ('mode', 'class', 'tag')
+    NODE_PROPS = ('tag',)
 
     def prepare_values(self, values):
         values['tag'] = self.kwargs.get('tag', 'span')
@@ -128,8 +126,7 @@ class IconButton(Node):
     """TopAppBar button icon
     """
     WANT_CHILDREN = True
-
-    NODE_PROPS = ('mode', 'class', 'label', 'type')
+    NODE_PROPS = ('type',)
 
     def prepare_values(self, values):
         values['type'] = self.kwargs.get('type', 'button')
@@ -148,8 +145,7 @@ class Link(Node):
     """TopAppBar link item
     """
     WANT_CHILDREN = True
-
-    NODE_PROPS = ('mode', 'class', 'label', 'href')
+    NODE_PROPS = ('href',)
 
     def prepare_values(self, values):
         values['href'] = self.eval(self.kwargs.get('href')) or '#'

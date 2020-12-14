@@ -1,5 +1,3 @@
-from distutils.util import strtobool
-#-
 from .base import Node
 
 
@@ -7,8 +5,7 @@ class Button(Node):
 
     WANT_CHILDREN = True
     MODES = ('outlined', 'raised')
-
-    NODE_PROPS = ('mode', 'class', 'label', 'type')
+    NODE_PROPS = ('type',)
 
     def prepare_values(self, values):
         values['type'] = self.kwargs.get('type', 'button')
@@ -49,17 +46,16 @@ class Icon(Node):
 
     def template_default(self):
         return '''
-<i aria-hidden="true" class="mdc-button__icon {class}">
+<span aria-hidden="true" class="mdc-button__icon {class}">
   {child}
-</i>
+</span>
 '''
 
 
 class IconButton(Node):
 
     WANT_CHILDREN = True
-
-    NODE_PROPS = ('mode', 'class', 'label', 'type')
+    NODE_PROPS = ('type',)
 
     def prepare_values(self, values):
         values['type'] = self.kwargs.get('type', 'button')
@@ -76,11 +72,10 @@ class IconButton(Node):
 
 class ToggleButton(Node):
 
-    NODE_PROPS = ('mode', 'class', 'label', 'type', 'state', 'icon_when_on',
-            'icon_when_off')
+    NODE_PROPS = ('type', 'state', 'icon_when_on', 'icon_when_off')
 
     def prepare_values(self, values):
-        values['state'] = strtobool(self.kwargs.get('state', ''))
+        values['state'] = self.eval(self.kwargs.get('state'))
         values['icon_when_on'] = self.kwargs['icon_when_on']
         values['icon_when_off'] = self.kwargs['icon_when_off']
 
@@ -107,8 +102,7 @@ class Link(Node):
     """Button as link
     """
     WANT_CHILDREN = True
-
-    NODE_PROPS = ('mode', 'class', 'label', 'href')
+    NODE_PROPS = ('href',)
 
     def prepare_values(self, values):
         values['href'] = self.eval(self.kwargs.get('href')) or '#'

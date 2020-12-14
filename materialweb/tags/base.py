@@ -11,11 +11,11 @@ class Node(template.Node):
     WANT_CHILDREN = False
     WANT_FORM_FIELD = False
     MODES = ()
-
-    NODE_PROPS = ('mode', 'class', 'label')
+    MUST_HAVE_NODE_PROPS = ('mode', 'class', 'label')
+    NODE_PROPS = ()
 
     def __init__(self, *args, **kwargs):
-        self.args = args
+        self.args = template.NodeList(*args)
         self.context = None
         self.kwargs = kwargs
         self.bound_field = None
@@ -28,13 +28,14 @@ class Node(template.Node):
     def props(self):
         return ['%s="%s"' % (key, self.eval(val))\
                 for (key, val) in self.kwargs.items()\
-                if key not in self.NODE_PROPS]
+                if key not in self.MUST_HAVE_NODE_PROPS\
+                and key not in self.NODE_PROPS]
 
 
     @property
     def child(self):
         if self.WANT_CHILDREN:
-            return self.args[0].render(self.context)
+            return self.args.render(self.context)
         return ''
 
 
@@ -148,7 +149,6 @@ class Node(template.Node):
         """
         method = getattr(self, 'template_%s' % self.mode, None)
         if not method:
-            _logger.info(self.__class__)
             raise NotImplementedError("Method is missing: template_%s" %\
                     self.mode)
 
