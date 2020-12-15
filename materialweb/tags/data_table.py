@@ -344,7 +344,7 @@ class BodyColumnHeader(Node):
             values['class'].append('mdc-data-table__header-cell--numeric')
 
         if 'id_row_header' in self.context:
-            values['props'].append('id="%s"' % self.context['id_row_header'])
+            values['props'].append(('id', self.context['id_row_header']))
 
 
     def template_default(self):

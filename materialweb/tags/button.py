@@ -81,7 +81,7 @@ class ToggleButton(Node):
 
         if values['state']:
             values['class'].append('mdc-icon-button--on')
-            values['props'].append('aria-pressed="true"')
+            values['props'].append(('aria-pressed', 'true'))
 
 
     def template_default(self):

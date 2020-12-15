@@ -32,7 +32,7 @@ class Node(template.Node):
 
     @property
     def props(self):
-        return ['%s="%s"' % (key, self.eval(val))\
+        return [(key, self.eval(val))\
                 for (key, val) in self.kwargs.items()\
                 if key not in self.MUST_HAVE_NODE_PROPS\
                 and key not in self.NODE_PROPS]
@@ -62,9 +62,8 @@ class Node(template.Node):
         field = self.bound_field
         widget_attrs = field.field.widget.attrs
 
-        attrs = {
-            'class': widget_attrs.get('class', '').split(),
-        }
+        attrs = dict(self.values['props'])
+        attrs['class'] = widget_attrs.get('class', '').split()
         if field.help_text:
             attrs['aria-controls'] = self.id + '-hint'
             attrs['aria-describedby'] = self.id + '-hint'
@@ -122,24 +121,26 @@ class Node(template.Node):
         self.values = values = {
             'id': self.id,
             'label': self.label,
-            'element': self.element,
             'props': self.props,
             'class': self.eval(self.kwargs.get('class', '')).split(),
         }
         self.prepare_values(values)
-        values['child'] = self.child
-        values['class'] = ' '.join(values['class'])
 
         # Cleanup props
         added_props = set()
         clean_props = []
         for prop in reversed(values['props']):
-            prop_name = prop.split('=')[0]
+            prop_name = prop[0]
             if prop_name in added_props:
                 continue
             added_props.add(prop_name)
             clean_props.append(prop)
-        values['props'] = ' '.join(clean_props)
+        values['props'] = clean_props
+
+        values['child'] = self.child
+        values['element'] = self.element
+        values['class'] = ' '.join(values['class'])
+        values['props'] = ' '.join('%s="%s"' % x for x in values['props'])
 
         html = self.template.format(**values)
 
