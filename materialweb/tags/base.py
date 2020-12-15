@@ -2,6 +2,7 @@ import logging
 from uuid import uuid4
 #-
 from django import template
+from django.template.base import TextNode # pylint:disable=unused-import
 
 _logger = logging.getLogger(__name__)
 
@@ -15,7 +16,12 @@ class Node(template.Node):
     NODE_PROPS = ()
 
     def __init__(self, *args, **kwargs):
-        self.args = template.NodeList(*args)
+        if self.WANT_CHILDREN:
+            self.nodelist = args[0]
+            self.args = args[1:]
+        else:
+            self.args = args
+
         self.context = None
         self.kwargs = kwargs
         self.bound_field = None
@@ -35,7 +41,7 @@ class Node(template.Node):
     @property
     def child(self):
         if self.WANT_CHILDREN:
-            return self.args.render(self.context)
+            return self.nodelist.render(self.context)
         return ''
 
 
@@ -108,10 +114,7 @@ class Node(template.Node):
             self.mode = 'default'
 
         if self.WANT_FORM_FIELD:
-            if self.WANT_CHILDREN:
-                self.bound_field = self.args[1].resolve(context)
-            else:
-                self.bound_field = self.args[0].resolve(context)
+            self.bound_field = self.args[0].resolve(context)
             self.id = self.bound_field.id_for_label
         else:
             self.id = uuid4().hex

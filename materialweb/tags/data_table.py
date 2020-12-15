@@ -3,7 +3,7 @@ from yarl import URL
 #-
 from django.utils.translation import gettext
 #-
-from .base import Node
+from .base import Node, TextNode
 from .button import IconButton, Icon, Link
 
 _logger = logging.getLogger(__name__)
@@ -43,7 +43,7 @@ class DataTable(Node):
             extra_kwargs = {'disabled': 'disabled'}
 
         first_button = cls(
-                Icon('first_page'),
+                Icon(TextNode('first_page')),
                 **{
                     'label': gettext("First Page"),
                     'data-first-page': 'true',
@@ -52,7 +52,7 @@ class DataTable(Node):
                 **first_kwargs,
                 **extra_kwargs)
         prev_button = cls(
-                Icon('chevron_left'),
+                Icon(TextNode('chevron_left')),
                 **{
                     'label': gettext("Previous Page"),
                     'data-prev-page': 'true',
@@ -73,7 +73,7 @@ class DataTable(Node):
             extra_kwargs = {'disabled': 'disabled'}
 
         next_button = cls(
-                Icon('chevron_right'),
+                Icon(TextNode('chevron_right')),
                 **{
                     'label': gettext("Next Page"),
                     'data-next-page': 'true',
@@ -82,7 +82,7 @@ class DataTable(Node):
                 **next_kwargs,
                 **extra_kwargs)
         last_button = cls(
-                Icon('last_page'),
+                Icon(TextNode('last_page')),
                 **{
                     'label': gettext("Last Page"),
                     'data-last-page': 'true',
