@@ -9,6 +9,10 @@ class Button(Node):
 
     def prepare_values(self, values):
         values['type'] = self.kwargs.get('type', 'button')
+
+        if 'button_class' in self.context:
+            values['class'].extend(self.context['button_class'])
+
         if self.mode == 'outlined':
             values['class'].append('mdc-button--outlined')
         elif self.mode == 'raised':
@@ -60,6 +64,11 @@ class IconButton(Node):
     def prepare_values(self, values):
         values['type'] = self.kwargs.get('type', 'button')
 
+        if 'button_icon_class' in self.context:
+            values['class'].extend(self.context['button_icon_class'])
+        elif 'button_class' in self.context:
+            values['class'].extend(self.context['button_class'])
+
 
     def template_default(self):
         return '''
@@ -78,6 +87,9 @@ class ToggleButton(Node):
         values['state'] = self.eval(self.kwargs.get('state'))
         values['icon_when_on'] = self.kwargs['icon_when_on']
         values['icon_when_off'] = self.kwargs['icon_when_off']
+
+        if 'button_class' in self.context:
+            values['class'].extend(self.context['button_class'])
 
         if values['state']:
             values['class'].append('mdc-icon-button--on')
@@ -106,6 +118,9 @@ class Link(Node):
 
     def prepare_values(self, values):
         values['href'] = self.eval(self.kwargs.get('href')) or '#'
+
+        if 'button_class' in self.context:
+            values['class'].extend(self.context['button_class'])
 
 
     def template_default(self):

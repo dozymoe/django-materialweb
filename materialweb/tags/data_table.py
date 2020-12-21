@@ -1,7 +1,7 @@
 import logging
 from yarl import URL
 #-
-from django.utils.translation import gettext
+from django.utils.translation import gettext as trans
 #-
 from .base import Node, TextNode
 from .button import IconButton, Icon, Link
@@ -45,7 +45,7 @@ class DataTable(Node):
         first_button = cls(
                 Icon(TextNode('first_page')),
                 **{
-                    'label': gettext("First Page"),
+                    'label': trans("First Page"),
                     'data-first-page': 'true',
                     'class': 'material-icons mdc-data-table__pagination-button',
                 },
@@ -54,7 +54,7 @@ class DataTable(Node):
         prev_button = cls(
                 Icon(TextNode('chevron_left')),
                 **{
-                    'label': gettext("Previous Page"),
+                    'label': trans("Previous Page"),
                     'data-prev-page': 'true',
                     'class': 'material-icons i'
                         'mdc-data-table__pagination-button',
@@ -75,7 +75,7 @@ class DataTable(Node):
         next_button = cls(
                 Icon(TextNode('chevron_right')),
                 **{
-                    'label': gettext("Next Page"),
+                    'label': trans("Next Page"),
                     'data-next-page': 'true',
                     'class': 'material-icons mdc-data-table__pagination-button',
                 },
@@ -84,7 +84,7 @@ class DataTable(Node):
         last_button = cls(
                 Icon(TextNode('last_page')),
                 **{
-                    'label': gettext("Last Page"),
+                    'label': trans("Last Page"),
                     'data-last-page': 'true',
                     'class': 'material-icons mdc-data-table__pagination-button',
                 },
@@ -101,7 +101,7 @@ class DataTable(Node):
             'prev_button': prev_button.render(self.context),
             'next_button': next_button.render(self.context),
             'last_button': last_button.render(self.context),
-            'label_rows_per_page': gettext("Rows per page"),
+            'label_rows_per_page': trans("Rows per page"),
             'id_page_size': self.id + '-pagesize',
         }
         template = '''
@@ -207,7 +207,7 @@ class HeadRow(Node):
         else:
             values['select_checkbox'] = ''
 
-        values['label_toggle_all'] = gettext("Toggle all rows")
+        values['label_toggle_all'] = trans("Toggle all rows")
 
 
     def render_select(self):

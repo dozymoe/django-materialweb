@@ -113,6 +113,10 @@ class RightSection(Node):
     """
     WANT_CHILDREN = True
 
+    def prepare_values(self, values):
+        self.context['button_class'] = ['mdc-top-app-bar__action-item']
+
+
     def template_default(self):
         return '''
 <section role="toolbar" {props}
