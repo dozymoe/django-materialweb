@@ -9,12 +9,12 @@ There are two types of top app bar:
 
 See: https://material-components.github.io/material-components-web-catalog/#/component/top-app-bar
 """ # pylint:disable=line-too-long
+
 from .base import Node
 
 class TopAppBar(Node):
     """TopAppBar component.
     """
-
     WANT_CHILDREN = True
     MODES = ('short', 'short_closed', 'fixed', 'prominent', 'dense')
 
