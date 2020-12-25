@@ -34,19 +34,20 @@ class Select(Node):
     def prepare_values(self, values):
         values['items'] = '\n'.join(self.render_items())
 
-        choices = dict(self.bound_field.field.choices)
+        field = self.bound_field.field
+        choices = {str(choice): text for choice, text in field.choices}
         selected = self.bound_field.value()
         values['selected_text'] = choices.get(selected, '')
 
         anchor_props = []
 
         if ('required' in self.kwargs and self.eval(self.kwargs['required']))\
-                or self.bound_field.field.required:
+                or field.required:
             values['class'].append('mdc-select--required')
             anchor_props.append(('aria-required', 'true'))
 
         if ('disabled' in self.kwargs and self.eval(self.kwargs['disabled']))\
-                or self.bound_field.field.disabled:
+                or field.disabled:
             values['class'].append('mdc-select--disabled')
             anchor_props.append(('aria-disabled', 'true'))
 
