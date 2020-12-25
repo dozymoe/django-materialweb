@@ -3,7 +3,7 @@ import logging
 from django import template
 #-
 from ..tags import banner, button, card, checkbox, data_table, drawer, imagelist
-from ..tags import textarea, textfield, top_appbar
+from ..tags import select, textarea, textfield, top_appbar
 
 _logger = logging.getLogger(__name__)
 register = template.Library()
@@ -43,6 +43,8 @@ MATERIAL_TAGS = {
     'ImageList': imagelist.ImageList,
     'ImageList_Item': imagelist.ListItem,
     'Link': button.Link,
+    'Select': select.Select,
+    'Select_Item': select.Item,
     'TextArea': textarea.TextArea,
     'TextField': textfield.TextField,
     'ToggleButton': button.ToggleButton,

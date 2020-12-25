@@ -11,6 +11,7 @@ class Node(template.Node):
 
     WANT_CHILDREN = False
     WANT_FORM_FIELD = False
+    HIDE_FORM_FIELD = False
     MODES = ()
     MUST_HAVE_NODE_PROPS = ('mode', 'class', 'label')
     NODE_PROPS = ()
@@ -71,6 +72,8 @@ class Node(template.Node):
         self.prepare_attributes(attrs, widget_attrs)
         attrs['class'] = ' '.join(attrs['class'])
 
+        if self.HIDE_FORM_FIELD:
+            return self.bound_field.as_hidden(attrs=attrs)
         return field.as_widget(attrs=attrs)
 
 
@@ -127,26 +130,38 @@ class Node(template.Node):
         self.prepare_values(values)
 
         # Cleanup props
-        added_props = set()
-        clean_props = []
-        for prop in reversed(values['props']):
-            prop_name = prop[0]
-            if prop_name in added_props:
-                continue
-            added_props.add(prop_name)
-            clean_props.append(prop)
-        values['props'] = clean_props
+        values['props'] = self.prune_attributes(values['props'])
 
         values['child'] = self.child
         values['element'] = self.element
         values['class'] = ' '.join(values['class'])
-        values['props'] = ' '.join('%s="%s"' % x for x in values['props'])
+        values['props'] = self.join_attributes(values['props'])
 
         html = self.template.format(**values)
 
         if self.WANT_FORM_FIELD and self.bound_field.help_text:
             return html + '\n' + self.element_hint
         return html
+
+
+    def prune_attributes(self, attrs):
+        """Cleanup duplicate attributes.
+        """
+        added_props = set()
+
+        def _clean_attributes():
+            for prop in reversed(attrs):
+                prop_name = prop[0]
+                if prop_name in added_props:
+                    continue
+                added_props.add(prop_name)
+                yield prop
+
+        return list(_clean_attributes())
+
+
+    def join_attributes(self, attrs):
+        return ' '.join('%s="%s"' % x for x in attrs)
 
 
     def prepare_attributes(self, attrs, default):
