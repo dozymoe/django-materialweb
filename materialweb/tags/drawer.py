@@ -139,3 +139,13 @@ class AppContent(Node):
   {child}
 </div>
 '''
+
+
+components = {
+    'Drawer': Drawer,
+    'Drawer_Header': Header,
+    'Drawer_Title': Title,
+    'Drawer_SubTitle': SubTitle,
+    'Drawer_Content': Content,
+    'Drawer_AppContent': AppContent,
+}

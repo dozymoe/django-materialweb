@@ -98,3 +98,12 @@ class Actions(Node):
   {child}
 </div>
 '''
+
+
+components = {
+    'Banner': Banner,
+    'Banner_Content': Content,
+    'Banner_Icon': Icon,
+    'Banner_Text': Text,
+    'Banner_Actions': Actions,
+}

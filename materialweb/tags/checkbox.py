@@ -9,6 +9,7 @@ Use checkboxes to:
 
 See: https://material-components.github.io/material-components-web-catalog/#/component/checkbox
 """ # pylint:disable=line-too-long
+
 from .base import Node
 
 
@@ -101,3 +102,9 @@ class CheckBoxInput(Node):
   </div>
 </div>
 '''
+
+
+components = {
+    'CheckBox': CheckBox,
+    'CheckBox_Input': CheckBoxInput,
+}

@@ -6,6 +6,7 @@ optionally supporting content (i.e. a text label).
 
 See: https://material-components.github.io/material-components-web-catalog/#/component/image-list
 """ # pylint:disable=line-too-long
+
 from .base import Node
 
 
@@ -91,3 +92,9 @@ class ListItem(Node):
         return '''
   <img class="mdc-image-list__image" src="{image}" {props}>
 '''
+
+
+components = {
+    'ImageList': ImageList,
+    'ImageList_Item': ListItem,
+}

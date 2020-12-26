@@ -8,6 +8,7 @@ The text field class consists of the following types:
 
 See: https://material-components.github.io/material-components-web-catalog/#/component/text-field
 """ # pylint:disable=line-too-long
+
 from .base import Node
 
 
@@ -58,3 +59,8 @@ class TextArea(Node):
   <span class="mdc-line-ripple"></span>
 </label>
 '''
+
+
+components = {
+    'TextArea': TextArea,
+}

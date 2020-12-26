@@ -194,3 +194,9 @@ class Item(Node):
   <span class="mdc-list-item__text">{child}</span>
 </li>
 '''
+
+
+components = {
+    'Select': Select,
+    'Select_Item': Item,
+}

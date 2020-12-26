@@ -353,3 +353,15 @@ class BodyColumnHeader(Node):
   {child}
 </th>
 '''
+
+
+components = {
+    'DataTable': DataTable,
+    'DataTable_Head': Head,
+    'DataTable_Head_Row': HeadRow,
+    'DataTable_Head_Col': HeadColumn,
+    'DataTable_Body': Body,
+    'DataTable_Row': BodyRow,
+    'DataTable_Col': BodyColumn,
+    'DataTable_ColHeader': BodyColumnHeader,
+}

@@ -162,3 +162,15 @@ class Link(Node):
   {child}
 </a>
 '''
+
+
+components = {
+    'TopAppBar': TopAppBar,
+    'TopAppBar_Left': LeftSection,
+    'TopAppBar_Right': RightSection,
+    'TopAppBar_BrandButton': BrandButton,
+    'TopAppBar_BrandLink': BrandLink,
+    'TopAppBar_Title': Title,
+    'TopAppBar_Button': IconButton,
+    'TopAppBar_Link': Link,
+}

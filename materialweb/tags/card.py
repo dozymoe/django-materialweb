@@ -118,3 +118,12 @@ class Content(Node):
         """Get formatted literal string for Non-semantic content.
         """
         return '<div class="mdc-card__content {class}" {props}>{child}</div>'
+
+
+components = {
+    'Card': Card,
+    'Card_PrimaryAction': PrimaryAction,
+    'Card_Media': RichMedia,
+    'Card_Actions': Actions,
+    'Card_Content': Content,
+}

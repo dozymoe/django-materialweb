@@ -3,59 +3,25 @@ import logging
 from django import template
 #-
 from ..tags import banner, button, card, checkbox, data_table, drawer, imagelist
-from ..tags import select, textarea, textfield, top_appbar
+from ..tags import lists, select, textarea, textfield, top_appbar
 
 _logger = logging.getLogger(__name__)
 register = template.Library()
 
 
 MATERIAL_TAGS = {
-    'Banner': banner.Banner,
-    'Banner_Content': banner.Content,
-    'Banner_Icon': banner.Icon,
-    'Banner_Text': banner.Text,
-    'Banner_Actions': banner.Actions,
-    'Button': button.Button,
-    'Button_Icon': button.Icon,
-    'Button_Label': button.Label,
-    'Card': card.Card,
-    'Card_PrimaryAction': card.PrimaryAction,
-    'Card_Media': card.RichMedia,
-    'Card_Actions': card.Actions,
-    'Card_Content': card.Content,
-    'CheckBox': checkbox.CheckBox,
-    'CheckBox_Input': checkbox.CheckBoxInput,
-    'Drawer': drawer.Drawer,
-    'Drawer_Header': drawer.Header,
-    'Drawer_Title': drawer.Title,
-    'Drawer_SubTitle': drawer.SubTitle,
-    'Drawer_Content': drawer.Content,
-    'Drawer_AppContent': drawer.AppContent,
-    'DataTable': data_table.DataTable,
-    'DataTable_Head': data_table.Head,
-    'DataTable_Head_Row': data_table.HeadRow,
-    'DataTable_Head_Col': data_table.HeadColumn,
-    'DataTable_Body': data_table.Body,
-    'DataTable_Row': data_table.BodyRow,
-    'DataTable_Col': data_table.BodyColumn,
-    'DataTable_ColHeader': data_table.BodyColumnHeader,
-    'IconButton': button.IconButton,
-    'ImageList': imagelist.ImageList,
-    'ImageList_Item': imagelist.ListItem,
-    'Link': button.Link,
-    'Select': select.Select,
-    'Select_Item': select.Item,
-    'TextArea': textarea.TextArea,
-    'TextField': textfield.TextField,
-    'ToggleButton': button.ToggleButton,
-    'TopAppBar': top_appbar.TopAppBar,
-    'TopAppBar_Left': top_appbar.LeftSection,
-    'TopAppBar_Right': top_appbar.RightSection,
-    'TopAppBar_BrandButton': top_appbar.BrandButton,
-    'TopAppBar_BrandLink': top_appbar.BrandLink,
-    'TopAppBar_Title': top_appbar.Title,
-    'TopAppBar_Button': top_appbar.IconButton,
-    'TopAppBar_Link': top_appbar.Link,
+    **banner.components,
+    **button.components,
+    **card.components,
+    **checkbox.components,
+    **data_table.components,
+    **drawer.components,
+    **imagelist.components,
+    **lists.components,
+    **select.components,
+    **textarea.components,
+    **textfield.components,
+    **top_appbar.components,
 }
 
 

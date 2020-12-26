@@ -130,3 +130,13 @@ class Link(Node):
   {child}
 </a>
 '''
+
+
+components = {
+    'Button': Button,
+    'Button_Icon': Icon,
+    'Button_Label': Label,
+    'IconButton': IconButton,
+    'Link': Link,
+    'ToggleButton': ToggleButton,
+}
