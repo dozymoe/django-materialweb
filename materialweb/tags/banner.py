@@ -18,9 +18,9 @@ class Banner(Node):
     WANT_CHILDREN = True
     MODES = ('default', 'stacked')
 
-    def prepare_values(self, values):
+    def prepare(self):
         if self.mode == 'stacked':
-            values['class'].append('mdc-banner--mobile-stacked')
+            self.values['class'].append('mdc-banner--mobile-stacked')
 
 
     @property
@@ -30,11 +30,11 @@ class Banner(Node):
         Overridden because the templates are the same.
         """
         return '''
-<div class="mdc-banner {class}" role="banner" {props}>
+<{tag} class="mdc-banner {class}" role="banner" {props}>
   <div class="mdc-banner__content" role="status" aria-live="assertive">
     {child}
   </div>
-</div>
+</{tag}>
 '''
 
 
@@ -47,9 +47,9 @@ class Content(Node):
         """Get formatted literal string for Banner content wrapper.
         """
         return '''
-<div class="mdc-banner__graphic-text-wrapper {class}" {props}>
+<{tag} class="mdc-banner__graphic-text-wrapper {class}" {props}>
   {child}
-</div>
+</{tag}>
 '''
 
 
@@ -62,11 +62,11 @@ class Icon(Node):
         """Get formatted literal string for Banner icon content.
         """
         return '''
-<div class="mdc-banner__graphic" role="img" alt="{label}">
+<{tag} class="mdc-banner__graphic" role="img" alt="{label}">
   <span class="mdc-banner__icon {class}" {props}>
     {child}
   </span>
-</div>
+</{tag}>
 '''
 
 
@@ -79,9 +79,9 @@ class Text(Node):
         """Get formatted literal string for Banner text content.
         """
         return '''
-<div class="mdc-banner__text {class}" {props}>
+<{tag} class="mdc-banner__text {class}" {props}>
   {child}
-</div>
+</{tag}>
 '''
 
 

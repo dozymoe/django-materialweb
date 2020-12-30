@@ -15,12 +15,11 @@ class ImageList(Node):
     """
 
     WANT_CHILDREN = True
+    DEFAULT_TAG = 'ul'
 
-    NODE_PROPS = ('mode', 'class')
-
-    def prepare_values(self, values):
+    def prepare(self):
         if self.mode == 'masonry':
-            values['class'].append('mdc-image-list--masonry')
+            self.values['class'].append('mdc-image-list--masonry')
 
         # Send this to ListItem
         self.context['mode'] = self.mode
@@ -29,9 +28,9 @@ class ImageList(Node):
     @property
     def template(self):
         return '''
-<ul class="mdc-image-list {class}" {props}>
+<{tag} class="mdc-image-list {class}" {props}>
   {child}
-</ul>
+</{tag}>
 '''
 
 
@@ -39,8 +38,8 @@ class ListItem(Node):
 
     WANT_CHILDREN = True
     MODES = ('default', 'masonry')
-
-    NODE_PROPS = ('image', 'reversed', 'class')
+    NODE_PROPS = ('image', 'reversed')
+    DEFAULT_TAG = 'li'
 
     @property
     def template(self):
@@ -66,7 +65,7 @@ class ListItem(Node):
   </div>
 '''
 
-        template = ['<li class="mdc-image-list__item {class}">']
+        template = ['<{tag} class="mdc-image-list__item {class}">']
 
         if reverse:
             template.append(part2)
@@ -75,7 +74,7 @@ class ListItem(Node):
             template.append(part1)
             template.append(part2)
 
-        template.append('</li>')
+        template.append('</{tag}>')
 
         return ''.join(template)
 

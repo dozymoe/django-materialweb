@@ -20,14 +20,15 @@ class Drawer(Node):
     """
     WANT_CHILDREN = True
     MODES = ('standard', 'modal', 'dismissible')
+    DEFAULT_TAG = 'aside'
 
     def template_standard(self):
         """Get formatted literal string for standard Drawer.
         """
         return '''
-<aside class="mdc-drawer {class}" {props}>
+<{tag} class="mdc-drawer {class}" {props}>
   {child}
-</aside>
+</{tag}>
 '''
 
 
@@ -35,9 +36,9 @@ class Drawer(Node):
         """Get formatted literal string for modal Drawer.
         """
         return '''
-<aside class="mdc-drawer mdc-drawer--modal {class}" {props}>
+<{tag} class="mdc-drawer mdc-drawer--modal {class}" {props}>
   {child}
-</aside>
+</{tag}>
 <div class="mdc-drawer-scrim"></div>
 '''
 
@@ -46,9 +47,9 @@ class Drawer(Node):
         """Get formatted literal string for dismissible Drawer.
         """
         return '''
-<aside class="mdc-drawer mdc-drawer--dismissible {class}" {props}>
+<{tag} class="mdc-drawer mdc-drawer--dismissible {class}" {props}>
   {child}
-</aside>
+</{tag}>
 '''
 
 
@@ -61,9 +62,9 @@ class Header(Node):
         """Get formatted literal string for Drawer header.
         """
         return '''
-<div class="mdc-drawer__header {class}" {props}>
+<{tag} class="mdc-drawer__header {class}" {props}>
   {child}
-</div>
+</{tag}>
 '''
 
 
@@ -71,11 +72,7 @@ class Title(Node):
     """Drawer's header title.
     """
     WANT_CHILDREN = True
-    NODE_PROPS = ('tag',)
-
-    def prepare_values(self, values):
-        values['tag'] = self.kwargs.get('tag', 'h3')
-
+    DEFAULT_TAG = 'h3'
 
     def template_default(self):
         """Get formatted literal string for Drawer header title.
@@ -91,11 +88,7 @@ class SubTitle(Node):
     """Drawer's header subtitle.
     """
     WANT_CHILDREN = True
-    NODE_PROPS = ('tag',)
-
-    def prepare_values(self, values):
-        values['tag'] = self.kwargs.get('tag', 'h6')
-
+    DEFAULT_TAG = 'h6'
 
     def template_default(self):
         """Get formatted literal string for Drawer header subtitle.
@@ -111,15 +104,16 @@ class Content(Node):
     """Drawer's content.
     """
     WANT_CHILDREN = True
+    DEFAULT_TAG = 'nav'
 
     def template_default(self):
         """Get formatted literal string for Drawer content.
         """
         return '''
 <div class="mdc-drawer__content {class}" {props}>
-  <nav class="mdc-list">
+  <{tag} class="mdc-list">
     {child}
-  </nav>
+  </{tag}>
 </div>
 '''
 
@@ -135,9 +129,9 @@ class AppContent(Node):
         """Get formatted literal string for main content wrapper.
         """
         return '''
-<div class="mdc-drawer-app-content {class}" {props}>
+<{tag} class="mdc-drawer-app-content {class}" {props}>
   {child}
-</div>
+</{tag}>
 '''
 
 

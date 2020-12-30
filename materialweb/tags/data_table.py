@@ -1,10 +1,10 @@
 import logging
 from yarl import URL
 #-
-from django.utils.translation import gettext as trans
+from django.utils.translation import gettext as _
 #-
 from .base import Node, TextNode
-from .button import IconButton, Icon, Link
+from .button import IconButton, Icon
 
 _logger = logging.getLogger(__name__)
 
@@ -13,8 +13,9 @@ class DataTable(Node):
 
     WANT_CHILDREN = True
     NODE_PROPS = ('name', 'pager', 'page_name', 'row_selectable', 'row_movable')
+    DEFAULT_TAG = 'table'
 
-    def prepare_values(self, values):
+    def prepare(self):
         self.context['name'] = self.eval(self.kwargs.get('name', ''))
         self.context['selectable'] = self.eval(
                 self.kwargs.get('row_selectable'))
@@ -33,28 +34,26 @@ class DataTable(Node):
         page_name = self.eval(self.kwargs.get('page_name', 'page'))
 
         if pager.has_previous():
-            cls = Link
             first_kwargs = {'href': url % {page_name: 1}}
             next_kwargs = {'href': url % {page_name: pager.next_page_number()}}
             extra_kwargs = {}
         else:
-            cls = IconButton
             first_kwargs = next_kwargs = {}
-            extra_kwargs = {'disabled': 'disabled'}
+            extra_kwargs = {'type': 'button', 'disabled': 'disabled'}
 
-        first_button = cls(
+        first_button = IconButton(
                 Icon(TextNode('first_page')),
                 **{
-                    'label': trans("First Page"),
+                    'label': _("First Page"),
                     'data-first-page': 'true',
                     'class': 'material-icons mdc-data-table__pagination-button',
                 },
                 **first_kwargs,
                 **extra_kwargs)
-        prev_button = cls(
+        prev_button = IconButton(
                 Icon(TextNode('chevron_left')),
                 **{
-                    'label': trans("Previous Page"),
+                    'label': _("Previous Page"),
                     'data-prev-page': 'true',
                     'class': 'material-icons i'
                         'mdc-data-table__pagination-button',
@@ -63,28 +62,26 @@ class DataTable(Node):
                 **extra_kwargs)
 
         if pager.has_next():
-            cls = Link
             first_kwargs = {'href': url % {page_name: 1}}
             next_kwargs = {'href': url % {page_name: pager.next_page_number()}}
             extra_kwargs = {}
         else:
-            cls = IconButton
             next_kwargs = last_kwargs = {}
-            extra_kwargs = {'disabled': 'disabled'}
+            extra_kwargs = {'type': 'button', 'disabled': 'disabled'}
 
-        next_button = cls(
+        next_button = IconButton(
                 Icon(TextNode('chevron_right')),
                 **{
-                    'label': trans("Next Page"),
+                    'label': _("Next Page"),
                     'data-next-page': 'true',
                     'class': 'material-icons mdc-data-table__pagination-button',
                 },
                 **next_kwargs,
                 **extra_kwargs)
-        last_button = cls(
+        last_button = IconButton(
                 Icon(TextNode('last_page')),
                 **{
-                    'label': trans("Last Page"),
+                    'label': _("Last Page"),
                     'data-last-page': 'true',
                     'class': 'material-icons mdc-data-table__pagination-button',
                 },
@@ -101,7 +98,7 @@ class DataTable(Node):
             'prev_button': prev_button.render(self.context),
             'next_button': next_button.render(self.context),
             'last_button': last_button.render(self.context),
-            'label_rows_per_page': trans("Rows per page"),
+            'label_rows_per_page': _("Rows per page"),
             'id_page_size': self.id + '-pagesize',
         }
         template = '''
@@ -180,9 +177,9 @@ class DataTable(Node):
         return '''
 <div class="mdc-data-table">
   <div class="mdc-data-table__table-container">
-    <table aria-label="{label}" {props} class="mdc-data-table__table {class}">
+    <{tag} aria-label="{label}" {props} class="mdc-data-table__table {class}">
       {child}
-    </table>
+    </{tag}>
   </div>
   {pagination}
 </div>
@@ -192,22 +189,24 @@ class DataTable(Node):
 class Head(Node):
 
     WANT_CHILDREN = True
+    DEFAULT_TAG = 'thead'
 
     def template_default(self):
-        return '<thead {props} class="{class}">{child}</thead>'
+        return '<{tag} {props} class="{class}">{child}</{tag}>'
 
 
 class HeadRow(Node):
 
     WANT_CHILDREN = True
+    DEFAULT_TAG = 'tr'
 
-    def prepare_values(self, values):
+    def prepare(self):
         if self.context['selectable']:
-            values['select_checkbox'] = self.render_select()
+            self.values['select_checkbox'] = self.render_select()
         else:
-            values['select_checkbox'] = ''
+            self.values['select_checkbox'] = ''
 
-        values['label_toggle_all'] = trans("Toggle all rows")
+        self.values['label_toggle_all'] = _("Toggle all rows")
 
 
     def render_select(self):
@@ -232,10 +231,10 @@ class HeadRow(Node):
 
     def template_default(self):
         return '''
-<tr {props} class="mdc-data-table__header-row {class}">
+<{tag} {props} class="mdc-data-table__header-row {class}">
   {select_checkbox}
   {child}
-</tr>
+</{tag}>
 '''
 
 
@@ -243,30 +242,33 @@ class HeadColumn(Node):
 
     WANT_CHILDREN = True
     NODE_PROPS = ('type',)
+    DEFAULT_TAG = 'th'
 
-    def prepare_values(self, values):
+    def prepare(self):
         type_ = self.kwargs.get('type')
         if type_ == 'num':
-            values['class'].append('mdc-data-table__header-cell--numeric')
+            self.values['class'].append('mdc-data-table__header-cell--numeric')
 
 
     def template_default(self):
         return '''
-<th role="columnheader" scope="col" {props} class="mdc-data-table__header-cell {class}">
+<{tag} role="columnheader" scope="col" {props}
+    class="mdc-data-table__header-cell {class}">
   {child}
-</th>
+</{tag}>
 '''
 
 
 class Body(Node):
 
     WANT_CHILDREN = True
+    DEFAULT_TAG = 'tbody'
 
     def template_default(self):
         return '''
-<tbody {props} class="mdc-data-table__content {class}">
+<{tag} {props} class="mdc-data-table__content {class}">
   {child}
-</tbody>
+</{tag}>
 '''
 
 
@@ -274,13 +276,14 @@ class BodyRow(Node):
 
     WANT_CHILDREN = True
     NODE_PROPS = ('value',)
+    DEFAULT_TAG = 'tr'
 
-    def prepare_values(self, values):
+    def prepare(self):
         if self.context['selectable']:
             self.context['id_row_header'] = self.id + '-header'
-            values['select_checkbox'] = self.render_select()
+            self.values['select_checkbox'] = self.render_select()
         else:
-            values['select_checkbox'] = ''
+            self.values['select_checkbox'] = ''
 
 
     def render_select(self):
@@ -311,10 +314,10 @@ class BodyRow(Node):
 
     def template_default(self):
         return '''
-<tr {props} class="mdc-data-table__row {class}">
+<{tag} {props} class="mdc-data-table__row {class}">
   {select_checkbox}
   {child}
-</tr>
+</{tag}>
 '''
 
 
@@ -322,36 +325,42 @@ class BodyColumn(Node):
 
     WANT_CHILDREN = True
     NODE_PROPS = ('type',)
+    DEFAULT_TAG = 'td'
 
-    def prepare_values(self, values):
+    def prepare(self):
         type_ = self.kwargs.get('type')
         if type_ == 'num':
-            values['class'].append('mdc-data-table__header-cell--numeric')
+            self.values['class'].append('mdc-data-table__header-cell--numeric')
 
 
     def template_default(self):
-        return '<td {props} class="mdc-data-table__cell {class}">{child}</td>'
+        return '''
+<{tag} {props} class="mdc-data-table__cell {class}">
+  {child}
+</{tag}>
+'''
 
 
 class BodyColumnHeader(Node):
 
     WANT_CHILDREN = True
     NODE_PROPS = ('type',)
+    DEFAULT_TAG = 'th'
 
-    def prepare_values(self, values):
+    def prepare(self):
         type_ = self.kwargs.get('type')
         if type_ == 'num':
-            values['class'].append('mdc-data-table__header-cell--numeric')
+            self.values['class'].append('mdc-data-table__header-cell--numeric')
 
         if 'id_row_header' in self.context:
-            values['props'].append(('id', self.context['id_row_header']))
+            self.values['props'].append(('id', self.context['id_row_header']))
 
 
     def template_default(self):
         return '''
-<th scope="row" {props} class="mdc-data-table__cell {class}">
+<{tag} scope="row" {props} class="mdc-data-table__cell {class}">
   {child}
-</th>
+</{tag}>
 '''
 
 

@@ -29,19 +29,19 @@ class CheckBox(Node):
         attrs['class'].append('mdc-checkbox__native-control')
 
 
-    def prepare_values(self, values):
+    def prepare(self):
         """Prepare values for the formatted literal string.
         """
         disabled = self.element_attributes.get('disabled', None)
         if not disabled is None:
-            values['class'].append('mdc-checkbox--disabled')
+            self.values['class'].append('mdc-checkbox--disabled')
 
 
     def template_default(self):
         """Formatted literal string for CheckBox.
         """
         return '''
-<div class="mdc-form-field">
+<{tag} class="mdc-form-field">
   <div class="mdc-checkbox {class}">
     {element}
     <div class="mdc-checkbox__background">
@@ -54,7 +54,7 @@ class CheckBox(Node):
     <div class="mdc-checkbox__ripple"></div>
   </div>
   <label for="{id}">{label}</label>
-</div>
+</{tag}>
 '''
 
 
@@ -76,19 +76,19 @@ class CheckBoxInput(Node):
         attrs['class'].append('mdc-checkbox__native-control')
 
 
-    def prepare_values(self, values):
+    def prepare(self):
         """Prepare values for the formatted literal string.
         """
         disabled = self.element_attributes.get('disabled', None)
         if not disabled is None:
-            values['class'].append('mdc-checkbox--disabled')
+            self.values['class'].append('mdc-checkbox--disabled')
 
 
     def template_default(self):
         """Formatted literal string for CheckBox.
         """
         return '''
-<div class="mdc-touch-target-wrapper">
+<{tag} class="mdc-touch-target-wrapper">
   <div class="mdc-checkbox mdc-checkbox--touch {class}">
     {element}
     <div class="mdc-checkbox__background">
@@ -100,7 +100,7 @@ class CheckBoxInput(Node):
     </div>
     <div class="mdc-checkbox__ripple"></div>
   </div>
-</div>
+</{tag}>
 '''
 
 

@@ -5,18 +5,16 @@ class Button(Node):
 
     WANT_CHILDREN = True
     MODES = ('outlined', 'raised')
-    NODE_PROPS = ('type',)
+    DEFAULT_TAG = 'button'
 
-    def prepare_values(self, values):
-        values['type'] = self.kwargs.get('type', 'button')
-
+    def prepare(self):
         if 'button_class' in self.context:
-            values['class'].extend(self.context['button_class'])
+            self.values['class'].extend(self.context['button_class'])
 
         if self.mode == 'outlined':
-            values['class'].append('mdc-button--outlined')
+            self.values['class'].append('mdc-button--outlined')
         elif self.mode == 'raised':
-            values['class'].append('mdc-button--raised')
+            self.values['class'].append('mdc-button--raised')
 
 
     @property
@@ -27,11 +25,11 @@ class Button(Node):
         """
         return '''
 <div class="mdc-touch-target-wrapper">
-  <button type="{type}" class="mdc-button mdc-button--touch {class}" {props}>
+  <{tag} class="mdc-button mdc-button--touch {class}" {props}>
     <div class="mdc-button__ripple"></div>
     {child}
     <div class="mdc-button__touch"></div>
-  </button>
+  </{tag}>
 </div>
 '''
 
@@ -39,43 +37,48 @@ class Button(Node):
 class Label(Node):
 
     WANT_CHILDREN = True
+    DEFAULT_TAG = 'span'
 
     def template_default(self):
-        return '<span class="mdc-button__label">{child}</span>'
+        return '<{tag} class="mdc-button__label">{child}</{tag}>'
 
 
 class Icon(Node):
 
     WANT_CHILDREN = True
+    DEFAULT_TAG = 'span'
+
+    def prepare(self):
+        if 'button_icon_class' in self.context:
+            self.values['class'].extend(self.context['button_icon_class'])
+
 
     def template_default(self):
         return '''
-<span aria-hidden="true" class="mdc-button__icon {class}">
+<{tag} aria-hidden="true" class="mdc-button__icon {class}">
   {child}
-</span>
+</{tag}>
 '''
 
 
 class IconButton(Node):
 
     WANT_CHILDREN = True
-    NODE_PROPS = ('type',)
+    DEFAULT_TAG = 'button'
 
-    def prepare_values(self, values):
-        values['type'] = self.kwargs.get('type', 'button')
-
+    def prepare(self):
         if 'button_icon_class' in self.context:
-            values['class'].extend(self.context['button_icon_class'])
+            self.values['class'].extend(self.context['button_icon_class'])
         elif 'button_class' in self.context:
-            values['class'].extend(self.context['button_class'])
+            self.values['class'].extend(self.context['button_class'])
 
 
     def template_default(self):
         return '''
-<button type="{type}" aria-label="{label}" title="{label}" {props}
+<{tag} aria-label="{label}" title="{label}" {props}
     class="mdc-icon-button {class}">
   {child}
-</button>
+</{tag}>
 '''
 
 
@@ -83,17 +86,17 @@ class ToggleButton(Node):
 
     NODE_PROPS = ('type', 'state', 'icon_when_on', 'icon_when_off')
 
-    def prepare_values(self, values):
-        values['state'] = self.eval(self.kwargs.get('state'))
-        values['icon_when_on'] = self.kwargs['icon_when_on']
-        values['icon_when_off'] = self.kwargs['icon_when_off']
+    def prepare(self):
+        self.values['state'] = self.eval(self.kwargs.get('state'))
+        self.values['icon_when_on'] = self.kwargs['icon_when_on']
+        self.values['icon_when_off'] = self.kwargs['icon_when_off']
 
         if 'button_class' in self.context:
-            values['class'].extend(self.context['button_class'])
+            self.values['class'].extend(self.context['button_class'])
 
-        if values['state']:
-            values['class'].append('mdc-icon-button--on')
-            values['props'].append(('aria-pressed', 'true'))
+        if self.values['state']:
+            self.values['class'].append('mdc-icon-button--on')
+            self.values['props'].append(('aria-pressed', 'true'))
 
 
     def template_default(self):
@@ -110,33 +113,10 @@ class ToggleButton(Node):
 '''
 
 
-class Link(Node):
-    """Button as link
-    """
-    WANT_CHILDREN = True
-    NODE_PROPS = ('href',)
-
-    def prepare_values(self, values):
-        values['href'] = self.eval(self.kwargs.get('href')) or '#'
-
-        if 'button_class' in self.context:
-            values['class'].extend(self.context['button_class'])
-
-
-    def template_default(self):
-        return '''
-<a href="{href}" aria-label="{label}" title="{label}" {props}
-    class="mdc-icon-button {class}">
-  {child}
-</a>
-'''
-
-
 components = {
     'Button': Button,
     'Button_Icon': Icon,
     'Button_Label': Label,
     'IconButton': IconButton,
-    'Link': Link,
     'ToggleButton': ToggleButton,
 }

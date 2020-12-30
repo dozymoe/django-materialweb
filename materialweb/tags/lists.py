@@ -11,13 +11,11 @@ class List(Node):
     """
     WANT_CHILDREN = True
     MODES = ('one_line', 'two_line')
-    NODE_PROPS = ('tag',)
+    DEFAULT_TAG = 'ul'
 
-    def prepare_values(self, values):
-        values['tag'] = self.eval(self.kwargs.get('tag', 'ul'))
-
+    def prepare(self):
         if self.mode == 'two_line':
-            values['class'].append('mdc-list--two-line')
+            self.values['class'].append('mdc-list--two-line')
 
 
     @property
@@ -37,11 +35,7 @@ class Item(Node):
     """ListItem component.
     """
     WANT_CHILDREN = True
-    NODE_PROPS = ('tag',)
-
-    def prepare_values(self, values):
-        values['tag'] = self.eval(self.kwargs.get('tag', 'li'))
-
+    DEFAULT_TAG = 'li'
 
     def template_default(self):
         """Get formatted literal string for default ListItem.
@@ -58,14 +52,15 @@ class LinePrimary(Node):
     """ListItem primary line.
     """
     WANT_CHILDREN = True
+    DEFAULT_TAG = 'span'
 
     def template_default(self):
         """Get formatted literal string for default List Primary Line.
         """
         return '''
-<span class="mdc-list-item__primary-text {class}" {props}>
+<{tag} class="mdc-list-item__primary-text {class}" {props}>
   {child}
-</span>
+</{tag}>
 '''
 
 
@@ -73,14 +68,15 @@ class LineSecondary(Node):
     """ListItem secondary line.
     """
     WANT_CHILDREN = True
+    DEFAULT_TAG = 'span'
 
     def template_default(self):
         """Get formatted literal string for default List Secondary Line.
         """
         return '''
-<span class="mdc-list-item__secondary-text {class}" {props}>
+<{tag} class="mdc-list-item__secondary-text {class}" {props}>
   {child}
-</span>
+</{tag}>
 '''
 
 
@@ -88,11 +84,7 @@ class Group(Node):
     """ListGroup component.
     """
     WANT_CHILDREN = True
-    NODE_PROPS = ('tag',)
-
-    def prepare_values(self, values):
-        values['tag'] = self.eval(self.kwargs.get('tag', 'h3'))
-
+    DEFAULT_TAG = 'h3'
 
     def template_default(self):
         """Get formatted literal string for default List Group.
@@ -108,12 +100,13 @@ class Group(Node):
 class Divider(Node):
     """List divider.
     """
+    DEFAULT_TAG = 'li'
 
     def template_default(self):
         """get formatted literal string for default divider.
         """
         return '''
-<li role="separator" class="mdc-list-divider {class}" {props}></li>
+<{tag} role="separator" class="mdc-list-divider {class}" {props}></{tag}>
 '''
 
 
@@ -122,19 +115,18 @@ class SelectList(Node):
     """
     WANT_CHILDREN = True
     MODES = ('list', 'radio', 'checkbox')
-    NODE_PROPS = ('tag',)
+    DEFAULT_TAG = 'ul'
 
-    def prepare_values(self, values):
+    def prepare(self):
         if self.mode == 'radio':
-            values['props'].append(('role', 'radiogroup'))
+            self.values['props'].append(('role', 'radiogroup'))
         elif self.mode == 'checkbox':
-            values['props'].append(('role', 'group'))
+            self.values['props'].append(('role', 'group'))
         else:
-            values['props'].append(('role', 'listbox'))
-        values['tag'] = self.eval(self.kwargs.get('tag', 'ul'))
+            self.values['props'].append(('role', 'listbox'))
 
-        if values['label']:
-            values['props'].append(('aria-label', values['label']))
+        if self.values['label']:
+            self.values['props'].append(('aria-label', self.values['label']))
 
         self.context['item_mode'] = self.mode
 
@@ -157,31 +149,32 @@ class SelectItem(Node):
     """
     WANT_CHILDREN = True
     NODE_PROPS = ('selected', 'name', 'value')
+    DEFAULT_TAG = 'li'
 
-    def prepare_values(self, values):
+    def prepare(self):
         mode = self.context.get('item_mode', 'list')
         selected = self.eval(self.kwargs.get('selected', False))
         input_props = []
 
         if selected:
-            values['props'].append(('tabindex', '0'))
+            self.values['props'].append(('tabindex', '0'))
 
             if mode in ('radio', 'checkbox'):
-                values['props'].append(('aria-checked', 'true'))
+                self.values['props'].append(('aria-checked', 'true'))
                 input_props.append(('checked', 'checked'))
             else:
-                values['props'].append(('aria-selected', 'true'))
-                values['class'].append('mdc-list-item--selected')
+                self.values['props'].append(('aria-selected', 'true'))
+                self.values['class'].append('mdc-list-item--selected')
         else:
             if mode in ('radio', 'checkbox'):
-                values['props'].append(('aria-checked', 'false'))
+                self.values['props'].append(('aria-checked', 'false'))
             else:
-                values['props'].append(('aria-selected', 'false'))
+                self.values['props'].append(('aria-selected', 'false'))
 
-        values['name'] = self.eval(self.kwargs.get('name'))
-        values['value'] = self.eval(self.kwargs.get('value'))
+        self.values['name'] = self.eval(self.kwargs.get('name'))
+        self.values['value'] = self.eval(self.kwargs.get('value'))
 
-        values['input_props'] = self.join_attributes(input_props)
+        self.values['input_props'] = self.join_attributes(input_props)
 
 
     @property
@@ -202,9 +195,9 @@ class SelectItem(Node):
         """Get formatted literal string for list Selection.
         """
         return '''
-<li role="option" class="mdc-list-item {class}" {props}>
+<{tag} role="option" class="mdc-list-item {class}" {props}>
   {child}
-</li>
+</{tag}>
 '''
 
 
@@ -212,7 +205,7 @@ class SelectItem(Node):
         """Get formatted literal string for radio Selection.
         """
         return '''
-<li role="radio" class="md-list-item {class}" {props}>
+<{tag} role="radio" class="md-list-item {class}" {props}>
   <span class="mdc-list-item__ripple"></span>
   <span class="mdc-list-item__graphic">
     <div class="mdc-radio">
@@ -225,7 +218,7 @@ class SelectItem(Node):
     </div>
   </span>
   <label class="mdc-list-item__text" for="{id}">{label}</label>
-</li>
+</{tag}>
 '''
 
 
@@ -233,7 +226,7 @@ class SelectItem(Node):
         """Get formatted literal string for checkbox Selection.
         """
         return '''
-<li role="checkbox" class="mdc-list-item {class}" {props}>
+<{tag} role="checkbox" class="mdc-list-item {class}" {props}>
   <span class="mdc-list-item__ripple"></span>
   <span class="mdc-list-item__graphic">
     <div class="mdc-checkbox">
@@ -249,7 +242,7 @@ class SelectItem(Node):
     </div>
   </span>
   <label class="mdc-list-item__text" for="{id}">{label}</label>
-</li>
+</{tag}>
 '''
 
 

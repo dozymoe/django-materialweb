@@ -10,6 +10,8 @@ There are two types of top app bar:
 See: https://material-components.github.io/material-components-web-catalog/#/component/top-app-bar
 """ # pylint:disable=line-too-long
 
+from django.utils.translation import gettext as _
+#-
 from .base import Node
 
 class TopAppBar(Node):
@@ -17,19 +19,20 @@ class TopAppBar(Node):
     """
     WANT_CHILDREN = True
     MODES = ('short', 'short_closed', 'fixed', 'prominent', 'dense')
+    DEFAULT_TAG = 'header'
 
-    def prepare_values(self, values):
+    def prepare(self):
         if self.mode == 'short':
-            values['class'].append('mdc-top-app-bar--short')
+            self.values['class'].append('mdc-top-app-bar--short')
         elif self.mode == 'short_closed':
-            values['class'].append('mdc-top-app-bar--short')
-            values['class'].append('mdc-top-app-bar--short-collapsed')
+            self.values['class'].append('mdc-top-app-bar--short')
+            self.values['class'].append('mdc-top-app-bar--short-collapsed')
         elif self.mode == 'fixed':
-            values['class'].append('mdc-top-app-bar--fixed')
+            self.values['class'].append('mdc-top-app-bar--fixed')
         elif self.mode == 'prominent':
-            values['class'].append('mdc-top-app-bar--prominent')
+            self.values['class'].append('mdc-top-app-bar--prominent')
         elif self.mode == 'dense':
-            values['class'].append('mdc-top-app-bar--dense')
+            self.values['class'].append('mdc-top-app-bar--dense')
 
 
     @property
@@ -39,11 +42,11 @@ class TopAppBar(Node):
         Overridden because the templates are the same.
         """
         return '''
-<header class="mdc-top-app-bar {class}" {props}>
+<{tag} class="mdc-top-app-bar {class}" {props}>
   <div class="mdc-top-app-bar__row">
     {child}
   </div>
-</header>
+</{tag}>
 '''
 
 
@@ -51,46 +54,35 @@ class LeftSection(Node):
     """TopAppBar left section
     """
     WANT_CHILDREN = True
+    DEFAULT_TAG = 'section'
+
+    def prepare(self):
+        self.context['button_class'] = ['mdc-top-app-bar__action-item']
+
 
     def template_default(self):
         return '''
-<section {props}
+<{tag} {props}
     class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start {class}">
   {child}
-</section>
+</{tag}>
 '''
 
 
-class BrandButton(Node):
-    """TopAppBar brand button
+class Menu(Node):
+    """TopAppBar navigation button
     """
-    WANT_CHILDREN = True
+    def prepare(self):
+        if not self.values['label']:
+            self.values['label'] = _("Open navigation menu")
+
 
     def template_default(self):
         return '''
 <button type="button" aria-label="{label}" title="{label}" {props}
     class="mdc-top-app-bar__navigation-icon mdc-icon-button {class}">
-  {child}
+  menu
 </button>
-'''
-
-
-class BrandLink(Node):
-    """TopAppBar brand button
-    """
-    WANT_CHILDREN = True
-    NODE_PROPS = ('href',)
-
-    def prepare_values(self, values):
-        values['href'] = self.eval(self.kwargs.get('href')) or '#'
-
-
-    def template_default(self):
-        return '''
-<a href="{href}" aria-label="{label}" title="{label}" {props}
-    class="mdc-top-app-bar__navigation-icon mdc-icon-button {class}">
-  {child}
-</a>
 '''
 
 
@@ -98,11 +90,6 @@ class Title(Node):
     """TopAppBar title
     """
     WANT_CHILDREN = True
-    NODE_PROPS = ('tag',)
-
-    def prepare_values(self, values):
-        values['tag'] = self.kwargs.get('tag', 'span')
-
 
     def template_default(self):
         return '<{tag} class="mdc-top-app-bar__title {class}">{child}</{tag}>'
@@ -112,55 +99,18 @@ class RightSection(Node):
     """TopAppBar left section
     """
     WANT_CHILDREN = True
+    DEFAULT_TAG = 'section'
 
-    def prepare_values(self, values):
+    def prepare(self):
         self.context['button_class'] = ['mdc-top-app-bar__action-item']
 
 
     def template_default(self):
         return '''
-<section role="toolbar" {props}
+<{tag} role="toolbar" {props}
     class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end {class}">
   {child}
-</section>
-'''
-
-
-class IconButton(Node):
-    """TopAppBar button icon
-    """
-    WANT_CHILDREN = True
-    NODE_PROPS = ('type',)
-
-    def prepare_values(self, values):
-        values['type'] = self.kwargs.get('type', 'button')
-
-
-    def template_default(self):
-        return '''
-<button type="{type}" aria-label="{label}" title="{label}" {props}
-    class="mdc-top-app-bar__action-item mdc-icon-button {class}">
-  {child}
-</button>
-'''
-
-
-class Link(Node):
-    """TopAppBar link item
-    """
-    WANT_CHILDREN = True
-    NODE_PROPS = ('href',)
-
-    def prepare_values(self, values):
-        values['href'] = self.eval(self.kwargs.get('href')) or '#'
-
-
-    def template_default(self):
-        return '''
-<a href="{href}" aria-label="{label}" title="{label}" {props}
-    class="mdc-top-app-bar__action-item mdc-icon-button {class}">
-  {child}
-</a>
+</{tag}>
 '''
 
 
@@ -168,9 +118,6 @@ components = {
     'TopAppBar': TopAppBar,
     'TopAppBar_Left': LeftSection,
     'TopAppBar_Right': RightSection,
-    'TopAppBar_BrandButton': BrandButton,
-    'TopAppBar_BrandLink': BrandLink,
+    'TopAppBar_Menu': Menu,
     'TopAppBar_Title': Title,
-    'TopAppBar_Button': IconButton,
-    'TopAppBar_Link': Link,
 }

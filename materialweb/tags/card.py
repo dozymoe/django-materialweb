@@ -12,11 +12,11 @@ class Card(Node):
     WANT_CHILDREN = True
     MODES = ('elavated', 'outlined')
 
-    def prepare_values(self, values):
+    def prepare(self):
         if self.mode == 'elevated':
-            values['class'].append('mdc-card--elevated')
+            self.values['class'].append('mdc-card--elevated')
         elif self.mode == 'outlined':
-            values['class'].append('mdc-card--outlined')
+            self.values['class'].append('mdc-card--outlined')
 
 
     @property
@@ -26,9 +26,9 @@ class Card(Node):
         Overridden because the templates are the same.
         """
         return '''
-<div class="mdc-card {class}" {props}>
+<{tag} class="mdc-card {class}" {props}>
   {child}
-</div>
+</{tag}>
 '''
 
 
@@ -41,9 +41,9 @@ class PrimaryAction(Node):
         """Get formatted literal string for actionable Card.
         """
         return '''
-<div class="mdc-card__primary-action {class}" tabindex="0" {props}>
+<{tag} class="mdc-card__primary-action {class}" tabindex="0" {props}>
   {child}
-</div>
+</{tag}>
 '''
 
 
@@ -55,9 +55,9 @@ class RichMedia(Node):
     WANT_CHILDREN = True
     MODES = ('default', 'square')
 
-    def prepare_values(self, values):
+    def prepare(self):
         if self.mode == 'square':
-            values['class'].append('mdc-card__media--square')
+            self.values['class'].append('mdc-card__media--square')
 
 
     @property
@@ -65,11 +65,11 @@ class RichMedia(Node):
         """Get formatted literal string for Card's media.
         """
         return '''
-<div class="mdc-card__media {class}" {props}>
+<{tag} class="mdc-card__media {class}" {props}>
   <div class="mdc-card__media-content">
     {child}
   </div>
-</div>
+</{tag}>
 '''
 
 
@@ -79,11 +79,11 @@ class Actions(Node):
     the bottom of a card. It's often used with buttons.
     """
     WANT_CHILDREN = True
-    MODES = ('full_bleed',)
+    MODES = ('default', 'full_bleed')
 
-    def prepare_values(self, values):
+    def prepare(self):
         if self.mode == 'full_bleed':
-            values['class'].append('mdc-card__actions--full-bleed')
+            self.values['class'].append('mdc-card__actions--full-bleed')
 
         self.context['button_class'] = ['mdc-card__action',
                 'mdc-card__action--button']
@@ -92,13 +92,13 @@ class Actions(Node):
 
 
     @property
-    def tempate(self):
+    def template(self):
         """Get formatted literal string for Card's actions.
         """
         return '''
-<div class="mdc-card__actions {class}" {props}>
+<{tag} class="mdc-card__actions {class}" {props}>
   {child}
-</div>
+</{tag}>
 '''
 
 
@@ -117,7 +117,11 @@ class Content(Node):
     def template_default(self):
         """Get formatted literal string for Non-semantic content.
         """
-        return '<div class="mdc-card__content {class}" {props}>{child}</div>'
+        return '''
+<{tag} class="mdc-card__content {class}" {props}>
+  {child}
+</{tag}>
+'''
 
 
 components = {

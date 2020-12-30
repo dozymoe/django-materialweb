@@ -20,6 +20,7 @@ class Select(Node):
     HIDE_FORM_FIELD = True
     MODES = ('filled', 'outlined')
     NODE_PROPS = ('required', 'disabled')
+    DEFAULT_TAG = 'ul'
 
     def prepare_attributes(self, attrs, default):
         """Prepare html input element's attributes.
@@ -31,27 +32,27 @@ class Select(Node):
             attrs['disabled'] = 'true'
 
 
-    def prepare_values(self, values):
-        values['items'] = '\n'.join(self.render_items())
+    def prepare(self):
+        self.values['items'] = '\n'.join(self.render_items())
 
         field = self.bound_field.field
         choices = {str(choice): text for choice, text in field.choices}
         selected = self.bound_field.value()
-        values['selected_text'] = choices.get(selected, '')
+        self.values['selected_text'] = choices.get(selected, '')
 
         anchor_props = []
 
         if ('required' in self.kwargs and self.eval(self.kwargs['required']))\
                 or field.required:
-            values['class'].append('mdc-select--required')
+            self.values['class'].append('mdc-select--required')
             anchor_props.append(('aria-required', 'true'))
 
         if ('disabled' in self.kwargs and self.eval(self.kwargs['disabled']))\
                 or field.disabled:
-            values['class'].append('mdc-select--disabled')
+            self.values['class'].append('mdc-select--disabled')
             anchor_props.append(('aria-disabled', 'true'))
 
-        values['anchor_props'] = self.join_attributes(anchor_props)
+        self.values['anchor_props'] = self.join_attributes(anchor_props)
 
 
     def render_items(self):
@@ -104,10 +105,10 @@ class Select(Node):
   </div>
 
   <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-    <ul class="mdc-list" role="listbox" aria-label="{label}">
+    <{tag} class="mdc-list" role="listbox" aria-label="{label}">
       {child}
       {items}
-    </ul>
+    </{tag}>
   </div>
 </div>
 '''
@@ -158,10 +159,10 @@ class Select(Node):
   </div>
 
   <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-    <ul class="mdc-list" role="listbox" aria-label="{label}">
+    <{tag} class="mdc-list" role="listbox" aria-label="{label}">
       {child}
       {items}
-    </ul>
+    </{tag}>
   </div>
 </div>
 '''
@@ -172,27 +173,28 @@ class Item(Node):
     """
     WANT_CHILDREN = True
     NODE_PROPS = ('value', 'selected', 'disabled')
+    DEFAULT_TAG = 'li'
 
-    def prepare_values(self, values):
-        values['value'] = self.eval(self.kwargs['value'])
+    def prepare(self):
+        self.values['value'] = self.eval(self.kwargs['value'])
         if self.eval(self.kwargs.get('selected', False)):
-            values['selected'] = 'true'
-            values['class'].append('mdc-list-item--selected')
+            self.values['selected'] = 'true'
+            self.values['class'].append('mdc-list-item--selected')
         else:
-            values['selected'] = 'false'
+            self.values['selected'] = 'false'
 
         if self.eval(self.kwargs.get('disabled', False)):
-            values['class'].append('mdc-list-item--disabled')
-            values['props'].append(('aria-disabled', 'true'))
+            self.values['class'].append('mdc-list-item--disabled')
+            self.values['props'].append(('aria-disabled', 'true'))
 
 
     def template_default(self):
         return '''
-<li class="mdc-list-item {class}" aria-selected="{selected}"
+<{tag} class="mdc-list-item {class}" aria-selected="{selected}"
     data-value="{value}" role="option" {props}>
   <span class="mdc-list-item__ripple"></span>
   <span class="mdc-list-item__text">{child}</span>
-</li>
+</{tag}>
 '''
 
 

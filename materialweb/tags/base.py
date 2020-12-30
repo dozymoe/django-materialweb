@@ -13,8 +13,9 @@ class Node(template.Node):
     WANT_FORM_FIELD = False
     HIDE_FORM_FIELD = False
     MODES = ()
-    MUST_HAVE_NODE_PROPS = ('mode', 'class', 'label')
+    MUST_HAVE_NODE_PROPS = ('mode', 'tag', 'class', 'label')
     NODE_PROPS = ()
+    DEFAULT_TAG = 'div'
 
     def __init__(self, *args, **kwargs):
         if self.WANT_CHILDREN:
@@ -123,11 +124,12 @@ class Node(template.Node):
 
         self.values = values = {
             'id': self.id,
+            'tag': self.eval(self.kwargs.get('tag', self.DEFAULT_TAG)),
             'label': self.label,
             'props': self.props,
             'class': self.eval(self.kwargs.get('class', '')).split(),
         }
-        self.prepare_values(values)
+        self.prepare()
 
         # Cleanup props
         values['props'] = self.prune_attributes(values['props'])
@@ -168,7 +170,7 @@ class Node(template.Node):
         pass
 
 
-    def prepare_values(self, values):
+    def prepare(self):
         pass
 
 
