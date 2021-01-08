@@ -34,10 +34,12 @@ class Node(template.Node):
 
     @property
     def props(self):
-        return [(key, self.eval(val))\
+        props = [(key, self.eval(val))\
                 for (key, val) in self.kwargs.items()\
                 if key not in self.MUST_HAVE_NODE_PROPS\
                 and key not in self.NODE_PROPS]
+        # Ignore properties with falsy value except empty string.
+        return [x for x in props if bool(x[1]) or x[1] == '']
 
 
     @property
