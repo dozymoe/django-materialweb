@@ -72,6 +72,8 @@ class LeftSection(Node):
 class Menu(Node):
     """TopAppBar navigation button
     """
+    WANT_CHILDREN = True
+
     def prepare(self):
         if not self.values['label']:
             self.values['label'] = _("Open navigation menu")
@@ -81,7 +83,7 @@ class Menu(Node):
         return '''
 <button type="button" aria-label="{label}" title="{label}" {props}
     class="mdc-top-app-bar__navigation-icon mdc-icon-button {class}">
-  menu
+  {child}
 </button>
 '''
 
