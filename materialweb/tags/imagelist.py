@@ -15,6 +15,7 @@ class ImageList(Node):
     """
 
     WANT_CHILDREN = True
+    MODES = ('default', 'masonry')
     DEFAULT_TAG = 'ul'
 
     def prepare(self):
@@ -22,7 +23,7 @@ class ImageList(Node):
             self.values['class'].append('mdc-image-list--masonry')
 
         # Send this to ListItem
-        self.context['mode'] = self.mode
+        self.context['list_mode'] = self.mode
 
 
     @property
@@ -37,23 +38,23 @@ class ImageList(Node):
 class ListItem(Node):
 
     WANT_CHILDREN = True
-    MODES = ('default', 'masonry')
     NODE_PROPS = ('image', 'reversed')
     DEFAULT_TAG = 'li'
 
     @property
     def template(self):
-        image = self.kwargs.get('image', None)
-        reverse = 'reversed' in self.args or self.kwargs.get('reversed', False)
+        image = self.eval(self.kwargs.get('image'))
+        reverse = 'reversed' in self.args or\
+                self.eval(self.kwargs.get('reversed'))
 
         # Coming from ImageList
-        mode = self.context.get('mode', None)
+        mode = self.context.get('list_mode')
 
         if image:
             if mode == 'masonry':
                 part1 = self.template_image_masonry()
             else:
-                part1 = self.template_image_normal()
+                part1 = self.template_image_default()
         else:
             part1 = ''
 
@@ -79,7 +80,7 @@ class ListItem(Node):
         return ''.join(template)
 
 
-    def template_image_normal(self):
+    def template_image_default(self):
         return '''
   <div class="mdc-image-list__image-aspect-container">
     <img class="mdc-image-list__image" src="{image}" {props}>

@@ -110,8 +110,8 @@ class Content(Node):
         """Get formatted literal string for Drawer content.
         """
         return '''
-<div class="mdc-drawer__content {class}" {props}>
-  <{tag} class="mdc-list">
+<div class="mdc-drawer__content">
+  <{tag} class="mdc-list {class}" {props}>
     {child}
   </{tag}>
 </div>

@@ -19,30 +19,13 @@ class TextArea(Node):
     """
     WANT_FORM_FIELD = True
     MODES = ('filled', 'outlined')
+    DEFAULT_TAG = 'label'
 
     def prepare_attributes(self, attrs, default):
         """Prepare html input element's attributes.
         """
-        attrs['aria-label'] = self.label
+        attrs['aria-label'] = self.values['label']
         attrs['class'].append('mdc-text-field__input')
-
-
-    def template_outlined(self):
-        """Get formatted literal string for outlined TextArea.
-
-        See: https://material.io/develop/web/components/text-fields#outlined
-        """
-        return '''
-<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--no-label {class}">
-  <span class="mdc-text-field__resizer">
-    {element}
-  </span>
-  <span class="mdc-notched-outline">
-    <span class="mdc-notched-outline__leading"></span>
-    <span class="mdc-notched-outline__trailing"></span>
-  </span>
-</label>
-'''
 
 
     def template_filled(self):
@@ -51,13 +34,35 @@ class TextArea(Node):
         See: https://material.io/develop/web/components/text-fields#filled
         """
         return '''
-<label class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label {class}">
+<{tag}
+    class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label {class}"
+    {props}>
   <span class="mdc-text-field__ripple"></span>
   <span class="mdc-text-field__resizer">
     {element}
   </span>
   <span class="mdc-line-ripple"></span>
-</label>
+</{tag}>
+'''
+
+
+    def template_outlined(self):
+        """Get formatted literal string for outlined TextArea.
+
+        See: https://material.io/develop/web/components/text-fields#outlined
+        """
+        return '''
+<{tag}
+    class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--no-label {class}"
+    {props}>
+  <span class="mdc-text-field__resizer">
+    {element}
+  </span>
+  <span class="mdc-notched-outline">
+    <span class="mdc-notched-outline__leading"></span>
+    <span class="mdc-notched-outline__trailing"></span>
+  </span>
+</{tag}>
 '''
 
 

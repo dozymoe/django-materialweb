@@ -40,7 +40,11 @@ class Label(Node):
     DEFAULT_TAG = 'span'
 
     def template_default(self):
-        return '<{tag} class="mdc-button__label">{child}</{tag}>'
+        return '''
+<{tag} class="mdc-button__label {class}" {props}>
+  {child}
+</{tag}>
+'''
 
 
 class Icon(Node):
@@ -55,7 +59,7 @@ class Icon(Node):
 
     def template_default(self):
         return '''
-<{tag} aria-hidden="true" class="mdc-button__icon {class}">
+<{tag} aria-hidden="true" class="mdc-button__icon {class}" {props}>
   {child}
 </{tag}>
 '''

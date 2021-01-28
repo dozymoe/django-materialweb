@@ -19,7 +19,7 @@ class Select(Node):
     WANT_FORM_FIELD = True
     HIDE_FORM_FIELD = True
     MODES = ('filled', 'outlined')
-    NODE_PROPS = ('required', 'disabled')
+    NODE_PROPS = ('value', 'required', 'disabled')
     DEFAULT_TAG = 'ul'
 
     def prepare_attributes(self, attrs, default):
@@ -33,6 +33,9 @@ class Select(Node):
 
 
     def prepare(self):
+        self.values['value'] = self.eval(self.kwargs.get('value'))
+        self.context['list_value'] = self.values['value']
+
         self.values['items'] = '\n'.join(self.render_items())
 
         field = self.bound_field.field
@@ -54,6 +57,15 @@ class Select(Node):
 
         self.values['anchor_props'] = self.join_attributes(anchor_props)
 
+        self.values['dropdown_icon'] = self.template_dropdown_icon()
+
+        if self.values['label']:
+            template_method = getattr(self, 'template_label_' + self.mode)
+            self.values['html_label'] = template_method().format(self.values)
+        else:
+            self.values['class'].append('mdc-select--no-label')
+            self.values['html_label'] = ''
+
 
     def render_items(self):
         selected = self.bound_field.value()
@@ -71,36 +83,19 @@ class Select(Node):
         """Get formatted literal string for filled Select.
         """
         return '''
-<div class="mdc-select mdc-select--filled {class} {props}">
+<div class="mdc-select mdc-select--filled {class}" {props}>
   {element}
   <div class="mdc-select__anchor" role="button" aria-haspopup="listbox"
-      aria-expanded="false" aria-labelledby="{id}-label {id}-selected"
+      aria-expanded="false" aria-labelledby="{id}-label {id}-selected-text"
       {anchor_props}>
     <span class="mdc-select__ripple"></span>
-    <span id="{id}-label" class="mdc-floating-label">{label}</span>
+    {html_label}
     <span class="mdc-select__selected-text-container">
-      <span id="{id}-selected" class="mdc-select__selected-text">
+      <span id="{id}-selected-text" class="mdc-select__selected-text">
         {selected_text}
       </span>
     </span>
-    <span class="mdc-select__dropdown-icon">
-      <svg
-          class="mdc-select__dropdown-icon-graphic"
-          viewBox="7 10 10 5" focusable="false">
-        <polygon
-            class="mdc-select__dropdown-icon-inactive"
-            stroke="none"
-            fill-rule="evenodd"
-            points="7 10 12 15 17 10">
-        </polygon>
-        <polygon
-            class="mdc-select__dropdown-icon-active"
-            stroke="none"
-            fill-rule="evenodd"
-            points="7 15 12 10 17 15">
-        </polygon>
-      </svg>
-    </span>
+    {dropdown_icon}
     <span class="mdc-line-ripple"></span>
   </div>
 
@@ -118,44 +113,22 @@ class Select(Node):
         """Get formatted literal string for filled Select.
         """
         return '''
-<div class="mdc-select mdc-select--outlined {class} {props}">
+<div class="mdc-select mdc-select--outlined {class}" {props}>
   {element}
   <div class="mdc-select__anchor" role="button" aria-haspopup="listbox"
-      aria-expanded="false" aria-labelledby="{id}-label {id}-selected"
+      aria-expanded="false" aria-labelledby="{id}-label {id}-selected-text"
       {anchor_props}>
     <span class="mdc-notched-outline">
       <span class="mdc-notched-outline__leading"></span>
-      <span class="mdc-notched-outline__notch">
-        <span id="{id}-label" class="mdc-floating-label">
-          {label}
-        </span>
-      </span>
+      {html_label}
       <span class="mdc-notched-outline__trailing"></span>
     </span>
     <span class="mdc-select__selected-text-container">
-      <span id="{id}-selected" class="mdc-select__selected-text">
+      <span id="{id}-selected-text" class="mdc-select__selected-text">
         {selected_text}
       </span>
     </span>
-    <span class="mdc-select__dropdown-icon">
-      <svg
-          class="mdc-select__dropdown-icon-graphic"
-          viewBox="7 10 10 5" focusable="false">
-        <polygon
-            class="mdc-select__dropdown-icon-inactive"
-            stroke="none"
-            fill-rule="evenodd"
-            points="7 10 12 15 17 10">
-        </polygon>
-        <polygon
-            class="mdc-select__dropdown-icon-active"
-            stroke="none"
-            fill-rule="evenodd"
-            points="7 15 12 10 17 15">
-        </polygon>
-      </svg>
-    </span>
-    <span class="mdc-line-ripple"></span>
+    {dropdown_icon}
   </div>
 
   <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
@@ -168,20 +141,62 @@ class Select(Node):
 '''
 
 
+    def template_label_filled(self):
+        return '''
+<span id="{id}-selected-text" class="mdc-select__selected-text">
+  {selected_text}
+</span>
+'''
+
+
+    def template_label_outlined(self):
+        return '''
+<span class="mdc-notched-outline__notch">
+  <span id="{id}-selected-text" class="mdc-select__selected-text">
+    {selected_text}
+  </span>
+</span>
+'''
+
+
+    def template_dropdown_icon(self):
+        return '''
+<span class="mdc-select__dropdown-icon">
+  <svg
+      class="mdc-select__dropdown-icon-graphic"
+      viewBox="7 10 10 5" focusable="false">
+    <polygon
+        class="mdc-select__dropdown-icon-inactive"
+        stroke="none"
+        fill-rule="evenodd"
+        points="7 10 12 15 17 10">
+    </polygon>
+    <polygon
+        class="mdc-select__dropdown-icon-active"
+        stroke="none"
+        fill-rule="evenodd"
+        points="7 15 12 10 17 15">
+    </polygon>
+  </svg>
+</span>
+'''
+
+
 class Item(Node):
     """Select list item.
     """
     WANT_CHILDREN = True
-    NODE_PROPS = ('value', 'selected', 'disabled')
+    NODE_PROPS = ('value', 'disabled')
     DEFAULT_TAG = 'li'
 
     def prepare(self):
         self.values['value'] = self.eval(self.kwargs['value'])
-        if self.eval(self.kwargs.get('selected', False)):
-            self.values['selected'] = 'true'
+        self.values['selected'] = self.values['value'] ==\
+                self.context['list_value']
+
+        if self.values['selected']:
             self.values['class'].append('mdc-list-item--selected')
-        else:
-            self.values['selected'] = 'false'
+            self.values['props'].append(('aria-selected', 'true'))
 
         if self.eval(self.kwargs.get('disabled', False)):
             self.values['class'].append('mdc-list-item--disabled')
@@ -190,8 +205,7 @@ class Item(Node):
 
     def template_default(self):
         return '''
-<{tag} class="mdc-list-item {class}" aria-selected="{selected}"
-    data-value="{value}" role="option" {props}>
+<{tag} data-value="{value}" role="option" class="mdc-list-item {class}" {props}>
   <span class="mdc-list-item__ripple"></span>
   <span class="mdc-list-item__text">{child}</span>
 </{tag}>

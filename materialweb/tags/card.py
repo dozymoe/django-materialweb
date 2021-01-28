@@ -10,7 +10,7 @@ class Card(Node):
     """Card component.
     """
     WANT_CHILDREN = True
-    MODES = ('elavated', 'outlined')
+    MODES = ('elevated', 'outlined')
 
     def prepare(self):
         if self.mode == 'elevated':

@@ -128,7 +128,7 @@ class SelectList(Node):
         if self.values['label']:
             self.values['props'].append(('aria-label', self.values['label']))
 
-        self.context['item_mode'] = self.mode
+        self.context['list_mode'] = self.mode
 
 
     @property
@@ -152,21 +152,23 @@ class SelectItem(Node):
     DEFAULT_TAG = 'li'
 
     def prepare(self):
-        mode = self.context.get('item_mode', 'list')
+        # Late declaration of `self.mode`.
+        self.mode = self.context.get('list_mode', 'list')
+
         selected = self.eval(self.kwargs.get('selected', False))
         input_props = []
 
         if selected:
             self.values['props'].append(('tabindex', '0'))
 
-            if mode in ('radio', 'checkbox'):
+            if self.mode in ('radio', 'checkbox'):
                 self.values['props'].append(('aria-checked', 'true'))
                 input_props.append(('checked', 'checked'))
             else:
                 self.values['props'].append(('aria-selected', 'true'))
                 self.values['class'].append('mdc-list-item--selected')
         else:
-            if mode in ('radio', 'checkbox'):
+            if self.mode in ('radio', 'checkbox'):
                 self.values['props'].append(('aria-checked', 'false'))
             else:
                 self.values['props'].append(('aria-selected', 'false'))
@@ -175,20 +177,6 @@ class SelectItem(Node):
         self.values['value'] = self.eval(self.kwargs.get('value'))
 
         self.values['input_props'] = self.join_attributes(input_props)
-
-
-    @property
-    def template(self):
-        """Get formatted literal string for Select ListItem.
-
-        Overridden, mode comes from context, from parent Component.
-        """
-        mode = self.context.get('item_mode', 'list')
-        method = getattr(self, 'template_%s' % mode, None)
-        if not method:
-            raise NotImplementedError("Method is missing: template_%s" % mode)
-
-        return method()
 
 
     def template_list(self):
@@ -249,8 +237,8 @@ class SelectItem(Node):
 components = {
     'List': List,
     'List_Item': Item,
-    'List_Line_Primary': LinePrimary,
-    'List_Line_Secondary': LineSecondary,
+    'List_LinePrimary': LinePrimary,
+    'List_LineSecondary': LineSecondary,
     'List_Group': Group,
     'List_Divider': Divider,
     'SelectList': SelectList,

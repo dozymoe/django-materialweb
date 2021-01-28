@@ -4,7 +4,7 @@ from yarl import URL
 from django.utils.translation import gettext as _
 #-
 from .base import Node, TextNode
-from .button import IconButton, Icon
+from .button import IconButton
 
 _logger = logging.getLogger(__name__)
 
@@ -35,42 +35,43 @@ class DataTable(Node):
 
         if pager.has_previous():
             first_kwargs = {'href': url % {page_name: 1}}
-            next_kwargs = {'href': url % {page_name: pager.next_page_number()}}
+            prev_kwargs = {'href': url %\
+                    {page_name: pager.previous_page_number()}}
             extra_kwargs = {}
         else:
-            first_kwargs = next_kwargs = {}
+            first_kwargs = prev_kwargs = {}
             extra_kwargs = {'type': 'button', 'disabled': 'disabled'}
 
         first_button = IconButton(
-                Icon(TextNode('first_page')),
+                TextNode('first_page'),
                 **{
                     'label': _("First Page"),
                     'data-first-page': 'true',
-                    'class': 'material-icons mdc-data-table__pagination-button',
+                    'class': 'mdc-data-table__pagination-button material-icons',
                 },
                 **first_kwargs,
                 **extra_kwargs)
         prev_button = IconButton(
-                Icon(TextNode('chevron_left')),
+                TextNode('chevron_left'),
                 **{
                     'label': _("Previous Page"),
                     'data-prev-page': 'true',
-                    'class': 'material-icons i'
-                        'mdc-data-table__pagination-button',
+                    'class': 'mdc-data-table__pagination-button material-icons',
                 },
-                **next_kwargs,
+                **prev_kwargs,
                 **extra_kwargs)
 
         if pager.has_next():
-            first_kwargs = {'href': url % {page_name: 1}}
             next_kwargs = {'href': url % {page_name: pager.next_page_number()}}
+            last_kwargs = {'href': url %\
+                    {page_name: pager.pagination.num_pages}}
             extra_kwargs = {}
         else:
             next_kwargs = last_kwargs = {}
             extra_kwargs = {'type': 'button', 'disabled': 'disabled'}
 
         next_button = IconButton(
-                Icon(TextNode('chevron_right')),
+                TextNode('chevron_right'),
                 **{
                     'label': _("Next Page"),
                     'data-next-page': 'true',
@@ -79,7 +80,7 @@ class DataTable(Node):
                 **next_kwargs,
                 **extra_kwargs)
         last_button = IconButton(
-                Icon(TextNode('last_page')),
+                TextNode('last_page'),
                 **{
                     'label': _("Last Page"),
                     'data-last-page': 'true',

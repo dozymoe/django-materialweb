@@ -41,8 +41,8 @@ class CheckBox(Node):
         """Formatted literal string for CheckBox.
         """
         return '''
-<{tag} class="mdc-form-field">
-  <div class="mdc-checkbox {class}">
+<{tag} class="mdc-form-field {class}" {props}>
+  <div class="mdc-checkbox">
     {element}
     <div class="mdc-checkbox__background">
       <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
@@ -88,8 +88,8 @@ class CheckBoxInput(Node):
         """Formatted literal string for CheckBox.
         """
         return '''
-<{tag} class="mdc-touch-target-wrapper">
-  <div class="mdc-checkbox mdc-checkbox--touch {class}">
+<div class="mdc-touch-target-wrapper">
+  <{tag} class="mdc-checkbox mdc-checkbox--touch {class}" {props}>
     {element}
     <div class="mdc-checkbox__background">
       <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
@@ -99,8 +99,8 @@ class CheckBoxInput(Node):
       <div class="mdc-checkbox__mixedmark"></div>
     </div>
     <div class="mdc-checkbox__ripple"></div>
-  </div>
-</{tag}>
+  </{tag}>
+</div>
 '''
 
 

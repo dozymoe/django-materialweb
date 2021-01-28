@@ -94,9 +94,9 @@ class Actions(Node):
         """Get formatted literal string for Banner actions.
         """
         return '''
-<div class="mdc-banner__actions {class}" {props}>
+<{tag} class="mdc-banner__actions {class}" {props}>
   {child}
-</div>
+</{tag}>
 '''
 
 

@@ -113,7 +113,7 @@ class Node(template.Node):
             if not self.mode:
                 self.mode = self.MODES[0]
             elif self.mode not in self.MODES:
-                raise NotImplementedError("Method %s is not allowed." %\
+                raise NotImplementedError("Mode %s is not allowed." %\
                         self.mode)
         else:
             self.mode = 'default'

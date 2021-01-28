@@ -19,17 +19,35 @@ class TextField(Node):
     """
     WANT_FORM_FIELD = True
     MODES = ('filled', 'outlined', 'fullwidth')
+    DEFAULT_TAG = 'label'
 
     def prepare_attributes(self, attrs, default):
         """Prepare html input element's attributes.
         """
         if self.mode == 'fullwidth':
-            attrs['aria-label'] = self.label
+            attrs['aria-label'] = self.values['label']
         else:
-            attrs['aria-labelledby'] = self.id + '-label'
-        if not 'placeholder' in default:
-            attrs['placeholder'] = self.label
+            attrs['aria-labelledby'] = self.values['id'] + '-label'
+        if not 'placeholder' in attrs:
+            attrs['placeholder'] = self.values['label']
         attrs['class'].append('mdc-text-field__input')
+
+
+    def template_filled(self):
+        """Formatted literal string for filled TextField.
+
+        See: https://material.io/develop/web/components/text-fields#filled-text
+        """
+        return '''
+<{tag} class="mdc-text-field mdc-text-field--filled {class}" {props}>
+  <span class="mdc-text-field__ripple"></span>
+  {element}
+  <span id="{id}-label" class="mdc-floating-label">
+    {label}
+  </span>
+  <span className="mdc-line-ripple"></span>
+</{tag}>
+'''
 
 
     def template_outlined(self):
@@ -38,7 +56,7 @@ class TextField(Node):
         See: https://material.io/develop/web/components/text-fields#outlined-text
         """ # pylint:disable=line-too-long
         return '''
-<label class="mdc-text-field mdc-text-field--outlined {class}">
+<{tag} class="mdc-text-field mdc-text-field--outlined {class}" {props}>
   {element}
   <span class="mdc-notched-outline">
     <span class="mdc-notched-outline__leading"></span>
@@ -49,24 +67,7 @@ class TextField(Node):
     </span>
     <span class="mdc-notched-outline__trailing"></span>
   </span>
-</label>
-'''
-
-
-    def template_filled(self):
-        """Formatted literal string for filled TextField.
-
-        See: https://material.io/develop/web/components/text-fields#filled-text
-        """
-        return '''
-<label class="mdc-text-field mdc-text-field--filled {class}">
-  <span class="mdc-text-field__ripple"></span>
-  {element}
-  <span id="{id}-label" class="mdc-floating-label">
-    {label}
-  </span>
-  <span className="mdc-line-ripple"></span>
-</label>
+</{tag}>
 '''
 
 
@@ -74,11 +75,13 @@ class TextField(Node):
         """Formatted literal string for fullwidth TextField.
         """
         return '''
-<label className="mdc-text-field mdc-text-field--filled mdc-text-field--fullwidth {class}">
+<{tag}
+    className="mdc-text-field mdc-text-field--filled mdc-text-field--fullwidth {class}"
+    {props}>
   <span class="mdc-text-field__ripple"></span>
   {element}
   <span class="mdc-line-ripple"></span>
-</label>
+</{tag}>
 '''
 
 
