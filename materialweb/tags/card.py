@@ -1,16 +1,23 @@
-"""Implements Material Design Web Component: Card
+"""
+Card
+====
+
+See: https://material.io/components/cards
 
 Cards contain content and actions about a single subject.
 
-See: https://material.io/components/cards
 """
 from .base import Node
 
 class Card(Node):
-    """Card component.
+    """
+    Provides template tag: :code:`Card`.
+
     """
     WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
     MODES = ('elevated', 'outlined')
+    "Available variants."
 
     def prepare(self):
         if self.mode == 'elevated':
@@ -21,10 +28,6 @@ class Card(Node):
 
     @property
     def template(self):
-        """Get formatted literal string for different types of Card.
-
-        Overridden because the templates are the same.
-        """
         return '''
 <{tag} class="mdc-card {class}" {props}>
   {child}
@@ -33,13 +36,13 @@ class Card(Node):
 
 
 class PrimaryAction(Node):
-    """If a majority of the card (or even the entire card) should be actionable.
+    """
+    If a majority of the card (or even the entire card) should be actionable.
     """
     WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
 
     def template_default(self):
-        """Get formatted literal string for actionable Card.
-        """
         return '''
 <{tag} class="mdc-card__primary-action {class}" tabindex="0" {props}>
   {child}
@@ -53,7 +56,9 @@ class RichMedia(Node):
     container.
     """
     WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
     MODES = ('default', 'square')
+    "Available variants."
 
     def prepare(self):
         if self.mode == 'square':
@@ -62,8 +67,6 @@ class RichMedia(Node):
 
     @property
     def template(self):
-        """Get formatted literal string for Card's media.
-        """
         return '''
 <{tag} class="mdc-card__media {class}" {props}>
   <div class="mdc-card__media-content">
@@ -79,7 +82,9 @@ class Actions(Node):
     the bottom of a card. It's often used with buttons.
     """
     WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
     MODES = ('default', 'full_bleed')
+    "Available variants."
 
     def prepare(self):
         if self.mode == 'full_bleed':
@@ -93,8 +98,6 @@ class Actions(Node):
 
     @property
     def template(self):
-        """Get formatted literal string for Card's actions.
-        """
         return '''
 <{tag} class="mdc-card__actions {class}" {props}>
   {child}
@@ -113,10 +116,9 @@ class Content(Node):
     non-semantic content can remain at the card's top level.
     """
     WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
 
     def template_default(self):
-        """Get formatted literal string for Non-semantic content.
-        """
         return '''
 <{tag} class="mdc-card__content {class}" {props}>
   {child}

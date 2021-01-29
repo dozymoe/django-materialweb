@@ -10,12 +10,19 @@ _logger = logging.getLogger(__name__)
 class Node(template.Node):
 
     WANT_CHILDREN = False
+    "Template Tag needs closing end tag."
     WANT_FORM_FIELD = False
+    "Template Tag needs form field as first argument."
     HIDE_FORM_FIELD = False
+    "Render form field as hidden input."
     MODES = ()
+    "Available variants."
     MUST_HAVE_NODE_PROPS = ('mode', 'tag', 'class', 'label')
+    "Base Template Tag arguments."
     NODE_PROPS = ()
+    "Extended Template Tag arguments."
     DEFAULT_TAG = 'div'
+    "Rendered HTML tag."
 
     def __init__(self, *args, **kwargs):
         if self.WANT_CHILDREN:
@@ -178,8 +185,6 @@ class Node(template.Node):
 
     @property
     def template(self):
-        """Get formatted literal string for different types of TextField.
-        """
         method = getattr(self, 'template_%s' % self.mode, None)
         if not method:
             raise NotImplementedError("Method is missing: template_%s" %\

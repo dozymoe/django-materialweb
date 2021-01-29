@@ -1,11 +1,26 @@
+"""
+Button
+======
+
+See: https://material.io/components/buttons
+
+Buttons allow users to take actions, and make choices, with a single tap.
+
+"""
 from .base import Node
 
 
 class Button(Node):
+    """
+    Provides template tag: :code:`Button`.
 
+    """
     WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
     MODES = ('outlined', 'raised')
+    "Available variants."
     DEFAULT_TAG = 'button'
+    "Rendered HTML tag."
 
     def prepare(self):
         if 'button_class' in self.context:
@@ -19,10 +34,6 @@ class Button(Node):
 
     @property
     def template(self):
-        """Get formatted literal string for different types of Button.
-
-        Overridden because the templates are the same.
-        """
         return '''
 <div class="mdc-touch-target-wrapper">
   <{tag} class="mdc-button mdc-button--touch {class}" {props}>
@@ -37,7 +48,9 @@ class Button(Node):
 class Label(Node):
 
     WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
     DEFAULT_TAG = 'span'
+    "Rendered HTML tag."
 
     def template_default(self):
         return '''
@@ -50,7 +63,9 @@ class Label(Node):
 class Icon(Node):
 
     WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
     DEFAULT_TAG = 'span'
+    "Rendered HTML tag."
 
     def prepare(self):
         if 'button_icon_class' in self.context:
@@ -68,7 +83,9 @@ class Icon(Node):
 class IconButton(Node):
 
     WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
     DEFAULT_TAG = 'button'
+    "Rendered HTML tag."
 
     def prepare(self):
         if 'button_icon_class' in self.context:
@@ -89,6 +106,7 @@ class IconButton(Node):
 class ToggleButton(Node):
 
     NODE_PROPS = ('type', 'state', 'icon_when_on', 'icon_when_off')
+    "Extended Template Tag arguments."
 
     def prepare(self):
         self.values['state'] = self.eval(self.kwargs.get('state'))

@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class MaterialwebConfig(AppConfig):
+class MaterialWebConfig(AppConfig):
     name = 'materialweb'

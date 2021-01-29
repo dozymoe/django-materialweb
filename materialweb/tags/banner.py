@@ -1,4 +1,8 @@
-"""Implements Material Design Web Component: Banner
+"""
+Banner
+======
+
+See: https://material.io/components/banners
 
 A banner displays an important, succinct message, and provides actions for
 users to address (or dismiss the banner). It requires a user action to be
@@ -8,15 +12,42 @@ Banners should be displayed at the top of the screen, below a top app bar.
 They’re persistent and nonmodal, allowing the user to either ignore them or
 interact with them at any time. Only one banner should be shown at a time.
 
-See: https://material.io/components/banners
 """
 from .base import Node
 
 class Banner(Node):
-    """Banner component.
+    """
+    Provides template tag: :code:`Banner`.
+
+    Example usage:
+
+    .. code-block:: jinja
+
+       {% load materialweb %}
+
+       {% Banner mode="stacked" %}
+         {% Banner_Content %}
+           {% Banner_Text %}
+             {% trans "Message that needs immediate action." %}
+           {% endBanner_Text %}
+         {% endBanner_Content %}
+       {% endBanner %}
+
+    Example output:
+
+    .. code-block:: html
+
+       <div class="mdc-banner" role="banner">
+         <div class="mdc-banner__content" role="status" aria-live="assertive">
+           HTML
+         </div>
+       </div>
+
     """
     WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
     MODES = ('default', 'stacked')
+    "Available variants."
 
     def prepare(self):
         if self.mode == 'stacked':
@@ -25,10 +56,6 @@ class Banner(Node):
 
     @property
     def template(self):
-        """Get formatted literal string for Banner.
-
-        Overridden because the templates are the same.
-        """
         return '''
 <{tag} class="mdc-banner {class}" role="banner" {props}>
   <div class="mdc-banner__content" role="status" aria-live="assertive">
@@ -39,13 +66,34 @@ class Banner(Node):
 
 
 class Content(Node):
-    """Banner content wrapper.
+    """
+    Provides template tag: :code:`Banner_Content`.
+
+    Example usage:
+
+    .. code-block:: jinja
+
+       {% load materialweb %}
+
+       {% Banner_Content %}
+         {% Banner_Text %}
+           {% trans "Message that needs immediate action." %}
+         {% endBanner_Text %}
+       {% endBanner_Content %}
+
+    Example output:
+
+    .. code-block:: html
+
+       <div class="mdc-banner__graphic-text-wrapper">
+         HTML
+       </div>
+
     """
     WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
 
     def template_default(self):
-        """Get formatted literal string for Banner content wrapper.
-        """
         return '''
 <{tag} class="mdc-banner__graphic-text-wrapper {class}" {props}>
   {child}
@@ -54,15 +102,37 @@ class Content(Node):
 
 
 class Icon(Node):
-    """Banner icon content.
+    """
+    Provides template tag: :code:`Banner_Icon`.
+
+    Example usage:
+
+    .. code-block:: jinja
+
+       {% load materialweb %}
+
+       {% trans "Back" as label %}
+       {% Banner_Icon label=label class="material-icons" %}
+         arrow_back
+       {% endBanner_Icon %}
+
+    Example output:
+
+    .. code-block:: html
+
+       <div class="mdc-banner__graphic" role="img" alt="Back" title="Back">
+         <span class="mdc-banner__icon material-icons">
+           arrow_back
+         </span>
+       </div>
+
     """
     WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
 
     def template_default(self):
-        """Get formatted literal string for Banner icon content.
-        """
         return '''
-<{tag} class="mdc-banner__graphic" role="img" alt="{label}">
+<{tag} class="mdc-banner__graphic" role="img" alt="{label}" title="{label}">
   <span class="mdc-banner__icon {class}" {props}>
     {child}
   </span>
@@ -71,13 +141,32 @@ class Icon(Node):
 
 
 class Text(Node):
-    """Banner text content.
+    """
+    Provides template tag: :code:`Banner_Text`.
+
+    Example usage:
+
+    .. code-block:: jinja
+
+       {% load materialweb %}
+
+       {% Banner_Text %}
+         {% trans "Message that needs immediate action." %}
+       {% endBanner_Text %}
+
+    Example output:
+
+    .. code-block:: html
+
+       <div class="mdc-banner__text">
+         Message that needs immediate action.
+       </div>
+
     """
     WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
 
     def template_default(self):
-        """Get formatted literal string for Banner text content.
-        """
         return '''
 <{tag} class="mdc-banner__text {class}" {props}>
   {child}
@@ -86,13 +175,37 @@ class Text(Node):
 
 
 class Actions(Node):
-    """Banner actions.
+    """
+    Provides template tag: :code:`Banner_Actions`.
+
+    Example usage:
+
+    .. code-block:: jinja
+
+       {% load materialweb %}
+
+       {% Banner_Actions %}
+         {% Button type="button" id="btnFixIt" class="mdc-banner__primary-action" %}
+           {% trans "Fix it" %}
+         {% endButton %}
+       {% endBanner_Actions %}
+
+    Example output:
+
+    .. code-block:: html
+
+       <div class="mdc-banner__actions">
+         <button type="button" class="mdc-button mdc-banner__primary-action">
+           <div class="mdc-button__ripple"></div>
+           <div class="mdc-button__label">Fix it</div>
+         </button>
+       </div>
+
     """
     WANT_CHILDREN = True
+    "TemplateTag needs closing end tag."
 
     def template_default(self):
-        """Get formatted literal string for Banner actions.
-        """
         return '''
 <{tag} class="mdc-banner__actions {class}" {props}>
   {child}
