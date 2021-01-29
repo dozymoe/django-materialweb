@@ -1,0 +1,25 @@
+materialweb.tags package
+========================
+
+.. automodule:: materialweb.tags
+   :members:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   materialweb.tags.banner
+   materialweb.tags.button
+   materialweb.tags.card
+   materialweb.tags.checkbox
+   materialweb.tags.data_table
+   materialweb.tags.drawer
+   materialweb.tags.imagelist
+   materialweb.tags.lists
+   materialweb.tags.select
+   materialweb.tags.snackbar
+   materialweb.tags.textarea
+   materialweb.tags.textfield
+   materialweb.tags.top_appbar

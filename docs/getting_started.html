@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Getting Started &mdash; Django MaterialWeb  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Banner" href="gen/materialweb.tags.banner.html" />
+    <link rel="prev" title="Welcome to Django MaterialWeb’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Django MaterialWeb
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced-usage">Advanced Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#similar-projects">Similar Projects</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Material Components</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gen/materialweb.tags.banner.html">Banner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gen/materialweb.tags.button.html">Button</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gen/materialweb.tags.card.html">Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gen/materialweb.tags.checkbox.html">CheckBox</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Django MaterialWeb</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Getting Started</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/getting_started.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Provides <a class="reference external" href="https://material.io/design/introduction">Material Design Web</a> as <a class="reference external" href="https://docs.djangoproject.com/">Django</a> template tags, aimed at advanced
+frontend developers.</p>
+<p>At the moment, this project does not provide CSS files and javascript files and
+assumes that whoever uses this has learned about including those assets
+themselves after getting familiar with <a class="reference external" href="https://material.io/design/introduction">Material Design Web</a> documentation and
+its components.</p>
+<p>Beginner frontend developers will face some difficulties trying to implement
+the css and javascript assets.</p>
+<p>This project only offers the HTML markups as described in
+<a class="reference external" href="https://material.io/design/introduction">Material Design Web</a>, it is also designed so you can easily extends the
+project with your own components.</p>
+<p>Some components work with forms and require that you pass the form field
+to the template tags as its first argument.</p>
+<p>As a general rule, this project is only going to be used in <a class="reference external" href="https://docs.djangoproject.com/">Django</a> templates.</p>
+<p>There is a sister project <a class="reference external" href="https://github.com/dozymoe/react-materialweb">react-materialweb</a> that gives overview on what
+preparing css files and javascript files look like. I used it in my projects to
+build assets.</p>
+<p><a class="reference external" href="https://github.com/dozymoe/react-materialweb">react-materialweb</a> implements this project as a <a class="reference external" href="https://reactjs.org">react</a> + <a class="reference external" href="https://mobx.js.org/README.html">mobx</a> library, the
+components and how to use them is almost exactly the same.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install django-materialweb
+</pre></div>
+</div>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>NPM packages &#64;material/* version “^8.0.0”.</p>
+<p>You may use other versions, but do check if the html markups matched. You can
+also extends this project and write your own template tags.</p>
+</div>
+<div class="section" id="advanced-usage">
+<h2>Advanced Usage<a class="headerlink" href="#advanced-usage" title="Permalink to this headline">¶</a></h2>
+<p>How to extends this project with your own components.</p>
+<p>Checkout the <a class="reference external" href="https://github.com/dozymoe/django-materialweb/tree/main/materialweb/tags">tags</a> and <a class="reference external" href="https://github.com/dozymoe/django-materialweb/tree/main/materialweb/templatetags">templatetags</a> directories.</p>
+<p>Write your own components in your module <code class="code docutils literal notranslate"><span class="pre">tags</span></code> directory, following the
+examples in this project’s <a class="reference external" href="https://github.com/dozymoe/django-materialweb/tree/main/materialweb/tags">tags</a> directory.</p>
+<p>Create a file in your module <code class="code docutils literal notranslate"><span class="pre">templatetags</span></code> directory, for example:
+<strong>website_material.py</strong>.</p>
+<p>Example content:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">template</span>
+<span class="kn">from</span> <span class="nn">materialweb.templatetags.materialweb</span> <span class="kn">import</span> <span class="n">TagParser</span>
+<span class="c1">#-</span>
+<span class="kn">from</span> <span class="nn">..tags</span> <span class="kn">import</span> <span class="n">mycomponent</span>
+
+<span class="n">register</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">Library</span><span class="p">()</span>
+
+<span class="n">MATERIAL_TAGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="o">**</span><span class="n">mycomponent</span><span class="o">.</span><span class="n">components</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">_parser</span> <span class="o">=</span> <span class="n">TagParser</span><span class="p">(</span><span class="n">MATERIAL_TAGS</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">MATERIAL_TAGS</span><span class="p">:</span>
+    <span class="n">register</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">_parser</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="similar-projects">
+<h2>Similar Projects<a class="headerlink" href="#similar-projects" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://github.com/viewflow/django-material">django-material</a>, Django-Material offers the alternative approach to
+rendering forms in django. Strong Python/HTML code separation keeps you code
+DRY and free from underline HTML/CSS rendering details.</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/django-material-admin/">django-material-admin</a></p></li>
+</ul>
+</div></blockquote>
+<p>Both uses <a class="reference external" href="https://materializecss.com/">MaterializeCSS</a>, A modern responsive front-end framework based on
+Material Design.</p>
+<p>The main difference with their approach is that this project aimed at
+implementing the original <a class="reference external" href="https://material.io/design/introduction">Material Design Web</a>, it works only on the level of
+templates, and provides more than form rendering.</p>
+<p>The drawbacks of this project, I think is that <a class="reference external" href="https://materializecss.com/">MaterializeCSS</a> aimed at being
+easier to use compared to the original <a class="reference external" href="https://material.io/design/introduction">Material Design Web</a>, the class names
+are shorter, and more resilient to changes in the framework itself.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="gen/materialweb.tags.banner.html" class="btn btn-neutral float-right" title="Banner" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Django MaterialWeb’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Fahri Reza &lt;i@dozy.moe&gt;.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
