@@ -21,7 +21,7 @@ api:
 			materialweb/tests.py materialweb/apps.py\
 			materialweb/tags/base.py
 
-github: Makefile api
+github:
 	@make html
 	@cp -a "$(BUILDDIR)/html/." "$(GHPAGESDIR)"
 

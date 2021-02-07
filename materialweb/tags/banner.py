@@ -15,6 +15,7 @@ interact with them at any time. Only one banner should be shown at a time.
 """
 from .base import Node
 
+
 class Banner(Node):
     """
     Provides template tag: :code:`Banner`.
@@ -25,12 +26,19 @@ class Banner(Node):
 
        {% load materialweb %}
 
-       {% Banner mode="stacked" %}
+       {% Banner %}
          {% Banner_Content %}
            {% Banner_Text %}
-             {% trans "Message that needs immediate action." %}
+             {% trans "There was a problem processing a transaction on your credit card." %}
            {% endBanner_Text %}
          {% endBanner_Content %}
+         {% Banner_Actions %}
+           {% Button type="button" class="mdc-banner__primary-action" %}
+             {% Button_Label %}
+               {% trans "Fix it" %}
+             {% endButton_Label %}
+           {% endButton %}
+         {% endBanner_Actions %}
        {% endBanner %}
 
     Example output:
@@ -39,7 +47,17 @@ class Banner(Node):
 
        <div class="mdc-banner" role="banner">
          <div class="mdc-banner__content" role="status" aria-live="assertive">
-           HTML
+           <div class="mdc-banner__graphic-text-wrapper">
+             <div class="mdc-banner__text">
+               There was a problem processing a transaction on your credit card.
+             </div>
+           </div>
+           <div class="mdc-banner__actions">
+             <button type="button" class="mdc-button mdc-banner__primary-action">
+               <span class="mdc-button__ripple"></span>
+               <span class="mdc-button__label">Fix it</span>
+             </button>
+           </div>
          </div>
        </div>
 
@@ -76,8 +94,11 @@ class Content(Node):
        {% load materialweb %}
 
        {% Banner_Content %}
+         {% Banner_Icon class="material-icons" %}
+           error_outline
+         {% endBanner_Icon %}
          {% Banner_Text %}
-           {% trans "Message that needs immediate action." %}
+           {% trans "There was a problem processing a transaction on your credit card." %}
          {% endBanner_Text %}
        {% endBanner_Content %}
 
@@ -86,7 +107,12 @@ class Content(Node):
     .. code-block:: html
 
        <div class="mdc-banner__graphic-text-wrapper">
-         HTML
+         <div class="mdc-banner__graphic" role="img" alt="">
+           <i class="material-icons mdc-banner__icon">error_outline</i>
+         </div>
+         <div class="mdc-banner__text">
+           There was a problem processing a transaction on your credit card.
+         </div>
        </div>
 
     """
@@ -186,7 +212,9 @@ class Actions(Node):
 
        {% Banner_Actions %}
          {% Button type="button" id="btnFixIt" class="mdc-banner__primary-action" %}
-           {% trans "Fix it" %}
+           {% Button_Label %}
+             {% trans "Fix it" %}
+           {% endButton_Label %}
          {% endButton %}
        {% endBanner_Actions %}
 
@@ -196,14 +224,14 @@ class Actions(Node):
 
        <div class="mdc-banner__actions">
          <button type="button" class="mdc-button mdc-banner__primary-action">
-           <div class="mdc-button__ripple"></div>
-           <div class="mdc-button__label">Fix it</div>
+           <span class="mdc-button__ripple"></span>
+           <span class="mdc-button__label">Fix it</span>
          </button>
        </div>
 
     """
     WANT_CHILDREN = True
-    "TemplateTag needs closing end tag."
+    "Template Tag needs closing end tag."
 
     def template_default(self):
         return '''

@@ -20,6 +20,37 @@ class CheckBox(Node):
     """
     Provides template tag: :code:`CheckBox`.
 
+    Example usage:
+
+    .. code-block:: jinja
+
+       {% load materialweb %}
+
+       {% CheckBox form.remember %}
+
+    Example output:
+
+    .. code-block:: html
+
+       <div class="mdc-form-field ">
+         <div class="mdc-checkbox">
+           <input name="remember" type="checkbox"
+               id="id_remember"
+               class="mdc-checkbox__native-control"/>
+           <div class="mdc-checkbox__background">
+             <svg class="mdc-checkbox__checkmark"
+                 viewBox="0 0 24 24">
+               <path class="mdc-checkbox__checkmark-path"
+                   fill="none"
+                   d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+             </svg>
+             <div class="mdc-checkbox__mixedmark"></div>
+           </div>
+           <div class="mdc-checkbox__ripple"></div>
+         </div>
+         <label for="id_remember">Remember Me</label>
+       </div>
+
     """
     WANT_FORM_FIELD = True
     "Template Tag needs form field as first argument."
@@ -58,7 +89,39 @@ class CheckBox(Node):
 
 class CheckBoxInput(Node):
     """
+    Provides template tag: :code:`CheckBox_Input`.
+
     Only the input field without the label.
+
+    Example usage:
+
+    .. code-block:: jinja
+
+       {% load materialweb %}
+
+       {% CheckBox_Input form.remember %}
+
+    Example output:
+
+    .. code-block:: html
+
+       <div class="mdc-touch-target-wrapper">
+         <div class="mdc-checkbox mdc-checkbox--touch">
+           <input name="remember" type="checkbox" id="id_remember"
+               class="mdc-checkbox__native-control"/>
+           <div class="mdc-checkbox__background">
+             <svg class="mdc-checkbox__checkmark"
+                 viewBox="0 0 24 24">
+               <path class="mdc-checkbox__checkmark-path"
+                   fill="none"
+                   d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+             </svg>
+             <div class="mdc-checkbox__mixedmark"></div>
+           </div>
+           <div class="mdc-checkbox__ripple"></div>
+         </div>
+       </div>
+
     """
     WANT_FORM_FIELD = True
     "Template Tag needs form field as first argument."
