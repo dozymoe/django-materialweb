@@ -94,6 +94,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Button</a></li>
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.card.html">Card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.checkbox.html">CheckBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="materialweb.tags.data_table.html">DataTable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.drawer.html">Drawer</a></li>
 </ul>
 
@@ -170,6 +171,39 @@
 <dt id="materialweb.tags.button.Button">
 <em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.button.</code><code class="sig-name descname">Button</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.button.Button" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">Button</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">Button</span> <span class="nv">mode</span><span class="o">=</span><span class="s2">&quot;raised&quot;</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">Button_Label</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Submit&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endButton_Label</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endButton</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;login&#39;</span> <span class="k">as</span> <span class="nv">url</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">Button</span> <span class="nv">mode</span><span class="o">=</span><span class="s2">&quot;outlined&quot;</span> <span class="nv">tag</span><span class="o">=</span><span class="s2">&quot;a&quot;</span> <span class="nv">href</span><span class="o">=</span><span class="nv">url</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">Button_Label</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Log In&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endButton_Label</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endButton</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-touch-target-wrapper&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button mdc-button--raised&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button__label&quot;</span><span class="p">&gt;</span>Submit<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-touch-target-wrapper&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/login&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button mdc-button--outlined&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button__label&quot;</span><span class="p">&gt;</span>Log In<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
 <dl class="py attribute">
 <dt id="materialweb.tags.button.Button.WANT_CHILDREN">
 <code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.button.Button.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
@@ -186,6 +220,134 @@
 <dt id="materialweb.tags.button.Button.DEFAULT_TAG">
 <code class="sig-name descname">DEFAULT_TAG</code><em class="property"> = 'button'</em><a class="headerlink" href="#materialweb.tags.button.Button.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rendered HTML tag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="materialweb.tags.button.Label">
+<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.button.</code><code class="sig-name descname">Label</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.button.Label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">Banner_Label</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">Button_Label</span> <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;mylabel&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;My Accessible Button&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endButton_Label</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;mylabel&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button__label&quot;</span><span class="p">&gt;</span>My Accessible Button<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.button.Label.WANT_CHILDREN">
+<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.button.Label.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.button.Label.DEFAULT_TAG">
+<code class="sig-name descname">DEFAULT_TAG</code><em class="property"> = 'span'</em><a class="headerlink" href="#materialweb.tags.button.Label.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="materialweb.tags.button.Icon">
+<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.button.</code><code class="sig-name descname">Icon</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.button.Icon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">Button_Icon</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">Button_Icon</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  &lt;i class=&quot;fa fa-circle&quot;&gt;&lt;/i&gt;</span>
+<span class="cp">{%</span> <span class="k">endButton_Icon</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">span</span> <span class="na">aria-hidden</span><span class="o">=</span><span class="s">&quot;true&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button__icon&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;fa fa-circle&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.button.Icon.WANT_CHILDREN">
+<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.button.Icon.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.button.Icon.DEFAULT_TAG">
+<code class="sig-name descname">DEFAULT_TAG</code><em class="property"> = 'span'</em><a class="headerlink" href="#materialweb.tags.button.Icon.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="materialweb.tags.button.IconButton">
+<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.button.</code><code class="sig-name descname">IconButton</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.button.IconButton" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">IconButton</span></code>.</p>
+<p>See: <a class="reference external" href="https://material.io/develop/web/components/buttons/icon-buttons">https://material.io/develop/web/components/buttons/icon-buttons</a></p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Save&quot;</span> <span class="k">as</span> <span class="nv">label</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">IconButton</span> <span class="nv">label</span><span class="o">=</span><span class="nv">label</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;button&quot;</span> <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;material-icons&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  save</span>
+<span class="cp">{%</span> <span class="k">endIconButton</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">button</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Save&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;Save&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span>
+    <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-icon-button material-icons&quot;</span><span class="p">&gt;</span>
+  save
+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.button.IconButton.WANT_CHILDREN">
+<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.button.IconButton.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.button.IconButton.DEFAULT_TAG">
+<code class="sig-name descname">DEFAULT_TAG</code><em class="property"> = 'button'</em><a class="headerlink" href="#materialweb.tags.button.IconButton.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="materialweb.tags.button.ToggleButton">
+<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.button.</code><code class="sig-name descname">ToggleButton</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.button.ToggleButton" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">ToggleButton</span></code>.</p>
+<p>See: <a class="reference external" href="https://material.io/develop/web/components/buttons/icon-buttons">https://material.io/develop/web/components/buttons/icon-buttons</a></p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Add to favorites&quot;</span> <span class="k">as</span> <span class="nv">label</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">ToggleButton</span> <span class="nv">state</span><span class="o">=</span><span class="kp">False</span> <span class="nv">icon_when_on</span><span class="o">=</span><span class="s2">&quot;favorite&quot;</span> <span class="nv">icon_when_off</span><span class="o">=</span><span class="s2">&quot;favorite_border&quot;</span> <span class="nv">label</span><span class="o">=</span><span class="nv">label</span> <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;add-to-favorites&quot;</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;add-to-favorites&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-icon-button&quot;</span>
+    <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Add to favorites&quot;</span> <span class="na">aria-pressed</span><span class="o">=</span><span class="s">&quot;false&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;material-icons mdc-icon-button__icon mdc-icon-button__icon--on&quot;</span><span class="p">&gt;</span>
+    favorite
+  <span class="p">&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;material-icons mdc-icon-button__icon&quot;</span><span class="p">&gt;</span>
+    favorite_border
+  <span class="p">&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.button.ToggleButton.NODE_PROPS">
+<code class="sig-name descname">NODE_PROPS</code><em class="property"> = ('type', 'state', 'icon_when_on', 'icon_when_off')</em><a class="headerlink" href="#materialweb.tags.button.ToggleButton.NODE_PROPS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended Template Tag arguments.</p>
 </dd></dl>
 
 </dd></dl>

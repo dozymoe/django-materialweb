@@ -94,6 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.button.html">Button</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.checkbox.html">CheckBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="materialweb.tags.data_table.html">DataTable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.drawer.html">Drawer</a></li>
 </ul>
 
@@ -170,6 +171,69 @@
 <dt id="materialweb.tags.card.Card">
 <em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.card.</code><code class="sig-name descname">Card</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.card.Card" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">Card</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">Card</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">Card_PrimaryAction</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">Card_Media</span> <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;mdc-card__media--square&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      Title</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endCard_Media</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    &lt;!-- ... additional primary action content ... --&gt;</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endCard_PrimaryAction</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">  </span><span class="cp">{%</span> <span class="k">Card_Actions</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    &lt;div class=&quot;mdc-card__action-buttons&quot;&gt;</span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">Button</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">Button_Label</span> <span class="cp">%}</span><span class="x">Action 1</span><span class="cp">{%</span> <span class="k">endButton_Label</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endButon</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">Button</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">Button_Label</span> <span class="cp">%}</span><span class="x">Action 2</span><span class="cp">{%</span> <span class="k">endButton_Label</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endButon</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    &lt;/div&gt;</span>
+<span class="x">    &lt;div class=&quot;mdc-card__action-icons&quot;&gt;</span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Share&quot;</span> <span class="k">as</span> <span class="nv">label</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">IconButton</span> <span class="nv">label</span><span class="o">=</span><span class="nv">label</span> <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;material-icons&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        share</span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endIconButton</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;More options&quot;</span> <span class="k">as</span> <span class="nv">label</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">IconButton</span> <span class="nv">label</span><span class="o">=</span><span class="nv">label</span> <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;material-icons&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        more_vert</span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endIconButton</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    &lt;/div&gt;</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endCard_Actions</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endCard</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-card&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-card__primary-action&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-card__media mdc-card__media--square&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-card__media-content&quot;</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- ... additional primary action content ... --&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-card__actions&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-card__action-buttons&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button mdc-card__action mdc-card__action--button&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button__label&quot;</span><span class="p">&gt;</span>Action 1<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button mdc-card__action mdc-card__action--button&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button__label&quot;</span><span class="p">&gt;</span>Action 2<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-card__action-icons&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;material-icons mdc-icon-button mdc-card__action mdc-card__action--icon&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;Share&quot;</span><span class="p">&gt;</span>share<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;material-icons mdc-icon-button mdc-card__action mdc-card__action--icon&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;More options&quot;</span><span class="p">&gt;</span>more_vert<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
 <dl class="py attribute">
 <dt id="materialweb.tags.card.Card.WANT_CHILDREN">
 <code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.card.Card.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
@@ -187,7 +251,22 @@
 <dl class="py class">
 <dt id="materialweb.tags.card.PrimaryAction">
 <em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.card.</code><code class="sig-name descname">PrimaryAction</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.card.PrimaryAction" title="Permalink to this definition">¶</a></dt>
-<dd><p>If a majority of the card (or even the entire card) should be actionable.</p>
+<dd><p>Provides template tag: <a href="#id1"><span class="problematic" id="id2">:node:`Card_PrimaryAction`</span></a>.</p>
+<p>If a majority of the card (or even the entire card) should be actionable.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">Card_PrimaryAction</span> <span class="nv">tabindex</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  &lt;!-- content within actionable area --&gt;</span>
+<span class="cp">{%</span> <span class="k">endCard_PrimaryAction</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-card__primary-action&quot;</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="p">&gt;</span>
+  <span class="c">&lt;!-- content within actionable area --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
 <dl class="py attribute">
 <dt id="materialweb.tags.card.PrimaryAction.WANT_CHILDREN">
 <code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.card.PrimaryAction.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
@@ -199,8 +278,23 @@
 <dl class="py class">
 <dt id="materialweb.tags.card.RichMedia">
 <em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.card.</code><code class="sig-name descname">RichMedia</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.card.RichMedia" title="Permalink to this definition">¶</a></dt>
-<dd><p>This area is used for showing rich media in cards, and optionally as a
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">Card_Media</span></code>.</p>
+<p>This area is used for showing rich media in cards, and optionally as a
 container.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">Card_Media</span> <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;my-card__media mdc-card__media--16-9&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  Title</span>
+<span class="cp">{%</span> <span class="k">endCard_Media</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;my-card__media mdc-card__media mdc-card__media--16-9&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-card__media-content&quot;</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
 <dl class="py attribute">
 <dt id="materialweb.tags.card.RichMedia.WANT_CHILDREN">
 <code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.card.RichMedia.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
@@ -218,8 +312,34 @@ container.</p>
 <dl class="py class">
 <dt id="materialweb.tags.card.Actions">
 <em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.card.</code><code class="sig-name descname">Actions</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.card.Actions" title="Permalink to this definition">¶</a></dt>
-<dd><p>This area is used to show different actions the user can take, typically at
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">Card_Actions</span></code>.</p>
+<p>This area is used to show different actions the user can take, typically at
 the bottom of a card. It’s often used with buttons.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">Card_Actions</span> <span class="nv">mode</span><span class="o">=</span><span class="s2">&quot;full_bleed&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">Button</span> <span class="nv">tag</span><span class="o">=</span><span class="s2">&quot;a&quot;</span> <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;#&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">Button_Label</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;All Business Headlines&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endButton_Label</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">Button_Icon</span> <span class="nv">tag</span><span class="o">=</span><span class="s2">&quot;i&quot;</span> <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;material-icons&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      arrow_forward</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endButton_Icon</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endButton</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endCard_Actions</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-card__actions mdc-card__actions--full-bleed&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button mdc-card__action mdc-card__action--button&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-button__label&quot;</span><span class="p">&gt;</span>All Business Headlines<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;material-icons mdc-button__icon&quot;</span> <span class="na">aria-hidden</span><span class="o">=</span><span class="s">&quot;true&quot;</span><span class="p">&gt;</span>arrow_forward<span class="p">&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
 <dl class="py attribute">
 <dt id="materialweb.tags.card.Actions.WANT_CHILDREN">
 <code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.card.Actions.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
@@ -237,12 +357,33 @@ the bottom of a card. It’s often used with buttons.</p>
 <dl class="py class">
 <dt id="materialweb.tags.card.Content">
 <em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.card.</code><code class="sig-name descname">Content</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.card.Content" title="Permalink to this definition">¶</a></dt>
-<dd><p>It can occasionally be useful to add non-semantic elements to a card. For
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">Card_Content</span></code>.</p>
+<p>It can occasionally be useful to add non-semantic elements to a card. For
 instance, some implementations might do this to add an overlay layer.</p>
 <p>In this case, it’s important to delineate between semantic (real) content
 and non-semantic content added by the implementation. To achieve this,
 simply wrap the semantic content in an mdc-card__content element. The
 non-semantic content can remain at the card’s top level.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">Card</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">Card_Content</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    &lt;!-- ... semantic content ... --&gt;</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endCard_Content</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  &lt;!-- ... non-semantic content ... --&gt;</span>
+<span class="cp">{%</span> <span class="k">endCard</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-card&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-card__content&quot;</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- ... semantic content ... --&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="c">&lt;!-- ... non-semantic content ... --&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
 <dl class="py attribute">
 <dt id="materialweb.tags.card.Content.WANT_CHILDREN">
 <code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.card.Content.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>

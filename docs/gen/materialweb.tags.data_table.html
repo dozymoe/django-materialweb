@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>&lt;no title&gt; &mdash; Django MaterialWeb  documentation</title>
+  <title>DataTable &mdash; Django MaterialWeb  documentation</title>
   
 
   
@@ -89,11 +89,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Material Components</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.banner.html">Banner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.button.html">Button</a></li>
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.card.html">Card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.checkbox.html">CheckBox</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DataTable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.drawer.html">Drawer</a></li>
 </ul>
 
@@ -143,7 +144,7 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>&lt;no title&gt;</li>
+      <li>DataTable</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -162,7 +163,540 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <span class="target" id="module-materialweb.tags.data_table"></span>
+  <span class="target" id="module-materialweb.tags.data_table"></span><div class="section" id="datatable">
+<h1>DataTable<a class="headerlink" href="#datatable" title="Permalink to this headline">¶</a></h1>
+<p>See: <a class="reference external" href="https://material.io/components/data-tables">https://material.io/components/data-tables</a></p>
+<p>Data tables display information in a grid-like format of rows and columns.
+They organize information in a way that’s easy to scan, so that users can look
+for patterns and insights.</p>
+<p>Data tables can contain:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Interactive components (such as chips, buttons, or menus)</p></li>
+<li><p>Non-interactive elements (such as badges)</p></li>
+<li><p>Tools to query and manipulate data</p></li>
+</ul>
+</div></blockquote>
+<dl class="py class">
+<dt id="materialweb.tags.data_table.DataTable">
+<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.data_table.</code><code class="sig-name descname">DataTable</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.data_table.DataTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">DataTable</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Dessert calories&quot;</span> <span class="k">as</span> <span class="nv">label</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">DataTable</span> <span class="nv">label</span><span class="o">=</span><span class="nv">label</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">DataTable_Head</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">DataTable_Head_Row</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Dessert&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_Head_Col</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;num&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Carbs (g)&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_Head_Col</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;num&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Protein (g)&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Comments&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endDataTable_Head_Row</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endDataTable_Head</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">  </span><span class="cp">{%</span> <span class="k">DataTable_Body</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">DataTable_Row</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_ColHeader</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Frozen yogurt&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_ColHeader</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;num&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        24</span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;num&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        4.0</span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Super tasty&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endDataTable_Row</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">{%</span> <span class="k">DataTable_Row</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_ColHeader</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Ice cream sandwich&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_ColHeader</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;num&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        37</span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;num&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        4.33333333333</span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;I like ice cream more&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endDataTable_Row</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">{%</span> <span class="k">DataTable_Row</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_ColHeader</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Eclair&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_ColHeader</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;num&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        24</span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;num&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        6.0</span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;New filling flavor&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endDataTable_Row</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endDataTable_Body</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endDataTable</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__table-container&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">table</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__table&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Dessert calories&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__header-row&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__header-cell&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;columnheader&quot;</span>
+              <span class="na">scope</span><span class="o">=</span><span class="s">&quot;col&quot;</span><span class="p">&gt;</span>
+            Dessert
+          <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">th</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;columnheader&quot;</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;col&quot;</span>
+              <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__header-cell mdc-data-table__header-cell--numeric&quot;</span><span class="p">&gt;</span>
+            Carbs (g)
+          <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">th</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;col&quot;</span>
+              <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__header-cell mdc-data-table__header-cell--numeric&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;columnheader&quot;</span><span class="p">&gt;</span>
+            Protein (g)
+          <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__header-cell&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;columnheader&quot;</span>
+              <span class="na">scope</span><span class="o">=</span><span class="s">&quot;col&quot;</span><span class="p">&gt;</span>
+            Comments
+          <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">tbody</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__content&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__row&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell&quot;</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+            Frozen yogurt
+          <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell mdc-data-table__cell--numeric&quot;</span><span class="p">&gt;</span>
+            24
+          <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell mdc-data-table__cell--numeric&quot;</span><span class="p">&gt;</span>
+            4.0
+          <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell&quot;</span><span class="p">&gt;</span>
+            Super tasty
+          <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__row&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell&quot;</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+            Ice cream sandwich
+          <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell mdc-data-table__cell--numeric&quot;</span><span class="p">&gt;</span>
+            37
+          <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell mdc-data-table__cell--numeric&quot;</span><span class="p">&gt;</span>
+            4.33333333333
+          <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell&quot;</span><span class="p">&gt;</span>
+            I like ice cream more
+          <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__row&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell&quot;</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+            Eclair
+          <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell mdc-data-table__cell--numeric&quot;</span><span class="p">&gt;</span>
+            24
+          <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell mdc-data-table__cell--numeric&quot;</span><span class="p">&gt;</span>
+            6.0
+          <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell&quot;</span><span class="p">&gt;</span>
+            New filing flavor
+          <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.DataTable.WANT_CHILDREN">
+<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.data_table.DataTable.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.DataTable.NODE_PROPS">
+<code class="sig-name descname">NODE_PROPS</code><em class="property"> = ('name', 'pager', 'page_name', 'row_selectable', 'row_movable')</em><a class="headerlink" href="#materialweb.tags.data_table.DataTable.NODE_PROPS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended Template Tag arguments.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.DataTable.DEFAULT_TAG">
+<code class="sig-name descname">DEFAULT_TAG</code><em class="property"> = 'table'</em><a class="headerlink" href="#materialweb.tags.data_table.DataTable.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="materialweb.tags.data_table.Head">
+<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.data_table.</code><code class="sig-name descname">Head</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.data_table.Head" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">DataTable_Head</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">DataTable_Head</span> <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;simple-table-header&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  &lt;tr&gt;&lt;/tr&gt;</span>
+<span class="cp">{%</span> <span class="k">endDataTable_Head</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">thead</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;simple-table-header&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.Head.WANT_CHILDREN">
+<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.data_table.Head.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.Head.DEFAULT_TAG">
+<code class="sig-name descname">DEFAULT_TAG</code><em class="property"> = 'thead'</em><a class="headerlink" href="#materialweb.tags.data_table.Head.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="materialweb.tags.data_table.HeadRow">
+<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.data_table.</code><code class="sig-name descname">HeadRow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.data_table.HeadRow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">DataTable</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">DataTable_Head_Row</span> <span class="nv">selectable</span><span class="o">=</span><span class="kp">True</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">DataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    Signal name</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endDataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">  </span><span class="cp">{%</span> <span class="k">DataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    Status</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endDataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">  </span><span class="cp">{%</span> <span class="k">DataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    Severity</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endDataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">  </span><span class="cp">{%</span> <span class="k">DataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    Stage</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endDataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">  </span><span class="cp">{%</span> <span class="k">DataTable_Head_Col</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;num&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    Time</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endDataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">  </span><span class="cp">{%</span> <span class="k">DataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    Roles</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endDataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endDataTable_Head_Row</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__header-row&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">th</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;columnheader&quot;</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;col&quot;</span>
+      <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__header-cell mdc-data-table__header-cell--checkbox&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-checkbox mdc-data-table__header-row-checkbox mdc-checkbox--selected&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Toggle all rows&quot;</span>
+          <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-checkbox__native-control&quot;</span><span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-checkbox__background&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">svg</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-checkbox__checkmark&quot;</span> <span class="na">viewBox</span><span class="o">=</span><span class="s">&quot;0 0 24 24&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">path</span> <span class="na">fill</span><span class="o">=</span><span class="s">&quot;none&quot;</span> <span class="na">d</span><span class="o">=</span><span class="s">&quot;M1.73,12.91 8.1,19.28 22.79,4.59&quot;</span>
+              <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-checkbox__checkmark-path&quot;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-checkbox__mixedmark&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-checkbox__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">th</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;columnheader&quot;</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;col&quot;</span>
+      <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__header-cell&quot;</span><span class="p">&gt;</span>
+    Signal name
+  <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">th</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;columnheader&quot;</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;col&quot;</span>
+      <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__header-cell&quot;</span><span class="p">&gt;</span>
+    Status
+  <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">th</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;columnheader&quot;</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;col&quot;</span>
+      <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__header-cell&quot;</span><span class="p">&gt;</span>
+    Severity
+  <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">th</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;columnheader&quot;</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;col&quot;</span>
+      <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__header-cell&quot;</span><span class="p">&gt;</span>
+    Stage
+  <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">th</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;columnheader&quot;</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;col&quot;</span>
+      <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__header-cell mdc-data-table__header-cell--numeric&quot;</span><span class="p">&gt;</span>
+    Time
+  <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">th</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;columnheader&quot;</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;col&quot;</span>
+      <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__header-cell&quot;</span><span class="p">&gt;</span>
+    Roles
+  <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.HeadRow.WANT_CHILDREN">
+<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.data_table.HeadRow.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.HeadRow.DEFAULT_TAG">
+<code class="sig-name descname">DEFAULT_TAG</code><em class="property"> = 'tr'</em><a class="headerlink" href="#materialweb.tags.data_table.HeadRow.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="materialweb.tags.data_table.HeadColumn">
+<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.data_table.</code><code class="sig-name descname">HeadColumn</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.data_table.HeadColumn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">DataTable_Head_Col</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">DataTable_Head_Col</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;num&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  Time</span>
+<span class="cp">{%</span> <span class="k">endDataTable_Head_Col</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">th</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;columnheader&quot;</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;col&quot;</span>
+    <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__header-cell mdc-data-table__header-cell--numeric&quot;</span><span class="p">&gt;</span>
+  Time
+<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.HeadColumn.WANT_CHILDREN">
+<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.data_table.HeadColumn.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.HeadColumn.NODE_PROPS">
+<code class="sig-name descname">NODE_PROPS</code><em class="property"> = ('type',)</em><a class="headerlink" href="#materialweb.tags.data_table.HeadColumn.NODE_PROPS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended Template Tag arguments.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.HeadColumn.DEFAULT_TAG">
+<code class="sig-name descname">DEFAULT_TAG</code><em class="property"> = 'th'</em><a class="headerlink" href="#materialweb.tags.data_table.HeadColumn.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="materialweb.tags.data_table.Body">
+<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.data_table.</code><code class="sig-name descname">Body</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.data_table.Body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">DataTable_Body</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">DataTable_Body</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">DataTable_Row</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">DataTable_ColHeader</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Frozen yogurt&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endDataTable_ColHeader</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;num&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      24</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;num&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      4.0</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Super tasty&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endDataTable_Row</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endDataTable_Body</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">tbody</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__content&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__row&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell&quot;</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>
+      Frozen yogurt
+    <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell mdc-data-table__cell--numeric&quot;</span><span class="p">&gt;</span>
+      24
+    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell mdc-data-table__cell--numeric&quot;</span><span class="p">&gt;</span>
+      4.0
+    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell&quot;</span><span class="p">&gt;</span>
+      Super tasty
+    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.Body.WANT_CHILDREN">
+<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.data_table.Body.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.Body.DEFAULT_TAG">
+<code class="sig-name descname">DEFAULT_TAG</code><em class="property"> = 'tbody'</em><a class="headerlink" href="#materialweb.tags.data_table.Body.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="materialweb.tags.data_table.BodyRow">
+<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.data_table.</code><code class="sig-name descname">BodyRow</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.data_table.BodyRow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">DataTable_Row</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">DataTable_Row</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">DataTable_ColHeader</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Frozen yogurt&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endDataTable_ColHeader</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;num&quot;</span> <span class="cp">%}</span><span class="x">24</span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;num&quot;</span> <span class="cp">%}</span><span class="x">4.0</span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Super tasty&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endDataTable_Row</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__row&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell&quot;</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>Frozen yogurt<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell mdc-data-table__cell--numeric&quot;</span><span class="p">&gt;</span>24<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell mdc-data-table__cell--numeric&quot;</span><span class="p">&gt;</span>4.0<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell&quot;</span><span class="p">&gt;</span>Super tasty<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.BodyRow.WANT_CHILDREN">
+<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.data_table.BodyRow.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.BodyRow.NODE_PROPS">
+<code class="sig-name descname">NODE_PROPS</code><em class="property"> = ('value',)</em><a class="headerlink" href="#materialweb.tags.data_table.BodyRow.NODE_PROPS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended Template Tag arguments.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.BodyRow.DEFAULT_TAG">
+<code class="sig-name descname">DEFAULT_TAG</code><em class="property"> = 'tr'</em><a class="headerlink" href="#materialweb.tags.data_table.BodyRow.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="materialweb.tags.data_table.BodyColumn">
+<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.data_table.</code><code class="sig-name descname">BodyColumn</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.data_table.BodyColumn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">DataTable_Col</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">DataTable_Col</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;num&quot;</span> <span class="cp">%}</span><span class="x">6.0</span><span class="cp">{%</span> <span class="k">endDataTable_Col</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell mdc-data-table__cell--numeric&quot;</span><span class="p">&gt;</span>6.0<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.BodyColumn.WANT_CHILDREN">
+<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.data_table.BodyColumn.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.BodyColumn.NODE_PROPS">
+<code class="sig-name descname">NODE_PROPS</code><em class="property"> = ('type',)</em><a class="headerlink" href="#materialweb.tags.data_table.BodyColumn.NODE_PROPS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended Template Tag arguments.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.BodyColumn.DEFAULT_TAG">
+<code class="sig-name descname">DEFAULT_TAG</code><em class="property"> = 'td'</em><a class="headerlink" href="#materialweb.tags.data_table.BodyColumn.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="materialweb.tags.data_table.BodyColumnHeader">
+<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.data_table.</code><code class="sig-name descname">BodyColumnHeader</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.data_table.BodyColumnHeader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">DataTable_ColHeader</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">DataTable_ColHeader</span> <span class="cp">%}{%</span> <span class="k">trans</span> <span class="s2">&quot;Eclair&quot;</span> <span class="cp">%}{%</span> <span class="k">endDataTable_ColHeader</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-data-table__cell&quot;</span> <span class="na">scope</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="p">&gt;</span>Eclair<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.BodyColumnHeader.WANT_CHILDREN">
+<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.data_table.BodyColumnHeader.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.BodyColumnHeader.NODE_PROPS">
+<code class="sig-name descname">NODE_PROPS</code><em class="property"> = ('type',)</em><a class="headerlink" href="#materialweb.tags.data_table.BodyColumnHeader.NODE_PROPS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended Template Tag arguments.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.data_table.BodyColumnHeader.DEFAULT_TAG">
+<code class="sig-name descname">DEFAULT_TAG</code><em class="property"> = 'th'</em><a class="headerlink" href="#materialweb.tags.data_table.BodyColumnHeader.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
 
            </div>
            
