@@ -35,7 +35,14 @@ class Item(Node):
     """ListItem component.
     """
     WANT_CHILDREN = True
+    NODE_PROPS = ('activated',)
     DEFAULT_TAG = 'li'
+
+    def prepare(self):
+        activated = self.eval(self.kwargs.get('activated'))
+        if activated:
+            self.values['class'].append('mdc-list-item--activated')
+
 
     def template_default(self):
         """Get formatted literal string for default ListItem.
@@ -43,7 +50,36 @@ class Item(Node):
         return '''
 <{tag} class="mdc-list-item {class}" {props}>
   <span class="mdc-list-item__ripple"></span>
-  <span class="mdc-list-item__text">{child}</span>
+  {child}
+</{tag}>
+'''
+
+
+class ItemContent(Node):
+    WANT_CHILDREN = True
+    NODE_PROPS = ('type',)
+    DEFAULT_TAG = 'span'
+
+    def prepare(self):
+        type_ = self.eval(self.kwargs.get('type', 'text'))
+        if (type_ == 'image'):
+            self.values['class'].append('mdc-list-item__graphic')
+        else:
+            self.values['class'].append('mdc-list-item__text')
+
+
+    def template_default(self):
+        return '<{tag} class="{class}" {props}>{child}</{tag}>'
+
+
+class ItemText(Node):
+    WANT_CHILDREN = True
+    DEFAULT_TAG = 'span'
+
+    def template_default(self):
+        return '''
+<{tag} class="mdc-list-item__graphic {class}" {props}>
+  {child}
 </{tag}>
 '''
 
@@ -237,6 +273,7 @@ class SelectItem(Node):
 components = {
     'List': List,
     'List_Item': Item,
+    'List_Content': ItemContent,
     'List_LinePrimary': LinePrimary,
     'List_LineSecondary': LineSecondary,
     'List_Group': Group,
