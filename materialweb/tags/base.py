@@ -190,4 +190,4 @@ class Node(template.Node):
             raise NotImplementedError("Method is missing: template_%s" %\
                     self.mode)
 
-        return method()
+        return method() # pylint:disable=not-callable
