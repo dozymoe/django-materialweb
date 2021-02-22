@@ -53,6 +53,8 @@ class Drawer(Node):
          {% endDrawer_Content %}
        {% endDrawer %}
 
+    Example output:
+
     .. code-block:: html
 
        <aside class="mdc-drawer">
@@ -87,7 +89,7 @@ class Drawer(Node):
          </div>
        </aside>
 
-    """
+    """ # pylint:disable=line-too-long
     WANT_CHILDREN = True
     "Template Tag needs closing end tag."
     MODES = ('standard', 'modal', 'dismissible')
@@ -145,6 +147,8 @@ class Header(Node):
          {% endDrawer_Content %}
        {% endDrawer %}
 
+    Example output:
+
     .. code-block:: html
 
        <aside class="mdc-drawer">
@@ -166,7 +170,7 @@ class Header(Node):
          </div>
        </aside>
 
-    """
+    """ # pylint:disable=line-too-long
     WANT_CHILDREN = True
     "Template Tag needs closing end tag."
 
@@ -192,6 +196,8 @@ class Title(Node):
          {% Drawer_Title %}Mail{% endDrawer_Title %}
          {% Drawer_SubTitle %}email@material.io{% endDrawer_SubTitle %}
        {% endDrawer_Header %}
+
+    Example output:
 
     .. code-block:: html
 
@@ -228,6 +234,8 @@ class SubTitle(Node):
          {% Drawer_Title %}Mail{% endDrawer_Title %}
          {% Drawer_SubTitle %}email@material.io{% endDrawer_SubTitle %}
        {% endDrawer_Header %}
+
+    Example output:
 
     .. code-block:: html
 
@@ -269,6 +277,8 @@ class Content(Node):
          {% endList_Item %}
        {% endDrawer_Content %}
 
+    Example output:
+
     .. code-block:: html
 
        <div class="mdc-drawer__content">
@@ -284,7 +294,7 @@ class Content(Node):
          </nav>
        </div>
 
-    """
+    """ # pylint:disable=line-too-long
     WANT_CHILDREN = True
     "Template Tag needs closing end tag."
     DEFAULT_TAG = 'nav'
@@ -327,14 +337,14 @@ class AppContent(Node):
                {% endList_Content %}
                {% List_Content type="text" %}Inbox{% endList_Content %}
              {% endList_Item %}
-  
+
              {% List_Item tag="a" href="#" %}
                {% List_Content tag="i" type="image" aria-hidden="true" class="material-icons" %}
                  send
                {% endList_Content %}
                {% List_Content type="text" %}Outgoing{% endList_Content %}
              {% endList_Item %}
-  
+
              {% List_Item tag="a" href="#" %}
                {% List_Content tag="i" type="image" aria-hidden="true" class="material-icons" %}
                  drafts
@@ -365,6 +375,8 @@ class AppContent(Node):
          {% endDrawer_AppContent %}
 
        </body>
+
+    Example output:
 
     .. code-block:: html
 
@@ -405,7 +417,9 @@ class AppContent(Node):
            <header class="mdc-top-app-bar app-bar" id="app-bar">
              <div class="mdc-top-app-bar__row">
                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                 <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
+                 <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
+                   menu
+                 </button>
                  <span class="mdc-top-app-bar__title">Dismissible Drawer</span>
                </section>
              </div>
@@ -419,7 +433,7 @@ class AppContent(Node):
          </div>
        </body>
 
-    """
+    """ # pylint:disable=line-too-long
     WANT_CHILDREN = True
     "Template Tag needs closing end tag."
 

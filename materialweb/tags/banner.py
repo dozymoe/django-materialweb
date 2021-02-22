@@ -61,7 +61,7 @@ class Banner(Node):
          </div>
        </div>
 
-    """
+    """ # pylint:disable=line-too-long
     WANT_CHILDREN = True
     "Template Tag needs closing end tag."
     MODES = ('default', 'stacked')
@@ -115,7 +115,7 @@ class Content(Node):
          </div>
        </div>
 
-    """
+    """ # pylint:disable=line-too-long
     WANT_CHILDREN = True
     "Template Tag needs closing end tag."
 
@@ -229,7 +229,7 @@ class Actions(Node):
          </button>
        </div>
 
-    """
+    """ # pylint:disable=line-too-long
     WANT_CHILDREN = True
     "Template Tag needs closing end tag."
 

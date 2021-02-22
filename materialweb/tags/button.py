@@ -232,7 +232,7 @@ class ToggleButton(Node):
          </i>
        </button>
 
-    """
+    """ # pylint:disable=line-too-long
     NODE_PROPS = ('type', 'state', 'icon_when_on', 'icon_when_off')
     "Extended Template Tag arguments."
 

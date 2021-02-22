@@ -1,22 +1,49 @@
-"""Implements Material Design Web Component: ImageList
+"""
+ImageList
+=========
 
-MDC Image List provides a RTL-aware Material Design image list component.
-An Image List consists of several items, each containing an image and
-optionally supporting content (i.e. a text label).
+See: https://material.io/components/image-lists
 
-See: https://material-components.github.io/material-components-web-catalog/#/component/image-list
-""" # pylint:disable=line-too-long
+Image lists display a collection of images in an organized grid.
 
+"""
 from .base import Node
 
 
 class ImageList(Node):
-    """Imagelist component.
     """
+    Provides template tag: :code:`ImageList`.
 
+    .. code-block:: jinja
+
+       {% load materialweb %}
+
+       {% ImageList mode="masonry" class="my-masonry-image-list" %}
+         {% ImageList_Item image="..." %}
+           {% trans "Text Label" %}
+         {% endImageList_Item %}
+       {% endImageList %}
+
+    Example output:
+
+    .. code-block:: html
+
+       <ul class="mdc-image-list mdc-image-list--masonry my-masonry-image-list">
+         <li class="mdc-image-list__item">
+           <img class="mdc-image-list__image" src="...">
+           <div class="mdc-image-list__supporting">
+             <span class="mdc-image-list__label">Text label</span>
+           </div>
+         </li>
+       </ul>
+
+    """
     WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
     MODES = ('default', 'masonry')
+    "Available variants."
     DEFAULT_TAG = 'ul'
+    "Rendered HTML tag."
 
     def prepare(self):
         if self.mode == 'masonry':
@@ -36,10 +63,39 @@ class ImageList(Node):
 
 
 class ListItem(Node):
+    """
+    Provides template tag: :code:`ImageList_Item`.
 
+    Example usage:
+
+    .. code-block:: jinja
+
+       {% load materialweb %}
+
+       {% ImageList_Item image="..." %}
+         {% trans "Text Label %}
+       {% endImageList_Item %}
+
+    Example output:
+
+    .. code-block:: html
+
+       <li class="mdc-image-list__item">
+         <div class="mdc-image-list__image-aspect-container">
+           <img class="mdc-image-list__image" src="...">
+         </div>
+         <div class="mdc-image-list__supporting">
+           <span class="mdc-image-list__label">Text label</span>
+         </div>
+       </li>
+
+    """
     WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
     NODE_PROPS = ('image', 'reversed')
+    "Extended Template Tag arguments."
     DEFAULT_TAG = 'li'
+    "Rendered HTML tag."
 
     @property
     def template(self):

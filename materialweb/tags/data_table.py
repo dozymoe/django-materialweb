@@ -187,7 +187,7 @@ class DataTable(Node):
          </div>
        </div>
 
-    """
+    """ # pylint:disable=line-too-long
     WANT_CHILDREN = True
     "Template Tag needs closing end tag."
     NODE_PROPS = ('name', 'pager', 'page_name', 'row_selectable', 'row_movable')
@@ -350,7 +350,7 @@ class DataTable(Node):
     </div>
   </div>
 </div>
-'''
+''' # pylint:disable=line-too-long
         return template.format(**values)
 
 
@@ -479,7 +479,7 @@ class HeadRow(Node):
          </th>
        </tr>
 
-    """
+    """ # pylint:disable=line-too-long
     WANT_CHILDREN = True
     "Template Tag needs closing end tag."
     DEFAULT_TAG = 'tr'
@@ -511,7 +511,7 @@ class HeadRow(Node):
     <div class="mdc-checkbox__ripple"></div>
   </div>
 </th>
-'''
+''' # pylint:disable=line-too-long
 
 
     def template_default(self):
@@ -546,7 +546,7 @@ class HeadColumn(Node):
          Time
        </th>
 
-    """
+    """ # pylint:disable=line-too-long
     WANT_CHILDREN = True
     "Template Tag needs closing end tag."
     NODE_PROPS = ('type',)
