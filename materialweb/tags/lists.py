@@ -184,6 +184,7 @@ class Content(Node):
         type_ = self.eval(self.kwargs.get('type', 'text'))
         if (type_ == 'image'):
             self.values['class'].append('mdc-list-item__graphic')
+            self.values['props'].append(('aria-hidden', 'true'))
         else:
             self.values['class'].append('mdc-list-item__text')
 
