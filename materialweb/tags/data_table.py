@@ -25,7 +25,7 @@ from .button import IconButton
 
 class DataTable(Node):
     """
-    Provides template tag: :code:`DataTable`.
+    Provides template tag: :code:`Table`.
 
     Example usage:
 
@@ -34,83 +34,83 @@ class DataTable(Node):
        {% load materialweb %}
 
        {% trans "Dessert calories" as label %}
-       {% DataTable label=label %}
-         {% DataTable_Head %}
-           {% DataTable_Head_Row %}
-             {% DataTable_Head_Col %}
+       {% Table label=label %}
+         {% Table_Head %}
+           {% Table_Head_Row %}
+             {% Table_Head_Col %}
                {% trans "Dessert" %}
-             {% endDataTable_Head_Col %}
+             {% endTable_Head_Col %}
 
-             {% DataTable_Head_Col type="num" %}
+             {% Table_Head_Col type="num" %}
                {% trans "Carbs (g)" %}
-             {% endDataTable_Head_Col %}
+             {% endTable_Head_Col %}
 
-             {% DataTable_Head_Col type="num" %}
+             {% Table_Head_Col type="num" %}
                {% trans "Protein (g)" %}
-             {% endDataTable_Head_Col %}
+             {% endTable_Head_Col %}
 
-             {% DataTable_Head_Col %}
+             {% Table_Head_Col %}
                {% trans "Comments" %}
-             {% endDataTable_Head_Col %}
-           {% endDataTable_Head_Row %}
-         {% endDataTable_Head %}
+             {% endTable_Head_Col %}
+           {% endTable_Head_Row %}
+         {% endTable_Head %}
 
-         {% DataTable_Body %}
-           {% DataTable_Row %}
-             {% DataTable_ColHeader %}
+         {% Table_Body %}
+           {% Table_Row %}
+             {% Table_ColHeader %}
                {% trans "Frozen yogurt" %}
-             {% endDataTable_ColHeader %}
+             {% endTable_ColHeader %}
 
-             {% DataTable_Col type="num" %}
+             {% Table_Col type="num" %}
                24
-             {% endDataTable_Col %}
+             {% endTable_Col %}
 
-             {% DataTable_Col type="num" %}
+             {% Table_Col type="num" %}
                4.0
-             {% endDataTable_Col %}
+             {% endTable_Col %}
 
-             {% DataTable_Col %}
+             {% Table_Col %}
                {% trans "Super tasty" %}
-             {% endDataTable_Col %}
-           {% endDataTable_Row %}
+             {% endTable_Col %}
+           {% endTable_Row %}
 
-           {% DataTable_Row %}
-             {% DataTable_ColHeader %}
+           {% Table_Row %}
+             {% Table_ColHeader %}
                {% trans "Ice cream sandwich" %}
-             {% endDataTable_ColHeader %}
+             {% endTable_ColHeader %}
 
-             {% DataTable_Col type="num" %}
+             {% Table_Col type="num" %}
                37
-             {% endDataTable_Col %}
+             {% endTable_Col %}
 
-             {% DataTable_Col type="num" %}
+             {% Table_Col type="num" %}
                4.33333333333
-             {% endDataTable_Col %}
+             {% endTable_Col %}
 
-             {% DataTable_Col %}
+             {% Table_Col %}
                {% trans "I like ice cream more" %}
-             {% endDataTable_Col %}
-           {% endDataTable_Row %}
+             {% endTable_Col %}
+           {% endTable_Row %}
 
-           {% DataTable_Row %}
-             {% DataTable_ColHeader %}
+           {% Table_Row %}
+             {% Table_ColHeader %}
                {% trans "Eclair" %}
-             {% endDataTable_ColHeader %}
+             {% endTable_ColHeader %}
 
-             {% DataTable_Col type="num" %}
+             {% Table_Col type="num" %}
                24
-             {% endDataTable_Col %}
+             {% endTable_Col %}
 
-             {% DataTable_Col type="num" %}
+             {% Table_Col type="num" %}
                6.0
-             {% endDataTable_Col %}
+             {% endTable_Col %}
 
-             {% DataTable_Col %}
+             {% Table_Col %}
                {% trans "New filling flavor" %}
-             {% endDataTable_Col %}
-           {% endDataTable_Row %}
-         {% endDataTable_Body %}
-       {% endDataTable %}
+             {% endTable_Col %}
+           {% endTable_Row %}
+         {% endTable_Body %}
+       {% endTable %}
 
     Example output:
 
@@ -369,7 +369,7 @@ class DataTable(Node):
 
 class Head(Node):
     """
-    Provides template tag: :code:`DataTable_Head`.
+    Provides template tag: :code:`Table_Head`.
 
     Example usage:
 
@@ -377,9 +377,9 @@ class Head(Node):
 
        {% load materialweb %}
 
-       {% DataTable_Head class="simple-table-header" %}
+       {% Table_Head class="simple-table-header" %}
          <tr></tr>
-       {% endDataTable_Head %}
+       {% endTable_Head %}
 
     Example output:
 
@@ -401,7 +401,7 @@ class Head(Node):
 
 class HeadRow(Node):
     """
-    Provides template tag: :code:`DataTable`.
+    Provides template tag: :code:`Table`.
 
     Example usage:
 
@@ -409,31 +409,31 @@ class HeadRow(Node):
 
        {% load materialweb %}
 
-       {% DataTable_Head_Row selectable=True %}
-         {% DataTable_Head_Col %}
+       {% Table_Head_Row selectable=True %}
+         {% Table_Head_Col %}
            Signal name
-         {% endDataTable_Head_Col %}
+         {% endTable_Head_Col %}
 
-         {% DataTable_Head_Col %}
+         {% Table_Head_Col %}
            Status
-         {% endDataTable_Head_Col %}
+         {% endTable_Head_Col %}
 
-         {% DataTable_Head_Col %}
+         {% Table_Head_Col %}
            Severity
-         {% endDataTable_Head_Col %}
+         {% endTable_Head_Col %}
 
-         {% DataTable_Head_Col %}
+         {% Table_Head_Col %}
            Stage
-         {% endDataTable_Head_Col %}
+         {% endTable_Head_Col %}
 
-         {% DataTable_Head_Col type="num" %}
+         {% Table_Head_Col type="num" %}
            Time
-         {% endDataTable_Head_Col %}
+         {% endTable_Head_Col %}
 
-         {% DataTable_Head_Col %}
+         {% Table_Head_Col %}
            Roles
-         {% endDataTable_Head_Col %}
-       {% endDataTable_Head_Row %}
+         {% endTable_Head_Col %}
+       {% endTable_Head_Row %}
 
     .. code-block:: html
 
@@ -525,7 +525,7 @@ class HeadRow(Node):
 
 class HeadColumn(Node):
     """
-    Provides template tag: :code:`DataTable_Head_Col`.
+    Provides template tag: :code:`Table_Head_Col`.
 
     Example usage:
 
@@ -533,9 +533,9 @@ class HeadColumn(Node):
 
        {% load materialweb %}
 
-       {% DataTable_Head_Col type="num" %}
+       {% Table_Head_Col type="num" %}
          Time
-       {% endDataTable_Head_Col %}
+       {% endTable_Head_Col %}
 
     Example output:
 
@@ -571,7 +571,7 @@ class HeadColumn(Node):
 
 class Body(Node):
     """
-    Provides template tag: :code:`DataTable_Body`.
+    Provides template tag: :code:`Table_Body`.
 
     Example usage:
 
@@ -579,25 +579,25 @@ class Body(Node):
 
        {% load materialweb %}
 
-       {% DataTable_Body %}
-         {% DataTable_Row %}
-           {% DataTable_ColHeader %}
+       {% Table_Body %}
+         {% Table_Row %}
+           {% Table_ColHeader %}
              {% trans "Frozen yogurt" %}
-           {% endDataTable_ColHeader %}
+           {% endTable_ColHeader %}
 
-           {% DataTable_Col type="num" %}
+           {% Table_Col type="num" %}
              24
-           {% endDataTable_Col %}
+           {% endTable_Col %}
 
-           {% DataTable_Col type="num" %}
+           {% Table_Col type="num" %}
              4.0
-           {% endDataTable_Col %}
+           {% endTable_Col %}
 
-           {% DataTable_Col %}
+           {% Table_Col %}
              {% trans "Super tasty" %}
-           {% endDataTable_Col %}
-         {% endDataTable_Row %}
-       {% endDataTable_Body %}
+           {% endTable_Col %}
+         {% endTable_Row %}
+       {% endTable_Body %}
 
     Example output:
 
@@ -636,7 +636,7 @@ class Body(Node):
 
 class BodyRow(Node):
     """
-    Provides template tag: :code:`DataTable_Row`.
+    Provides template tag: :code:`Table_Row`.
 
     Example usage:
 
@@ -644,18 +644,18 @@ class BodyRow(Node):
 
        {% load materialweb %}
 
-       {% DataTable_Row %}
-           {% DataTable_ColHeader %}
+       {% Table_Row %}
+           {% Table_ColHeader %}
              {% trans "Frozen yogurt" %}
-           {% endDataTable_ColHeader %}
+           {% endTable_ColHeader %}
 
-           {% DataTable_Col type="num" %}24{% endDataTable_Col %}
-           {% DataTable_Col type="num" %}4.0{% endDataTable_Col %}
+           {% Table_Col type="num" %}24{% endTable_Col %}
+           {% Table_Col type="num" %}4.0{% endTable_Col %}
 
-           {% DataTable_Col %}
+           {% Table_Col %}
              {% trans "Super tasty" %}
-           {% endDataTable_Col %}
-       {% endDataTable_Row %}
+           {% endTable_Col %}
+       {% endTable_Row %}
 
     .. code-block:: html
 
@@ -719,7 +719,7 @@ class BodyRow(Node):
 
 class BodyColumn(Node):
     """
-    Provides template tag: :code:`DataTable_Col`.
+    Provides template tag: :code:`Table_Col`.
 
     Example usage:
 
@@ -727,7 +727,7 @@ class BodyColumn(Node):
 
        {% load materialweb %}
 
-       {% DataTable_Col type="num" %}6.0{% endDataTable_Col %}
+       {% Table_Col type="num" %}6.0{% endTable_Col %}
 
     .. code-block:: html
 
@@ -757,7 +757,7 @@ class BodyColumn(Node):
 
 class BodyColumnHeader(Node):
     """
-    Provides template tag: :code:`DataTable_ColHeader`.
+    Provides template tag: :code:`Table_ColHeader`.
 
     Example usage:
 
@@ -765,7 +765,7 @@ class BodyColumnHeader(Node):
 
        {% load materialweb %}
 
-       {% DataTable_ColHeader %}{% trans "Eclair" %}{% endDataTable_ColHeader %}
+       {% Table_ColHeader %}{% trans "Eclair" %}{% endTable_ColHeader %}
 
     .. code-block:: html
 
@@ -797,12 +797,12 @@ class BodyColumnHeader(Node):
 
 
 components = {
-    'DataTable': DataTable,
-    'DataTable_Head': Head,
-    'DataTable_Head_Row': HeadRow,
-    'DataTable_Head_Col': HeadColumn,
-    'DataTable_Body': Body,
-    'DataTable_Row': BodyRow,
-    'DataTable_Col': BodyColumn,
-    'DataTable_ColHeader': BodyColumnHeader,
+    'Table': DataTable,
+    'Table_Head': Head,
+    'Table_Head_Row': HeadRow,
+    'Table_Head_Col': HeadColumn,
+    'Table_Body': Body,
+    'Table_Row': BodyRow,
+    'Table_Col': BodyColumn,
+    'Table_ColHeader': BodyColumnHeader,
 }
