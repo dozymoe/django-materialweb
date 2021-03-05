@@ -111,7 +111,7 @@ class Card(Node):
 
 class PrimaryAction(Node):
     """
-    Provides template tag: :node:`Card_PrimaryAction`.
+    Provides template tag: :code:`Card_PrimaryAction`.
 
     If a majority of the card (or even the entire card) should be actionable.
 
