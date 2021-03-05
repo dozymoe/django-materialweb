@@ -96,6 +96,9 @@
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.checkbox.html">CheckBox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.data_table.html">DataTable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.drawer.html">Drawer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="materialweb.tags.imagelist.html">ImageList</a></li>
+<li class="toctree-l1"><a class="reference internal" href="materialweb.tags.lists.html">List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="materialweb.tags.menu.html">Menu</a></li>
 </ul>
 
             
@@ -174,7 +177,7 @@ They’re persistent and nonmodal, allowing the user to either ignore them or
 interact with them at any time. Only one banner should be shown at a time.</p>
 <dl class="py class">
 <dt id="materialweb.tags.banner.Banner">
-<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.banner.</code><code class="sig-name descname">Banner</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.banner.Banner" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.banner.</span></code><code class="sig-name descname"><span class="pre">Banner</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.banner.Banner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">Banner</span></code>.</p>
 <p>Example usage:</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
@@ -215,13 +218,13 @@ interact with them at any time. Only one banner should be shown at a time.</p>
 </div>
 <dl class="py attribute">
 <dt id="materialweb.tags.banner.Banner.WANT_CHILDREN">
-<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.banner.Banner.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">WANT_CHILDREN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#materialweb.tags.banner.Banner.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Template Tag needs closing end tag.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="materialweb.tags.banner.Banner.MODES">
-<code class="sig-name descname">MODES</code><em class="property"> = ('default', 'stacked')</em><a class="headerlink" href="#materialweb.tags.banner.Banner.MODES" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">MODES</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('default',</span> <span class="pre">'stacked')</span></em><a class="headerlink" href="#materialweb.tags.banner.Banner.MODES" title="Permalink to this definition">¶</a></dt>
 <dd><p>Available variants.</p>
 </dd></dl>
 
@@ -229,7 +232,7 @@ interact with them at any time. Only one banner should be shown at a time.</p>
 
 <dl class="py class">
 <dt id="materialweb.tags.banner.Content">
-<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.banner.</code><code class="sig-name descname">Content</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.banner.Content" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.banner.</span></code><code class="sig-name descname"><span class="pre">Content</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.banner.Content" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">Banner_Content</span></code>.</p>
 <p>Example usage:</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
@@ -257,7 +260,7 @@ interact with them at any time. Only one banner should be shown at a time.</p>
 </div>
 <dl class="py attribute">
 <dt id="materialweb.tags.banner.Content.WANT_CHILDREN">
-<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.banner.Content.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">WANT_CHILDREN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#materialweb.tags.banner.Content.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Template Tag needs closing end tag.</p>
 </dd></dl>
 
@@ -265,7 +268,7 @@ interact with them at any time. Only one banner should be shown at a time.</p>
 
 <dl class="py class">
 <dt id="materialweb.tags.banner.Icon">
-<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.banner.</code><code class="sig-name descname">Icon</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.banner.Icon" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.banner.</span></code><code class="sig-name descname"><span class="pre">Icon</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.banner.Icon" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">Banner_Icon</span></code>.</p>
 <p>Example usage:</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
@@ -286,7 +289,7 @@ interact with them at any time. Only one banner should be shown at a time.</p>
 </div>
 <dl class="py attribute">
 <dt id="materialweb.tags.banner.Icon.WANT_CHILDREN">
-<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.banner.Icon.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">WANT_CHILDREN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#materialweb.tags.banner.Icon.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Template Tag needs closing end tag.</p>
 </dd></dl>
 
@@ -294,7 +297,7 @@ interact with them at any time. Only one banner should be shown at a time.</p>
 
 <dl class="py class">
 <dt id="materialweb.tags.banner.Text">
-<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.banner.</code><code class="sig-name descname">Text</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.banner.Text" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.banner.</span></code><code class="sig-name descname"><span class="pre">Text</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.banner.Text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">Banner_Text</span></code>.</p>
 <p>Example usage:</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
@@ -312,7 +315,7 @@ interact with them at any time. Only one banner should be shown at a time.</p>
 </div>
 <dl class="py attribute">
 <dt id="materialweb.tags.banner.Text.WANT_CHILDREN">
-<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.banner.Text.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">WANT_CHILDREN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#materialweb.tags.banner.Text.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Template Tag needs closing end tag.</p>
 </dd></dl>
 
@@ -320,7 +323,7 @@ interact with them at any time. Only one banner should be shown at a time.</p>
 
 <dl class="py class">
 <dt id="materialweb.tags.banner.Actions">
-<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.banner.</code><code class="sig-name descname">Actions</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.banner.Actions" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.banner.</span></code><code class="sig-name descname"><span class="pre">Actions</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.banner.Actions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">Banner_Actions</span></code>.</p>
 <p>Example usage:</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
@@ -345,7 +348,7 @@ interact with them at any time. Only one banner should be shown at a time.</p>
 </div>
 <dl class="py attribute">
 <dt id="materialweb.tags.banner.Actions.WANT_CHILDREN">
-<code class="sig-name descname">WANT_CHILDREN</code><em class="property"> = True</em><a class="headerlink" href="#materialweb.tags.banner.Actions.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">WANT_CHILDREN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#materialweb.tags.banner.Actions.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Template Tag needs closing end tag.</p>
 </dd></dl>
 

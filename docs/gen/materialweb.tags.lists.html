@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>&lt;no title&gt; &mdash; Django MaterialWeb  documentation</title>
+  <title>List &mdash; Django MaterialWeb  documentation</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="materialweb.tags.select.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="materialweb.tags.imagelist.html" /> 
+    <link rel="next" title="Menu" href="materialweb.tags.menu.html" />
+    <link rel="prev" title="ImageList" href="materialweb.tags.imagelist.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,12 +89,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Material Components</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.banner.html">Banner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.button.html">Button</a></li>
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.card.html">Card</a></li>
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.checkbox.html">CheckBox</a></li>
 <li class="toctree-l1"><a class="reference internal" href="materialweb.tags.data_table.html">DataTable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="materialweb.tags.drawer.html">Drawer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="materialweb.tags.imagelist.html">ImageList</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="materialweb.tags.menu.html">Menu</a></li>
 </ul>
 
             
@@ -143,7 +147,7 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>&lt;no title&gt;</li>
+      <li>List</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -162,119 +166,508 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <span class="target" id="module-materialweb.tags.lists"></span><p>Implements Material Design Web Component: List</p>
-<p>Lists are continuous, vertical indexes of text or images.</p>
+  <span class="target" id="module-materialweb.tags.lists"></span><div class="section" id="list">
+<h1>List<a class="headerlink" href="#list" title="Permalink to this headline">¶</a></h1>
 <p>See: <a class="reference external" href="https://material.io/components/lists">https://material.io/components/lists</a></p>
+<p>Lists are continuous, vertical indexes of text or images.</p>
 <dl class="py class">
 <dt id="materialweb.tags.lists.List">
-<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.lists.</code><code class="sig-name descname">List</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.List" title="Permalink to this definition">¶</a></dt>
-<dd><p>List component.</p>
-<dl class="py method">
-<dt id="materialweb.tags.lists.List.template">
-<em class="property">property </em><code class="sig-name descname">template</code><a class="headerlink" href="#materialweb.tags.lists.List.template" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get formatted literal string for default List.</p>
-<p>Overridden because they are the same.</p>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.lists.</span></code><code class="sig-name descname"><span class="pre">List</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.List" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">List</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">List</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">List_Item</span> <span class="nv">tabindex</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">List_Content</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Single-line item&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endList_Content</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endList_Item</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">  </span><span class="cp">{%</span> <span class="k">List_Item</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">List_Content</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Single-line item&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endList_Content</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endList_Item</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endList</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item&quot;</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__text&quot;</span><span class="p">&gt;</span>Single-line item<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__text&quot;</span><span class="p">&gt;</span>Single-line item<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.List.WANT_CHILDREN">
+<code class="sig-name descname"><span class="pre">WANT_CHILDREN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#materialweb.tags.lists.List.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.List.MODES">
+<code class="sig-name descname"><span class="pre">MODES</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('one_line',</span> <span class="pre">'two_line')</span></em><a class="headerlink" href="#materialweb.tags.lists.List.MODES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Available variants.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.List.DEFAULT_TAG">
+<code class="sig-name descname"><span class="pre">DEFAULT_TAG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'ul'</span></em><a class="headerlink" href="#materialweb.tags.lists.List.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="materialweb.tags.lists.Item">
-<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.lists.</code><code class="sig-name descname">Item</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.Item" title="Permalink to this definition">¶</a></dt>
-<dd><p>ListItem component.</p>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.lists.</span></code><code class="sig-name descname"><span class="pre">Item</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.Item" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">List_Item</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">List</span> <span class="nv">mode</span><span class="o">=</span><span class="s2">&quot;two_line&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">List_Item</span> <span class="nv">tabindex</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">List_Content</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">List_LinePrimary</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Two-line item&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endList_LinePrimary</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">List_LineSecondary</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Secondary text&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endList_LineSecondary</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endList_Content</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endList_Item</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">  </span><span class="cp">{%</span> <span class="k">List_Item</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">List_Content</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">List_LinePrimary</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Two-line item&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endList_LinePrimary</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">      </span><span class="cp">{%</span> <span class="k">List_LineSecondary</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Secondary text&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endList_LineSecondary</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endList_Content</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endList_Item</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endList</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list mdc-list--two-line&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item&quot;</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__text&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__primary-text&quot;</span><span class="p">&gt;</span>Two-line item<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__secondary-text&quot;</span><span class="p">&gt;</span>Secondary text<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__text&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__primary-text&quot;</span><span class="p">&gt;</span>Two-line item<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__secondary-text&quot;</span><span class="p">&gt;</span>Secondary text<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.Item.WANT_CHILDREN">
+<code class="sig-name descname"><span class="pre">WANT_CHILDREN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#materialweb.tags.lists.Item.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.Item.NODE_PROPS">
+<code class="sig-name descname"><span class="pre">NODE_PROPS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('activated',)</span></em><a class="headerlink" href="#materialweb.tags.lists.Item.NODE_PROPS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended Template Tag arguments.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.Item.DEFAULT_TAG">
+<code class="sig-name descname"><span class="pre">DEFAULT_TAG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'li'</span></em><a class="headerlink" href="#materialweb.tags.lists.Item.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt id="materialweb.tags.lists.Item.template_default">
-<code class="sig-name descname">template_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.Item.template_default" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">template_default</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.Item.template_default" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get formatted literal string for default ListItem.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
+<dt id="materialweb.tags.lists.Image">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.lists.</span></code><code class="sig-name descname"><span class="pre">Image</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.Image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">List_Image</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">List_Image</span> <span class="nv">class</span><span class="o">=</span><span class="s2">&quot;material-icons&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  more_horz</span>
+<span class="cp">{%</span> <span class="k">endList_Image</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">span</span> <span class="na">aria-hidden</span><span class="o">=</span><span class="s">&quot;true&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__graphic material-icons&quot;</span><span class="p">&gt;</span>
+  more_horz
+<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.Image.WANT_CHILDREN">
+<code class="sig-name descname"><span class="pre">WANT_CHILDREN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#materialweb.tags.lists.Image.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.Image.DEFAULT_TAG">
+<code class="sig-name descname"><span class="pre">DEFAULT_TAG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'span'</span></em><a class="headerlink" href="#materialweb.tags.lists.Image.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="materialweb.tags.lists.Text">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.lists.</span></code><code class="sig-name descname"><span class="pre">Text</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.Text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">List_Text</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">List_Text</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;line item&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endList_Text</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__text&quot;</span><span class="p">&gt;</span>line item<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.Text.WANT_CHILDREN">
+<code class="sig-name descname"><span class="pre">WANT_CHILDREN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#materialweb.tags.lists.Text.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.Text.DEFAULT_TAG">
+<code class="sig-name descname"><span class="pre">DEFAULT_TAG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'span'</span></em><a class="headerlink" href="#materialweb.tags.lists.Text.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="materialweb.tags.lists.LinePrimary">
-<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.lists.</code><code class="sig-name descname">LinePrimary</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.LinePrimary" title="Permalink to this definition">¶</a></dt>
-<dd><p>ListItem primary line.</p>
-<dl class="py method">
-<dt id="materialweb.tags.lists.LinePrimary.template_default">
-<code class="sig-name descname">template_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.LinePrimary.template_default" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get formatted literal string for default List Primary Line.</p>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.lists.</span></code><code class="sig-name descname"><span class="pre">LinePrimary</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.LinePrimary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">List_LinePrimary</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">List_LinePrimary</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Two-line item&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endList_LinePrimary</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__primary-text&quot;</span><span class="p">&gt;</span>Two-line item<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.LinePrimary.WANT_CHILDREN">
+<code class="sig-name descname"><span class="pre">WANT_CHILDREN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#materialweb.tags.lists.LinePrimary.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.LinePrimary.DEFAULT_TAG">
+<code class="sig-name descname"><span class="pre">DEFAULT_TAG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'span'</span></em><a class="headerlink" href="#materialweb.tags.lists.LinePrimary.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="materialweb.tags.lists.LineSecondary">
-<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.lists.</code><code class="sig-name descname">LineSecondary</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.LineSecondary" title="Permalink to this definition">¶</a></dt>
-<dd><p>ListItem secondary line.</p>
-<dl class="py method">
-<dt id="materialweb.tags.lists.LineSecondary.template_default">
-<code class="sig-name descname">template_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.LineSecondary.template_default" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get formatted literal string for default List Secondary Line.</p>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.lists.</span></code><code class="sig-name descname"><span class="pre">LineSecondary</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.LineSecondary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">List_LineSecondary</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">List_LineSecondary</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Secondary text&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endList_LineSecondary</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__secondary-text&quot;</span><span class="p">&gt;</span>Secondary text<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.LineSecondary.WANT_CHILDREN">
+<code class="sig-name descname"><span class="pre">WANT_CHILDREN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#materialweb.tags.lists.LineSecondary.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.LineSecondary.DEFAULT_TAG">
+<code class="sig-name descname"><span class="pre">DEFAULT_TAG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'span'</span></em><a class="headerlink" href="#materialweb.tags.lists.LineSecondary.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="materialweb.tags.lists.Group">
-<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.lists.</code><code class="sig-name descname">Group</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.Group" title="Permalink to this definition">¶</a></dt>
-<dd><p>ListGroup component.</p>
-<dl class="py method">
-<dt id="materialweb.tags.lists.Group.template_default">
-<code class="sig-name descname">template_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.Group.template_default" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get formatted literal string for default List Group.</p>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.lists.</span></code><code class="sig-name descname"><span class="pre">Group</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.Group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">List_Group</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">List_Group</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">List_Header</span> <span class="cp">%}{%</span> <span class="k">trans</span> <span class="s2">&quot;List 1&quot;</span> <span class="cp">%}{%</span> <span class="k">endList_Header</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">List</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">List_Item</span> <span class="nv">tabindex</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">List_Content</span> <span class="cp">%}{%</span> <span class="k">trans</span> <span class="s2">&quot;line item %}{% endList_Content %}</span>
+<span class="s2">    {% endList_Item %}</span>
+
+<span class="s2">    {% List_Item %}</span>
+<span class="s2">      {% List_Content %}{% trans &quot;</span><span class="nv">line</span> <span class="nv">item</span> <span class="cp">%}{%</span> <span class="k">endList_Content</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endList_Item</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">{%</span> <span class="k">List_Item</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">List_Content</span> <span class="cp">%}{%</span> <span class="k">trans</span> <span class="p">&quot;</span><span class="nv">line</span> <span class="nv">item</span> <span class="cp">%}{%</span> <span class="k">endList_Content</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endList_Item</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endList</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endList_Group</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-group&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h3</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-group__subheader&quot;</span><span class="p">&gt;</span>List 1<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item&quot;</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__text&quot;</span><span class="p">&gt;</span>line item<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__text&quot;</span><span class="p">&gt;</span>line item<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__text&quot;</span><span class="p">&gt;</span>line item<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.Group.WANT_CHILDREN">
+<code class="sig-name descname"><span class="pre">WANT_CHILDREN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#materialweb.tags.lists.Group.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="materialweb.tags.lists.GroupHeader">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.lists.</span></code><code class="sig-name descname"><span class="pre">GroupHeader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.GroupHeader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">List_Header</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">List_Group</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">List_Header</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;List 1&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endList_Header</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endList_Group</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-group&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h3</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-group__subheader&quot;</span><span class="p">&gt;</span>List 1<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.GroupHeader.WANT_CHILDREN">
+<code class="sig-name descname"><span class="pre">WANT_CHILDREN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#materialweb.tags.lists.GroupHeader.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.GroupHeader.DEFAULT_TAG">
+<code class="sig-name descname"><span class="pre">DEFAULT_TAG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'h3'</span></em><a class="headerlink" href="#materialweb.tags.lists.GroupHeader.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="materialweb.tags.lists.Divider">
-<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.lists.</code><code class="sig-name descname">Divider</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.Divider" title="Permalink to this definition">¶</a></dt>
-<dd><p>List divider.</p>
-<dl class="py method">
-<dt id="materialweb.tags.lists.Divider.template_default">
-<code class="sig-name descname">template_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.Divider.template_default" title="Permalink to this definition">¶</a></dt>
-<dd><p>get formatted literal string for default divider.</p>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.lists.</span></code><code class="sig-name descname"><span class="pre">Divider</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.Divider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">List_Divider</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">List_Divider</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">li</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;separator&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-divider&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.Divider.DEFAULT_TAG">
+<code class="sig-name descname"><span class="pre">DEFAULT_TAG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'li'</span></em><a class="headerlink" href="#materialweb.tags.lists.Divider.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="materialweb.tags.lists.SelectList">
-<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.lists.</code><code class="sig-name descname">SelectList</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.SelectList" title="Permalink to this definition">¶</a></dt>
-<dd><p>List component, select variant.</p>
-<dl class="py method">
-<dt id="materialweb.tags.lists.SelectList.template">
-<em class="property">property </em><code class="sig-name descname">template</code><a class="headerlink" href="#materialweb.tags.lists.SelectList.template" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get formatted literal string for selection List.</p>
-<p>Overridden because the template are the same.</p>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.lists.</span></code><code class="sig-name descname"><span class="pre">SelectList</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.SelectList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides template tag: <code class="code docutils literal notranslate"><span class="pre">SelectList</span></code>.</p>
+<p>Example usage:</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">materialweb</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="cp">{%</span> <span class="k">SelectList</span> <span class="nv">mode</span><span class="o">=</span><span class="s2">&quot;radio&quot;</span> <span class="nv">value</span><span class="o">=</span><span class="s2">&quot;2&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">SelectList_Item</span> <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;demo-list-radio-item-group&quot;</span> <span class="nv">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Option 1&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endSelectList_Item</span> <span class="cp">%}</span><span class="x"></span>
+
+<span class="x">  </span><span class="cp">{%</span> <span class="k">SelectList_Item</span> <span class="nv">name</span><span class="o">=</span><span class="s2">&quot;demo-list-radio-item-group&quot;</span> <span class="nv">value</span><span class="o">=</span><span class="s2">&quot;2&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;Option 2&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">endSelectList_Item</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">endSelectList</span> <span class="cp">%}</span><span class="x"></span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;radiogroup&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">aria-checked</span><span class="o">=</span><span class="s">&quot;false&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__graphic&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-radio&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-radio__native-control&quot;</span>
+              <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span>
+              <span class="na">id</span><span class="o">=</span><span class="s">&quot;demo-list-radio-item-1&quot;</span>
+              <span class="na">name</span><span class="o">=</span><span class="s">&quot;demo-list-radio-item-group&quot;</span>
+              <span class="na">value</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-radio__background&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-radio__outer-circle&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-radio__inner-circle&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;demo-list-radio-item-1&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__text&quot;</span><span class="p">&gt;</span>
+      Option 1
+    <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">aria-checked</span><span class="o">=</span><span class="s">&quot;true&quot;</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;0&quot;</span>
+      <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__graphic&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-radio&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-radio__native-control&quot;</span>
+              <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span>
+              <span class="na">id</span><span class="o">=</span><span class="s">&quot;demo-list-radio-item-2&quot;</span>
+              <span class="na">name</span><span class="o">=</span><span class="s">&quot;demo-list-radio-item-group&quot;</span>
+              <span class="na">value</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
+              <span class="na">checked</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-radio__background&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-radio__outer-circle&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-radio__inner-circle&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;demo-list-radio-item-2&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__text&quot;</span><span class="p">&gt;</span>
+      Option 2
+    <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;radio&quot;</span> <span class="na">aria-checked</span><span class="o">=</span><span class="s">&quot;false&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__ripple&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__graphic&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-radio&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-radio__native-control&quot;</span>
+              <span class="na">type</span><span class="o">=</span><span class="s">&quot;radio&quot;</span>
+              <span class="na">id</span><span class="o">=</span><span class="s">&quot;demo-list-radio-item-3&quot;</span>
+              <span class="na">name</span><span class="o">=</span><span class="s">&quot;demo-list-radio-item-group&quot;</span>
+              <span class="na">value</span><span class="o">=</span><span class="s">&quot;3&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-radio__background&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-radio__outer-circle&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-radio__inner-circle&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;demo-list-radio-item-3&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mdc-list-item__text&quot;</span><span class="p">&gt;</span>
+      Option 3
+    <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.SelectList.WANT_CHILDREN">
+<code class="sig-name descname"><span class="pre">WANT_CHILDREN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#materialweb.tags.lists.SelectList.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.SelectList.MODES">
+<code class="sig-name descname"><span class="pre">MODES</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('list',</span> <span class="pre">'radio',</span> <span class="pre">'checkbox')</span></em><a class="headerlink" href="#materialweb.tags.lists.SelectList.MODES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Available variants.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.SelectList.NODE_PROPS">
+<code class="sig-name descname"><span class="pre">NODE_PROPS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('value',)</span></em><a class="headerlink" href="#materialweb.tags.lists.SelectList.NODE_PROPS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended Template Tag arguments.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.SelectList.DEFAULT_TAG">
+<code class="sig-name descname"><span class="pre">DEFAULT_TAG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'ul'</span></em><a class="headerlink" href="#materialweb.tags.lists.SelectList.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="materialweb.tags.lists.SelectItem">
-<em class="property">class </em><code class="sig-prename descclassname">materialweb.tags.lists.</code><code class="sig-name descname">SelectItem</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.SelectItem" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">materialweb.tags.lists.</span></code><code class="sig-name descname"><span class="pre">SelectItem</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.SelectItem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Select List item.</p>
-<dl class="py method">
-<dt id="materialweb.tags.lists.SelectItem.template_list">
-<code class="sig-name descname">template_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.SelectItem.template_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get formatted literal string for list Selection.</p>
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.SelectItem.WANT_CHILDREN">
+<code class="sig-name descname"><span class="pre">WANT_CHILDREN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#materialweb.tags.lists.SelectItem.WANT_CHILDREN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Template Tag needs closing end tag.</p>
 </dd></dl>
 
-<dl class="py method">
-<dt id="materialweb.tags.lists.SelectItem.template_radio">
-<code class="sig-name descname">template_radio</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.SelectItem.template_radio" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get formatted literal string for radio Selection.</p>
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.SelectItem.NODE_PROPS">
+<code class="sig-name descname"><span class="pre">NODE_PROPS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">('name',</span> <span class="pre">'value')</span></em><a class="headerlink" href="#materialweb.tags.lists.SelectItem.NODE_PROPS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended Template Tag arguments.</p>
 </dd></dl>
 
-<dl class="py method">
-<dt id="materialweb.tags.lists.SelectItem.template_checkbox">
-<code class="sig-name descname">template_checkbox</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#materialweb.tags.lists.SelectItem.template_checkbox" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get formatted literal string for checkbox Selection.</p>
+<dl class="py attribute">
+<dt id="materialweb.tags.lists.SelectItem.DEFAULT_TAG">
+<code class="sig-name descname"><span class="pre">DEFAULT_TAG</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'li'</span></em><a class="headerlink" href="#materialweb.tags.lists.SelectItem.DEFAULT_TAG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendered HTML tag.</p>
 </dd></dl>
 
 </dd></dl>
 
+</div>
 
 
            </div>
@@ -282,8 +675,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="materialweb.tags.select.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="materialweb.tags.imagelist.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="materialweb.tags.menu.html" class="btn btn-neutral float-right" title="Menu" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="materialweb.tags.imagelist.html" class="btn btn-neutral float-left" title="ImageList" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

@@ -18,6 +18,7 @@ Submodules
    materialweb.tags.drawer
    materialweb.tags.imagelist
    materialweb.tags.lists
+   materialweb.tags.menu
    materialweb.tags.select
    materialweb.tags.snackbar
    materialweb.tags.textarea
