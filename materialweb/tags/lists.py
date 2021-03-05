@@ -56,6 +56,8 @@ class List(Node):
     DEFAULT_TAG = 'ul'
     "Rendered HTML tag."
 
+    CATCH_PROPERTIES = ('list_props',)
+
     def prepare(self):
         if self.mode == 'two_line':
             self.values['class'].append('mdc-list--two-line')
@@ -135,6 +137,8 @@ class Item(Node):
     DEFAULT_TAG = 'li'
     "Rendered HTML tag."
 
+    CATCH_PROPERTIES = ('list_item_props',)
+
     def prepare(self):
         activated = self.eval(self.kwargs.get('activated'))
         if activated:
@@ -152,9 +156,9 @@ class Item(Node):
 '''
 
 
-class Content(Node):
+class Image(Node):
     """
-    Provides template tag: :code:`List_Content`.
+    Provides template tag: :code:`List_Image`.
 
     Example usage:
 
@@ -162,9 +166,47 @@ class Content(Node):
 
        {% load materialweb %}
 
-       {% List_Content type="text" %}
+       {% List_Image class="material-icons" %}
+         more_horz
+       {% endList_Image %}
+
+    Example output:
+
+    .. code-block:: html
+
+       <span aria-hidden="true" class="mdc-list-item__graphic material-icons">
+         more_horz
+       </span>
+
+    """
+    WANT_CHILDREN = True
+    "Template Tag needs closing end tag."
+    DEFAULT_TAG = 'span'
+    "Rendered HTML tag."
+
+    CATCH_CLASSNAMES = ('list_image_class',)
+
+    def template_default(self):
+        return '''
+<{tag} aria-hidden="true" class="mdc-list-item__graphic {class}" {props}>
+  {child}
+</{tag}>
+'''
+
+
+class Text(Node):
+    """
+    Provides template tag: :code:`List_Text`.
+
+    Example usage:
+
+    .. code-block:: jinja
+
+       {% load materialweb %}
+
+       {% List_Text %}
          {% trans "line item" %}
-       {% endList_Content %}
+       {% endList_Text %}
 
     Example output:
 
@@ -175,22 +217,15 @@ class Content(Node):
     """
     WANT_CHILDREN = True
     "Template Tag needs closing end tag."
-    NODE_PROPS = ('type',)
-    "Extended Template Tag arguments."
     DEFAULT_TAG = 'span'
     "Rendered HTML tag."
 
-    def prepare(self):
-        type_ = self.eval(self.kwargs.get('type', 'text'))
-        if (type_ == 'image'):
-            self.values['class'].append('mdc-list-item__graphic')
-            self.values['props'].append(('aria-hidden', 'true'))
-        else:
-            self.values['class'].append('mdc-list-item__text')
-
-
     def template_default(self):
-        return '<{tag} class="{class}" {props}>{child}</{tag}>'
+        return '''
+<{tag} class="mdc-list-item__text {class}" {props}>
+  {child}
+</{tag}>
+'''
 
 
 class LinePrimary(Node):
@@ -598,7 +633,8 @@ class SelectItem(Node):
 components = {
     'List': List,
     'List_Item': Item,
-    'List_Content': Content,
+    'List_Image': Image,
+    'List_Text': Text,
     'List_LinePrimary': LinePrimary,
     'List_LineSecondary': LineSecondary,
     'List_Group': Group,
