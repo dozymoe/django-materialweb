@@ -1,5 +1,4 @@
 include materialweb/README.rst
-recursive-include materialweb/docs *
 recursive-include materialweb/static *
 exclude run
 exclude wscript
@@ -7,5 +6,10 @@ exclude requirements.txt
 exclude build.yml
 exclude .git*
 exclude MANIFEST.in
+prune docs
+prune docs_build
+prune docsrc
 prune etc
 prune lib
+prune materialweb/tests
+prune templates

@@ -28,6 +28,15 @@ class TextArea(Node):
         attrs['class'].append('mdc-text-field__input')
 
 
+    def prepare(self):
+        if self.values.get('label'):
+            method = getattr(self, 'template_label_%s' % self.mode)
+            self.values['html_label'] = method().format(**self.values)
+        else:
+            self.values['class'].append('mdc-text-field--no-label')
+            self.values['html_label'] = ''
+
+
     def template_filled(self):
         """Get formatted literal string for filled TextArea.
 
@@ -35,12 +44,13 @@ class TextArea(Node):
         """
         return '''
 <{tag}
-    class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label {class}"
+    class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea {class}"
     {props}>
   <span class="mdc-text-field__ripple"></span>
   <span class="mdc-text-field__resizer">
     {element}
   </span>
+  {html_label}
   <span class="mdc-line-ripple"></span>
 </{tag}>
 '''
@@ -53,16 +63,35 @@ class TextArea(Node):
         """
         return '''
 <{tag}
-    class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--no-label {class}"
+    class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea {class}"
     {props}>
   <span class="mdc-text-field__resizer">
     {element}
   </span>
   <span class="mdc-notched-outline">
     <span class="mdc-notched-outline__leading"></span>
+    {html_label}
     <span class="mdc-notched-outline__trailing"></span>
   </span>
 </{tag}>
+'''
+
+
+    def template_label_filled(self):
+        return '''
+<span id="{id}-label" class="mdc-floating-label">
+  {label}
+</span>
+'''
+
+
+    def template_label_outlined(self):
+        return '''
+<span class="mdc-notched-outline__notch">
+  <span id="{id}-label" class="mdc-floating-label">
+    {label}
+  </span>
+</span>
 '''
 
 

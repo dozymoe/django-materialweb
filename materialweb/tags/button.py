@@ -59,10 +59,9 @@ class Button(Node):
     DEFAULT_TAG = 'button'
     "Rendered HTML tag."
 
-    def prepare(self):
-        if 'button_class' in self.context:
-            self.values['class'].extend(self.context['button_class'])
+    CATCH_CLASSNAMES = ('button_class',)
 
+    def prepare(self):
         if self.mode == 'outlined':
             self.values['class'].append('mdc-button--outlined')
         elif self.mode == 'raised':
@@ -144,10 +143,7 @@ class Icon(Node):
     DEFAULT_TAG = 'span'
     "Rendered HTML tag."
 
-    def prepare(self):
-        if 'button_icon_class' in self.context:
-            self.values['class'].extend(self.context['button_icon_class'])
-
+    CATCH_CLASSNAMES = ('button_icon_class',)
 
     def template_default(self):
         return '''
@@ -187,12 +183,7 @@ class IconButton(Node):
     DEFAULT_TAG = 'button'
     "Rendered HTML tag."
 
-    def prepare(self):
-        if 'button_icon_class' in self.context:
-            self.values['class'].extend(self.context['button_icon_class'])
-        elif 'button_class' in self.context:
-            self.values['class'].extend(self.context['button_class'])
-
+    CATCH_CLASSNAMES = ('button_class', 'button_icon_class')
 
     def template_default(self):
         return '''
@@ -232,17 +223,16 @@ class ToggleButton(Node):
          </i>
        </button>
 
-    """
+    """ # pylint:disable=line-too-long
     NODE_PROPS = ('type', 'state', 'icon_when_on', 'icon_when_off')
     "Extended Template Tag arguments."
+
+    CATCH_CLASSNAMES = ('button_class',)
 
     def prepare(self):
         self.values['state'] = self.eval(self.kwargs.get('state'))
         self.values['icon_when_on'] = self.kwargs['icon_when_on']
         self.values['icon_when_off'] = self.kwargs['icon_when_off']
-
-        if 'button_class' in self.context:
-            self.values['class'].extend(self.context['button_class'])
 
         if self.values['state']:
             self.values['class'].append('mdc-icon-button--on')

@@ -75,13 +75,19 @@ class Card(Node):
              </button>
            </div>
            <div class="mdc-card__action-icons">
-             <button class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon" title="Share">share</button>
-             <button class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon" title="More options">more_vert</button>
+             <button title="Share"
+                 class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon">
+               share
+             </button>
+             <button title="More options"
+                 class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon">
+               more_vert
+             </button>
            </div>
          </div>
        </div>
 
-    """
+    """ # pylint:disable=line-too-long
     WANT_CHILDREN = True
     "Template Tag needs closing end tag."
     MODES = ('elevated', 'outlined')
@@ -215,10 +221,13 @@ class Actions(Node):
     .. code-block:: html
 
        <div class="mdc-card__actions mdc-card__actions--full-bleed">
-         <a class="mdc-button mdc-card__action mdc-card__action--button" href="#">
+         <a href="#"
+             class="mdc-button mdc-card__action mdc-card__action--button">
            <div class="mdc-button__ripple"></div>
            <span class="mdc-button__label">All Business Headlines</span>
-           <i class="material-icons mdc-button__icon" aria-hidden="true">arrow_forward</i>
+           <i class="material-icons mdc-button__icon" aria-hidden="true">
+             arrow_forward
+           </i>
          </a>
        </div>
 

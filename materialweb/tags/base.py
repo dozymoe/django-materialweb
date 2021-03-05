@@ -24,6 +24,10 @@ class Node(template.Node):
     DEFAULT_TAG = 'div'
     "Rendered HTML tag."
 
+    # Parent Tags can set html attributes on their childs.
+    CATCH_CLASSNAMES = ()
+    CATCH_PROPERTIES = ()
+
     def __init__(self, *args, **kwargs):
         if self.WANT_CHILDREN:
             self.nodelist = args[0]
@@ -138,6 +142,15 @@ class Node(template.Node):
             'props': self.props,
             'class': self.eval(self.kwargs.get('class', '')).split(),
         }
+
+        # Parent Tags can set html attributes on their childs.
+        for ext in self.CATCH_CLASSNAMES:
+            if ext in context:
+                values['class'].extend(context[ext])
+        for ext in self.CATCH_PROPERTIES:
+            if ext in context:
+                values['props'].extend(context[ext])
+
         self.prepare()
 
         # Cleanup props
@@ -190,4 +203,4 @@ class Node(template.Node):
             raise NotImplementedError("Method is missing: template_%s" %\
                     self.mode)
 
-        return method()
+        return method() # pylint:disable=not-callable
