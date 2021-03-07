@@ -18,7 +18,7 @@ class TopAppBar(Node):
     """TopAppBar component.
     """
     WANT_CHILDREN = True
-    MODES = ('short', 'short_closed', 'fixed', 'prominent', 'dense')
+    MODES = ('default', 'short', 'short_closed', 'fixed', 'prominent', 'dense')
     DEFAULT_TAG = 'header'
 
     def prepare(self):
