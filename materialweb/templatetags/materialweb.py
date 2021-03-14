@@ -3,8 +3,8 @@ import logging
 from django import template
 #-
 from ..tags import banner, button, card, checkbox, data_table, drawer, imagelist
-from ..tags import lists, menu, select, textarea, textfield, top_appbar
-from ..tags import snackbar
+from ..tags import lists, menu, select, snackbar, tabs, textarea, textfield
+from ..tags import top_appbar
 
 _logger = logging.getLogger(__name__)
 register = template.Library()
@@ -22,6 +22,7 @@ MATERIAL_TAGS = {
     **menu.components,
     **select.components,
     **snackbar.components,
+    **tabs.components,
     **textarea.components,
     **textfield.components,
     **top_appbar.components,
