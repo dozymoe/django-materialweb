@@ -9,7 +9,6 @@ Image lists display a collection of images in an organized grid.
 """
 from .base import Node
 
-
 class ImageList(Node):
     """
     Provides template tag: :code:`ImageList`.
@@ -97,9 +96,15 @@ class ListItem(Node):
     DEFAULT_TAG = 'li'
     "Rendered HTML tag."
 
+    def prepare(self):
+        image = self.eval(self.kwargs.get('image'))
+        if image:
+            self.values['image'] = image
+
+
     @property
     def template(self):
-        image = self.eval(self.kwargs.get('image'))
+        image = self.values.get('image')
         reverse = 'reversed' in self.args or\
                 self.eval(self.kwargs.get('reversed'))
 
